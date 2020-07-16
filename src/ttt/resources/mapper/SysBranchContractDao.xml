@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysBranchContractDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchContractEntity">
+    <id column="BRANCH_CODE" jdbcType="DECIMAL" property="branchCode" />
+    <result column="BUSI_TYPE" jdbcType="VARCHAR" property="busiType" />
+    <result column="BUSI_DESC" jdbcType="OTHER" property="busiDesc" />
+    <result column="BUSI_PLACE_PHOTO" jdbcType="VARCHAR" property="busiPlacePhoto" />
+    <result column="LIC_TYPE" jdbcType="DECIMAL" property="licType" />
+    <result column="LIC_NO" jdbcType="VARCHAR" property="licNo" />
+    <result column="LIC_PHOTO" jdbcType="VARCHAR" property="licPhoto" />
+    <result column="LIC_PERIOD" jdbcType="VARCHAR" property="licPeriod" />
+    <result column="LIC_REG_NAME" jdbcType="OTHER" property="licRegName" />
+    <result column="LIC_REG_ADDR" jdbcType="OTHER" property="licRegAddr" />
+    <result column="LEGAL_PERSON" jdbcType="OTHER" property="legalPerson" />
+    <result column="AGENT_TYPE" jdbcType="DECIMAL" property="agentType" />
+    <result column="LEGAL_CERT_TYPE" jdbcType="DECIMAL" property="legalCertType" />
+    <result column="LEGAL_CERT_PHOTO_FRONT" jdbcType="DECIMAL" property="legalCertPhotoFront" />
+    <result column="LEGAL_CERT_PHOTO_BACK" jdbcType="DECIMAL" property="legalCertPhotoBack" />
+    <result column="LEGAL_CERT_NO" jdbcType="VARCHAR" property="legalCertNo" />
+    <result column="LEGAL_CERT_NAME" jdbcType="OTHER" property="legalCertName" />
+    <result column="LEGAL_CERT_PERIOD" jdbcType="VARCHAR" property="legalCertPeriod" />
+    <result column="AGENT_CERT_TYPE" jdbcType="DECIMAL" property="agentCertType" />
+    <result column="AGENT_CERT_PHOTO_FRONT" jdbcType="DECIMAL" property="agentCertPhotoFront" />
+    <result column="AGENT_CERT_PHOTO_BACK" jdbcType="DECIMAL" property="agentCertPhotoBack" />
+    <result column="AGENT_CERT_NO" jdbcType="VARCHAR" property="agentCertNo" />
+    <result column="AGENT_CERT_NAME" jdbcType="OTHER" property="agentCertName" />
+    <result column="AGENT_CERT_PERIOD" jdbcType="VARCHAR" property="agentCertPeriod" />
+    <result column="TERMINAL_NET_WAY" jdbcType="VARCHAR" property="terminalNetWay" />
+    <result column="TERMINAL_FUNC_OPEN" jdbcType="VARCHAR" property="terminalFuncOpen" />
+    <result column="PROVINCE_CODE" jdbcType="DECIMAL" property="provinceCode" />
+    <result column="CITY_CODE" jdbcType="DECIMAL" property="cityCode" />
+    <result column="DISTRICT_CODE" jdbcType="DECIMAL" property="districtCode" />
+    <result column="BUSI_ADDR" jdbcType="OTHER" property="busiAddr" />
+    <result column="POSITION_LATITUDE" jdbcType="VARCHAR" property="positionLatitude" />
+    <result column="POSITION_LONGITUDE" jdbcType="VARCHAR" property="positionLongitude" />
+    <result column="CONTRACT_PHOTOS" jdbcType="VARCHAR" property="contractPhotos" />
+    <result column="APPLY_WAY" jdbcType="DECIMAL" property="applyWay" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="REMARK" jdbcType="OTHER" property="remark" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPD_TIME" jdbcType="CHAR" property="updTime" />
+    <result column="OTHER_LIC_TYPE" jdbcType="OTHER" property="otherLicType" />
+    <result column="OTHER_LEGAL_CERT_TYPE" jdbcType="OTHER" property="otherLegalCertType" />
+    <result column="OTHER_AGENT_CERT_TYPE" jdbcType="OTHER" property="otherAgentCertType" />
+    <result column="IC_INFO_CHECK" jdbcType="DECIMAL" property="icInfoCheck" />
+    <result column="LEGAL_CERT_CHECK" jdbcType="DECIMAL" property="legalCertCheck" />
+    <result column="BANK_ACT_CHECK" jdbcType="DECIMAL" property="bankActCheck" />
+    <result column="AGENT_CERT_CHECK" jdbcType="DECIMAL" property="agentCertCheck" />
+    <result column="HFFLAG" jdbcType="VARCHAR" property="hfflag" />
+    <result column="INFLAG" jdbcType="VARCHAR" property="inflag" />
+    <result column="FREFEELIMT" jdbcType="VARCHAR" property="frefeelimt" />
+    <result column="FREFEERATE" jdbcType="VARCHAR" property="frefeerate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BRANCH_CODE, BUSI_TYPE, BUSI_DESC, BUSI_PLACE_PHOTO, LIC_TYPE, LIC_NO, LIC_PHOTO, 
+    LIC_PERIOD, LIC_REG_NAME, LIC_REG_ADDR, LEGAL_PERSON, AGENT_TYPE, LEGAL_CERT_TYPE, 
+    LEGAL_CERT_PHOTO_FRONT, LEGAL_CERT_PHOTO_BACK, LEGAL_CERT_NO, LEGAL_CERT_NAME, LEGAL_CERT_PERIOD, 
+    AGENT_CERT_TYPE, AGENT_CERT_PHOTO_FRONT, AGENT_CERT_PHOTO_BACK, AGENT_CERT_NO, AGENT_CERT_NAME, 
+    AGENT_CERT_PERIOD, TERMINAL_NET_WAY, TERMINAL_FUNC_OPEN, PROVINCE_CODE, CITY_CODE, 
+    DISTRICT_CODE, BUSI_ADDR, POSITION_LATITUDE, POSITION_LONGITUDE, CONTRACT_PHOTOS, 
+    APPLY_WAY, STATUS, REMARK, CREATOR, CREATE_TIME, UPD_TIME, OTHER_LIC_TYPE, OTHER_LEGAL_CERT_TYPE, 
+    OTHER_AGENT_CERT_TYPE, IC_INFO_CHECK, LEGAL_CERT_CHECK, BANK_ACT_CHECK, AGENT_CERT_CHECK, 
+    HFFLAG, INFLAG, FREFEELIMT, FREFEERATE
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchContractEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_BRANCH_CONTRACT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_BRANCH_CONTRACT
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_BRANCH_CONTRACT
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchContractEntityExample">
+    delete from SYS_BRANCH_CONTRACT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchContractEntity">
+    insert into SYS_BRANCH_CONTRACT (BRANCH_CODE, BUSI_TYPE, BUSI_DESC, 
+      BUSI_PLACE_PHOTO, LIC_TYPE, LIC_NO, 
+      LIC_PHOTO, LIC_PERIOD, LIC_REG_NAME, 
+      LIC_REG_ADDR, LEGAL_PERSON, AGENT_TYPE, 
+      LEGAL_CERT_TYPE, LEGAL_CERT_PHOTO_FRONT, LEGAL_CERT_PHOTO_BACK, 
+      LEGAL_CERT_NO, LEGAL_CERT_NAME, LEGAL_CERT_PERIOD, 
+      AGENT_CERT_TYPE, AGENT_CERT_PHOTO_FRONT, AGENT_CERT_PHOTO_BACK, 
+      AGENT_CERT_NO, AGENT_CERT_NAME, AGENT_CERT_PERIOD, 
+      TERMINAL_NET_WAY, TERMINAL_FUNC_OPEN, PROVINCE_CODE, 
+      CITY_CODE, DISTRICT_CODE, BUSI_ADDR, 
+      POSITION_LATITUDE, POSITION_LONGITUDE, CONTRACT_PHOTOS, 
+      APPLY_WAY, STATUS, REMARK, 
+      CREATOR, CREATE_TIME, UPD_TIME, 
+      OTHER_LIC_TYPE, OTHER_LEGAL_CERT_TYPE, OTHER_AGENT_CERT_TYPE, 
+      IC_INFO_CHECK, LEGAL_CERT_CHECK, BANK_ACT_CHECK, 
+      AGENT_CERT_CHECK, HFFLAG, INFLAG, 
+      FREFEELIMT, FREFEERATE)
+    values (#{branchCode,jdbcType=DECIMAL}, #{busiType,jdbcType=VARCHAR}, #{busiDesc,jdbcType=OTHER}, 
+      #{busiPlacePhoto,jdbcType=VARCHAR}, #{licType,jdbcType=DECIMAL}, #{licNo,jdbcType=VARCHAR}, 
+      #{licPhoto,jdbcType=VARCHAR}, #{licPeriod,jdbcType=VARCHAR}, #{licRegName,jdbcType=OTHER}, 
+      #{licRegAddr,jdbcType=OTHER}, #{legalPerson,jdbcType=OTHER}, #{agentType,jdbcType=DECIMAL}, 
+      #{legalCertType,jdbcType=DECIMAL}, #{legalCertPhotoFront,jdbcType=DECIMAL}, #{legalCertPhotoBack,jdbcType=DECIMAL}, 
+      #{legalCertNo,jdbcType=VARCHAR}, #{legalCertName,jdbcType=OTHER}, #{legalCertPeriod,jdbcType=VARCHAR}, 
+      #{agentCertType,jdbcType=DECIMAL}, #{agentCertPhotoFront,jdbcType=DECIMAL}, #{agentCertPhotoBack,jdbcType=DECIMAL}, 
+      #{agentCertNo,jdbcType=VARCHAR}, #{agentCertName,jdbcType=OTHER}, #{agentCertPeriod,jdbcType=VARCHAR}, 
+      #{terminalNetWay,jdbcType=VARCHAR}, #{terminalFuncOpen,jdbcType=VARCHAR}, #{provinceCode,jdbcType=DECIMAL}, 
+      #{cityCode,jdbcType=DECIMAL}, #{districtCode,jdbcType=DECIMAL}, #{busiAddr,jdbcType=OTHER}, 
+      #{positionLatitude,jdbcType=VARCHAR}, #{positionLongitude,jdbcType=VARCHAR}, #{contractPhotos,jdbcType=VARCHAR}, 
+      #{applyWay,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, #{remark,jdbcType=OTHER}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, #{updTime,jdbcType=CHAR}, 
+      #{otherLicType,jdbcType=OTHER}, #{otherLegalCertType,jdbcType=OTHER}, #{otherAgentCertType,jdbcType=OTHER}, 
+      #{icInfoCheck,jdbcType=DECIMAL}, #{legalCertCheck,jdbcType=DECIMAL}, #{bankActCheck,jdbcType=DECIMAL}, 
+      #{agentCertCheck,jdbcType=DECIMAL}, #{hfflag,jdbcType=VARCHAR}, #{inflag,jdbcType=VARCHAR}, 
+      #{frefeelimt,jdbcType=VARCHAR}, #{frefeerate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchContractEntity">
+    insert into SYS_BRANCH_CONTRACT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="branchCode != null">
+        BRANCH_CODE,
+      </if>
+      <if test="busiType != null">
+        BUSI_TYPE,
+      </if>
+      <if test="busiDesc != null">
+        BUSI_DESC,
+      </if>
+      <if test="busiPlacePhoto != null">
+        BUSI_PLACE_PHOTO,
+      </if>
+      <if test="licType != null">
+        LIC_TYPE,
+      </if>
+      <if test="licNo != null">
+        LIC_NO,
+      </if>
+      <if test="licPhoto != null">
+        LIC_PHOTO,
+      </if>
+      <if test="licPeriod != null">
+        LIC_PERIOD,
+      </if>
+      <if test="licRegName != null">
+        LIC_REG_NAME,
+      </if>
+      <if test="licRegAddr != null">
+        LIC_REG_ADDR,
+      </if>
+      <if test="legalPerson != null">
+        LEGAL_PERSON,
+      </if>
+      <if test="agentType != null">
+        AGENT_TYPE,
+      </if>
+      <if test="legalCertType != null">
+        LEGAL_CERT_TYPE,
+      </if>
+      <if test="legalCertPhotoFront != null">
+        LEGAL_CERT_PHOTO_FRONT,
+      </if>
+      <if test="legalCertPhotoBack != null">
+        LEGAL_CERT_PHOTO_BACK,
+      </if>
+      <if test="legalCertNo != null">
+        LEGAL_CERT_NO,
+      </if>
+      <if test="legalCertName != null">
+        LEGAL_CERT_NAME,
+      </if>
+      <if test="legalCertPeriod != null">
+        LEGAL_CERT_PERIOD,
+      </if>
+      <if test="agentCertType != null">
+        AGENT_CERT_TYPE,
+      </if>
+      <if test="agentCertPhotoFront != null">
+        AGENT_CERT_PHOTO_FRONT,
+      </if>
+      <if test="agentCertPhotoBack != null">
+        AGENT_CERT_PHOTO_BACK,
+      </if>
+      <if test="agentCertNo != null">
+        AGENT_CERT_NO,
+      </if>
+      <if test="agentCertName != null">
+        AGENT_CERT_NAME,
+      </if>
+      <if test="agentCertPeriod != null">
+        AGENT_CERT_PERIOD,
+      </if>
+      <if test="terminalNetWay != null">
+        TERMINAL_NET_WAY,
+      </if>
+      <if test="terminalFuncOpen != null">
+        TERMINAL_FUNC_OPEN,
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE,
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE,
+      </if>
+      <if test="districtCode != null">
+        DISTRICT_CODE,
+      </if>
+      <if test="busiAddr != null">
+        BUSI_ADDR,
+      </if>
+      <if test="positionLatitude != null">
+        POSITION_LATITUDE,
+      </if>
+      <if test="positionLongitude != null">
+        POSITION_LONGITUDE,
+      </if>
+      <if test="contractPhotos != null">
+        CONTRACT_PHOTOS,
+      </if>
+      <if test="applyWay != null">
+        APPLY_WAY,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updTime != null">
+        UPD_TIME,
+      </if>
+      <if test="otherLicType != null">
+        OTHER_LIC_TYPE,
+      </if>
+      <if test="otherLegalCertType != null">
+        OTHER_LEGAL_CERT_TYPE,
+      </if>
+      <if test="otherAgentCertType != null">
+        OTHER_AGENT_CERT_TYPE,
+      </if>
+      <if test="icInfoCheck != null">
+        IC_INFO_CHECK,
+      </if>
+      <if test="legalCertCheck != null">
+        LEGAL_CERT_CHECK,
+      </if>
+      <if test="bankActCheck != null">
+        BANK_ACT_CHECK,
+      </if>
+      <if test="agentCertCheck != null">
+        AGENT_CERT_CHECK,
+      </if>
+      <if test="hfflag != null">
+        HFFLAG,
+      </if>
+      <if test="inflag != null">
+        INFLAG,
+      </if>
+      <if test="frefeelimt != null">
+        FREFEELIMT,
+      </if>
+      <if test="frefeerate != null">
+        FREFEERATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="branchCode != null">
+        #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="busiType != null">
+        #{busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="busiDesc != null">
+        #{busiDesc,jdbcType=OTHER},
+      </if>
+      <if test="busiPlacePhoto != null">
+        #{busiPlacePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="licType != null">
+        #{licType,jdbcType=DECIMAL},
+      </if>
+      <if test="licNo != null">
+        #{licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="licPhoto != null">
+        #{licPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="licPeriod != null">
+        #{licPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="licRegName != null">
+        #{licRegName,jdbcType=OTHER},
+      </if>
+      <if test="licRegAddr != null">
+        #{licRegAddr,jdbcType=OTHER},
+      </if>
+      <if test="legalPerson != null">
+        #{legalPerson,jdbcType=OTHER},
+      </if>
+      <if test="agentType != null">
+        #{agentType,jdbcType=DECIMAL},
+      </if>
+      <if test="legalCertType != null">
+        #{legalCertType,jdbcType=DECIMAL},
+      </if>
+      <if test="legalCertPhotoFront != null">
+        #{legalCertPhotoFront,jdbcType=DECIMAL},
+      </if>
+      <if test="legalCertPhotoBack != null">
+        #{legalCertPhotoBack,jdbcType=DECIMAL},
+      </if>
+      <if test="legalCertNo != null">
+        #{legalCertNo,jdbcType=VARCHAR},
+      </if>
+      <if test="legalCertName != null">
+        #{legalCertName,jdbcType=OTHER},
+      </if>
+      <if test="legalCertPeriod != null">
+        #{legalCertPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="agentCertType != null">
+        #{agentCertType,jdbcType=DECIMAL},
+      </if>
+      <if test="agentCertPhotoFront != null">
+        #{agentCertPhotoFront,jdbcType=DECIMAL},
+      </if>
+      <if test="agentCertPhotoBack != null">
+        #{agentCertPhotoBack,jdbcType=DECIMAL},
+      </if>
+      <if test="agentCertNo != null">
+        #{agentCertNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentCertName != null">
+        #{agentCertName,jdbcType=OTHER},
+      </if>
+      <if test="agentCertPeriod != null">
+        #{agentCertPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalNetWay != null">
+        #{terminalNetWay,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalFuncOpen != null">
+        #{terminalFuncOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        #{provinceCode,jdbcType=DECIMAL},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=DECIMAL},
+      </if>
+      <if test="districtCode != null">
+        #{districtCode,jdbcType=DECIMAL},
+      </if>
+      <if test="busiAddr != null">
+        #{busiAddr,jdbcType=OTHER},
+      </if>
+      <if test="positionLatitude != null">
+        #{positionLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="positionLongitude != null">
+        #{positionLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="contractPhotos != null">
+        #{contractPhotos,jdbcType=VARCHAR},
+      </if>
+      <if test="applyWay != null">
+        #{applyWay,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="otherLicType != null">
+        #{otherLicType,jdbcType=OTHER},
+      </if>
+      <if test="otherLegalCertType != null">
+        #{otherLegalCertType,jdbcType=OTHER},
+      </if>
+      <if test="otherAgentCertType != null">
+        #{otherAgentCertType,jdbcType=OTHER},
+      </if>
+      <if test="icInfoCheck != null">
+        #{icInfoCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="legalCertCheck != null">
+        #{legalCertCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="bankActCheck != null">
+        #{bankActCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="agentCertCheck != null">
+        #{agentCertCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="hfflag != null">
+        #{hfflag,jdbcType=VARCHAR},
+      </if>
+      <if test="inflag != null">
+        #{inflag,jdbcType=VARCHAR},
+      </if>
+      <if test="frefeelimt != null">
+        #{frefeelimt,jdbcType=VARCHAR},
+      </if>
+      <if test="frefeerate != null">
+        #{frefeerate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchContractEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_BRANCH_CONTRACT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_BRANCH_CONTRACT
+    <set>
+      <if test="record.branchCode != null">
+        BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.busiType != null">
+        BUSI_TYPE = #{record.busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busiDesc != null">
+        BUSI_DESC = #{record.busiDesc,jdbcType=OTHER},
+      </if>
+      <if test="record.busiPlacePhoto != null">
+        BUSI_PLACE_PHOTO = #{record.busiPlacePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licType != null">
+        LIC_TYPE = #{record.licType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.licNo != null">
+        LIC_NO = #{record.licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licPhoto != null">
+        LIC_PHOTO = #{record.licPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licPeriod != null">
+        LIC_PERIOD = #{record.licPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licRegName != null">
+        LIC_REG_NAME = #{record.licRegName,jdbcType=OTHER},
+      </if>
+      <if test="record.licRegAddr != null">
+        LIC_REG_ADDR = #{record.licRegAddr,jdbcType=OTHER},
+      </if>
+      <if test="record.legalPerson != null">
+        LEGAL_PERSON = #{record.legalPerson,jdbcType=OTHER},
+      </if>
+      <if test="record.agentType != null">
+        AGENT_TYPE = #{record.agentType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.legalCertType != null">
+        LEGAL_CERT_TYPE = #{record.legalCertType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.legalCertPhotoFront != null">
+        LEGAL_CERT_PHOTO_FRONT = #{record.legalCertPhotoFront,jdbcType=DECIMAL},
+      </if>
+      <if test="record.legalCertPhotoBack != null">
+        LEGAL_CERT_PHOTO_BACK = #{record.legalCertPhotoBack,jdbcType=DECIMAL},
+      </if>
+      <if test="record.legalCertNo != null">
+        LEGAL_CERT_NO = #{record.legalCertNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalCertName != null">
+        LEGAL_CERT_NAME = #{record.legalCertName,jdbcType=OTHER},
+      </if>
+      <if test="record.legalCertPeriod != null">
+        LEGAL_CERT_PERIOD = #{record.legalCertPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentCertType != null">
+        AGENT_CERT_TYPE = #{record.agentCertType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.agentCertPhotoFront != null">
+        AGENT_CERT_PHOTO_FRONT = #{record.agentCertPhotoFront,jdbcType=DECIMAL},
+      </if>
+      <if test="record.agentCertPhotoBack != null">
+        AGENT_CERT_PHOTO_BACK = #{record.agentCertPhotoBack,jdbcType=DECIMAL},
+      </if>
+      <if test="record.agentCertNo != null">
+        AGENT_CERT_NO = #{record.agentCertNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentCertName != null">
+        AGENT_CERT_NAME = #{record.agentCertName,jdbcType=OTHER},
+      </if>
+      <if test="record.agentCertPeriod != null">
+        AGENT_CERT_PERIOD = #{record.agentCertPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalNetWay != null">
+        TERMINAL_NET_WAY = #{record.terminalNetWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalFuncOpen != null">
+        TERMINAL_FUNC_OPEN = #{record.terminalFuncOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceCode != null">
+        PROVINCE_CODE = #{record.provinceCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cityCode != null">
+        CITY_CODE = #{record.cityCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.districtCode != null">
+        DISTRICT_CODE = #{record.districtCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.busiAddr != null">
+        BUSI_ADDR = #{record.busiAddr,jdbcType=OTHER},
+      </if>
+      <if test="record.positionLatitude != null">
+        POSITION_LATITUDE = #{record.positionLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionLongitude != null">
+        POSITION_LONGITUDE = #{record.positionLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractPhotos != null">
+        CONTRACT_PHOTOS = #{record.contractPhotos,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyWay != null">
+        APPLY_WAY = #{record.applyWay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=OTHER},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updTime != null">
+        UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      </if>
+      <if test="record.otherLicType != null">
+        OTHER_LIC_TYPE = #{record.otherLicType,jdbcType=OTHER},
+      </if>
+      <if test="record.otherLegalCertType != null">
+        OTHER_LEGAL_CERT_TYPE = #{record.otherLegalCertType,jdbcType=OTHER},
+      </if>
+      <if test="record.otherAgentCertType != null">
+        OTHER_AGENT_CERT_TYPE = #{record.otherAgentCertType,jdbcType=OTHER},
+      </if>
+      <if test="record.icInfoCheck != null">
+        IC_INFO_CHECK = #{record.icInfoCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="record.legalCertCheck != null">
+        LEGAL_CERT_CHECK = #{record.legalCertCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bankActCheck != null">
+        BANK_ACT_CHECK = #{record.bankActCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="record.agentCertCheck != null">
+        AGENT_CERT_CHECK = #{record.agentCertCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="record.hfflag != null">
+        HFFLAG = #{record.hfflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inflag != null">
+        INFLAG = #{record.inflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frefeelimt != null">
+        FREFEELIMT = #{record.frefeelimt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frefeerate != null">
+        FREFEERATE = #{record.frefeerate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_BRANCH_CONTRACT
+    set BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      BUSI_TYPE = #{record.busiType,jdbcType=VARCHAR},
+      BUSI_DESC = #{record.busiDesc,jdbcType=OTHER},
+      BUSI_PLACE_PHOTO = #{record.busiPlacePhoto,jdbcType=VARCHAR},
+      LIC_TYPE = #{record.licType,jdbcType=DECIMAL},
+      LIC_NO = #{record.licNo,jdbcType=VARCHAR},
+      LIC_PHOTO = #{record.licPhoto,jdbcType=VARCHAR},
+      LIC_PERIOD = #{record.licPeriod,jdbcType=VARCHAR},
+      LIC_REG_NAME = #{record.licRegName,jdbcType=OTHER},
+      LIC_REG_ADDR = #{record.licRegAddr,jdbcType=OTHER},
+      LEGAL_PERSON = #{record.legalPerson,jdbcType=OTHER},
+      AGENT_TYPE = #{record.agentType,jdbcType=DECIMAL},
+      LEGAL_CERT_TYPE = #{record.legalCertType,jdbcType=DECIMAL},
+      LEGAL_CERT_PHOTO_FRONT = #{record.legalCertPhotoFront,jdbcType=DECIMAL},
+      LEGAL_CERT_PHOTO_BACK = #{record.legalCertPhotoBack,jdbcType=DECIMAL},
+      LEGAL_CERT_NO = #{record.legalCertNo,jdbcType=VARCHAR},
+      LEGAL_CERT_NAME = #{record.legalCertName,jdbcType=OTHER},
+      LEGAL_CERT_PERIOD = #{record.legalCertPeriod,jdbcType=VARCHAR},
+      AGENT_CERT_TYPE = #{record.agentCertType,jdbcType=DECIMAL},
+      AGENT_CERT_PHOTO_FRONT = #{record.agentCertPhotoFront,jdbcType=DECIMAL},
+      AGENT_CERT_PHOTO_BACK = #{record.agentCertPhotoBack,jdbcType=DECIMAL},
+      AGENT_CERT_NO = #{record.agentCertNo,jdbcType=VARCHAR},
+      AGENT_CERT_NAME = #{record.agentCertName,jdbcType=OTHER},
+      AGENT_CERT_PERIOD = #{record.agentCertPeriod,jdbcType=VARCHAR},
+      TERMINAL_NET_WAY = #{record.terminalNetWay,jdbcType=VARCHAR},
+      TERMINAL_FUNC_OPEN = #{record.terminalFuncOpen,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{record.provinceCode,jdbcType=DECIMAL},
+      CITY_CODE = #{record.cityCode,jdbcType=DECIMAL},
+      DISTRICT_CODE = #{record.districtCode,jdbcType=DECIMAL},
+      BUSI_ADDR = #{record.busiAddr,jdbcType=OTHER},
+      POSITION_LATITUDE = #{record.positionLatitude,jdbcType=VARCHAR},
+      POSITION_LONGITUDE = #{record.positionLongitude,jdbcType=VARCHAR},
+      CONTRACT_PHOTOS = #{record.contractPhotos,jdbcType=VARCHAR},
+      APPLY_WAY = #{record.applyWay,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=OTHER},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      OTHER_LIC_TYPE = #{record.otherLicType,jdbcType=OTHER},
+      OTHER_LEGAL_CERT_TYPE = #{record.otherLegalCertType,jdbcType=OTHER},
+      OTHER_AGENT_CERT_TYPE = #{record.otherAgentCertType,jdbcType=OTHER},
+      IC_INFO_CHECK = #{record.icInfoCheck,jdbcType=DECIMAL},
+      LEGAL_CERT_CHECK = #{record.legalCertCheck,jdbcType=DECIMAL},
+      BANK_ACT_CHECK = #{record.bankActCheck,jdbcType=DECIMAL},
+      AGENT_CERT_CHECK = #{record.agentCertCheck,jdbcType=DECIMAL},
+      HFFLAG = #{record.hfflag,jdbcType=VARCHAR},
+      INFLAG = #{record.inflag,jdbcType=VARCHAR},
+      FREFEELIMT = #{record.frefeelimt,jdbcType=VARCHAR},
+      FREFEERATE = #{record.frefeerate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchContractEntity">
+    update SYS_BRANCH_CONTRACT
+    <set>
+      <if test="busiType != null">
+        BUSI_TYPE = #{busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="busiDesc != null">
+        BUSI_DESC = #{busiDesc,jdbcType=OTHER},
+      </if>
+      <if test="busiPlacePhoto != null">
+        BUSI_PLACE_PHOTO = #{busiPlacePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="licType != null">
+        LIC_TYPE = #{licType,jdbcType=DECIMAL},
+      </if>
+      <if test="licNo != null">
+        LIC_NO = #{licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="licPhoto != null">
+        LIC_PHOTO = #{licPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="licPeriod != null">
+        LIC_PERIOD = #{licPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="licRegName != null">
+        LIC_REG_NAME = #{licRegName,jdbcType=OTHER},
+      </if>
+      <if test="licRegAddr != null">
+        LIC_REG_ADDR = #{licRegAddr,jdbcType=OTHER},
+      </if>
+      <if test="legalPerson != null">
+        LEGAL_PERSON = #{legalPerson,jdbcType=OTHER},
+      </if>
+      <if test="agentType != null">
+        AGENT_TYPE = #{agentType,jdbcType=DECIMAL},
+      </if>
+      <if test="legalCertType != null">
+        LEGAL_CERT_TYPE = #{legalCertType,jdbcType=DECIMAL},
+      </if>
+      <if test="legalCertPhotoFront != null">
+        LEGAL_CERT_PHOTO_FRONT = #{legalCertPhotoFront,jdbcType=DECIMAL},
+      </if>
+      <if test="legalCertPhotoBack != null">
+        LEGAL_CERT_PHOTO_BACK = #{legalCertPhotoBack,jdbcType=DECIMAL},
+      </if>
+      <if test="legalCertNo != null">
+        LEGAL_CERT_NO = #{legalCertNo,jdbcType=VARCHAR},
+      </if>
+      <if test="legalCertName != null">
+        LEGAL_CERT_NAME = #{legalCertName,jdbcType=OTHER},
+      </if>
+      <if test="legalCertPeriod != null">
+        LEGAL_CERT_PERIOD = #{legalCertPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="agentCertType != null">
+        AGENT_CERT_TYPE = #{agentCertType,jdbcType=DECIMAL},
+      </if>
+      <if test="agentCertPhotoFront != null">
+        AGENT_CERT_PHOTO_FRONT = #{agentCertPhotoFront,jdbcType=DECIMAL},
+      </if>
+      <if test="agentCertPhotoBack != null">
+        AGENT_CERT_PHOTO_BACK = #{agentCertPhotoBack,jdbcType=DECIMAL},
+      </if>
+      <if test="agentCertNo != null">
+        AGENT_CERT_NO = #{agentCertNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentCertName != null">
+        AGENT_CERT_NAME = #{agentCertName,jdbcType=OTHER},
+      </if>
+      <if test="agentCertPeriod != null">
+        AGENT_CERT_PERIOD = #{agentCertPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalNetWay != null">
+        TERMINAL_NET_WAY = #{terminalNetWay,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalFuncOpen != null">
+        TERMINAL_FUNC_OPEN = #{terminalFuncOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE = #{provinceCode,jdbcType=DECIMAL},
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE = #{cityCode,jdbcType=DECIMAL},
+      </if>
+      <if test="districtCode != null">
+        DISTRICT_CODE = #{districtCode,jdbcType=DECIMAL},
+      </if>
+      <if test="busiAddr != null">
+        BUSI_ADDR = #{busiAddr,jdbcType=OTHER},
+      </if>
+      <if test="positionLatitude != null">
+        POSITION_LATITUDE = #{positionLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="positionLongitude != null">
+        POSITION_LONGITUDE = #{positionLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="contractPhotos != null">
+        CONTRACT_PHOTOS = #{contractPhotos,jdbcType=VARCHAR},
+      </if>
+      <if test="applyWay != null">
+        APPLY_WAY = #{applyWay,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        UPD_TIME = #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="otherLicType != null">
+        OTHER_LIC_TYPE = #{otherLicType,jdbcType=OTHER},
+      </if>
+      <if test="otherLegalCertType != null">
+        OTHER_LEGAL_CERT_TYPE = #{otherLegalCertType,jdbcType=OTHER},
+      </if>
+      <if test="otherAgentCertType != null">
+        OTHER_AGENT_CERT_TYPE = #{otherAgentCertType,jdbcType=OTHER},
+      </if>
+      <if test="icInfoCheck != null">
+        IC_INFO_CHECK = #{icInfoCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="legalCertCheck != null">
+        LEGAL_CERT_CHECK = #{legalCertCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="bankActCheck != null">
+        BANK_ACT_CHECK = #{bankActCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="agentCertCheck != null">
+        AGENT_CERT_CHECK = #{agentCertCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="hfflag != null">
+        HFFLAG = #{hfflag,jdbcType=VARCHAR},
+      </if>
+      <if test="inflag != null">
+        INFLAG = #{inflag,jdbcType=VARCHAR},
+      </if>
+      <if test="frefeelimt != null">
+        FREFEELIMT = #{frefeelimt,jdbcType=VARCHAR},
+      </if>
+      <if test="frefeerate != null">
+        FREFEERATE = #{frefeerate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchContractEntity">
+    update SYS_BRANCH_CONTRACT
+    set BUSI_TYPE = #{busiType,jdbcType=VARCHAR},
+      BUSI_DESC = #{busiDesc,jdbcType=OTHER},
+      BUSI_PLACE_PHOTO = #{busiPlacePhoto,jdbcType=VARCHAR},
+      LIC_TYPE = #{licType,jdbcType=DECIMAL},
+      LIC_NO = #{licNo,jdbcType=VARCHAR},
+      LIC_PHOTO = #{licPhoto,jdbcType=VARCHAR},
+      LIC_PERIOD = #{licPeriod,jdbcType=VARCHAR},
+      LIC_REG_NAME = #{licRegName,jdbcType=OTHER},
+      LIC_REG_ADDR = #{licRegAddr,jdbcType=OTHER},
+      LEGAL_PERSON = #{legalPerson,jdbcType=OTHER},
+      AGENT_TYPE = #{agentType,jdbcType=DECIMAL},
+      LEGAL_CERT_TYPE = #{legalCertType,jdbcType=DECIMAL},
+      LEGAL_CERT_PHOTO_FRONT = #{legalCertPhotoFront,jdbcType=DECIMAL},
+      LEGAL_CERT_PHOTO_BACK = #{legalCertPhotoBack,jdbcType=DECIMAL},
+      LEGAL_CERT_NO = #{legalCertNo,jdbcType=VARCHAR},
+      LEGAL_CERT_NAME = #{legalCertName,jdbcType=OTHER},
+      LEGAL_CERT_PERIOD = #{legalCertPeriod,jdbcType=VARCHAR},
+      AGENT_CERT_TYPE = #{agentCertType,jdbcType=DECIMAL},
+      AGENT_CERT_PHOTO_FRONT = #{agentCertPhotoFront,jdbcType=DECIMAL},
+      AGENT_CERT_PHOTO_BACK = #{agentCertPhotoBack,jdbcType=DECIMAL},
+      AGENT_CERT_NO = #{agentCertNo,jdbcType=VARCHAR},
+      AGENT_CERT_NAME = #{agentCertName,jdbcType=OTHER},
+      AGENT_CERT_PERIOD = #{agentCertPeriod,jdbcType=VARCHAR},
+      TERMINAL_NET_WAY = #{terminalNetWay,jdbcType=VARCHAR},
+      TERMINAL_FUNC_OPEN = #{terminalFuncOpen,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{provinceCode,jdbcType=DECIMAL},
+      CITY_CODE = #{cityCode,jdbcType=DECIMAL},
+      DISTRICT_CODE = #{districtCode,jdbcType=DECIMAL},
+      BUSI_ADDR = #{busiAddr,jdbcType=OTHER},
+      POSITION_LATITUDE = #{positionLatitude,jdbcType=VARCHAR},
+      POSITION_LONGITUDE = #{positionLongitude,jdbcType=VARCHAR},
+      CONTRACT_PHOTOS = #{contractPhotos,jdbcType=VARCHAR},
+      APPLY_WAY = #{applyWay,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=OTHER},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPD_TIME = #{updTime,jdbcType=CHAR},
+      OTHER_LIC_TYPE = #{otherLicType,jdbcType=OTHER},
+      OTHER_LEGAL_CERT_TYPE = #{otherLegalCertType,jdbcType=OTHER},
+      OTHER_AGENT_CERT_TYPE = #{otherAgentCertType,jdbcType=OTHER},
+      IC_INFO_CHECK = #{icInfoCheck,jdbcType=DECIMAL},
+      LEGAL_CERT_CHECK = #{legalCertCheck,jdbcType=DECIMAL},
+      BANK_ACT_CHECK = #{bankActCheck,jdbcType=DECIMAL},
+      AGENT_CERT_CHECK = #{agentCertCheck,jdbcType=DECIMAL},
+      HFFLAG = #{hfflag,jdbcType=VARCHAR},
+      INFLAG = #{inflag,jdbcType=VARCHAR},
+      FREFEELIMT = #{frefeelimt,jdbcType=VARCHAR},
+      FREFEERATE = #{frefeerate,jdbcType=VARCHAR}
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </update>
+</mapper>

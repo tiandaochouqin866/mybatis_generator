@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--驱动jar包-->
+    <classPathEntry location="D:\ZRCB_GENERATOR\lib\mysql-connector-java-5.1.4.jar"/>
+    <context id="my" targetRuntime="MyBatis3">
+        <!--<context id="my" targetRuntime="MyBatis3DynamicSQL">-->
+        <!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
+        一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖 -->
+        <property name="autoDelimitKeywords" value="false"/>
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!--解决 XML 文件重新生成不会覆盖原文件-->
+        <plugin type="org.zephyr.generator.OverIsMergeablePlugin"/>
+
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号(&quot;)，MYSQL默认是`反引号； -->
+        <!--<property name="beginningDelimiter" value="&quot;"/>-->
+        <!--<property name="endingDelimiter" value="&quot;"/>-->
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--配置连接com.mysql.jdbc.Driver-->
+        <!--<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/pvtbank" userId="root"
+                        password="123456"/>-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/test?serverTimezone=Asia/Shanghai" userId="root"
+                        password="123456"/>
+        <!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" userId="zephyr0228"
+                        password="root"/>-->
+
+        <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+            <!--
+                true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+                false：默认,
+                    scale>0;length>18：使用BigDecimal;
+                    scale=0;length[10,18]：使用Long；
+                    scale=0;length[5,9]：使用Integer；
+                    scale=0;length<5：使用Short；
+             -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--公共配置中不需要配置-->
+        <javaModelGenerator targetPackage="" targetProject=""/>
+        <!--公共配置中不需要配置-->
+        <sqlMapGenerator targetPackage="" targetProject=""/>
+        <!--公共配置中不需要配置-->
+        <javaClientGenerator targetPackage="" targetProject="" type=""/>
+
+        <!--指定全局schema，必须放在其他table标签的前面-->
+        <!--未指定schema时，若数据库有多个schema里表名重复，会导致生成多次，互相覆盖 https://stackoverflow.com/questions/1601203/jdbc-databasemetadata-getcolumns-returns-duplicate-columns-->
+        <!-- <table schema="UPAY" tableName="" domainObjectName="" mapperName="" sqlProviderName=""></table>-->
+        <!--表映射-->
+
+        <!--<table tableName="sys_dict" domainObjectName="SysDictEntity" mapperName="SysDictMapper" sqlProviderName="SysDictMapper">
+            <columnOverride column="SECRET_KEY_NAME" javaType="java.lang.Integer"/>
+        </table>
+        <table tableName="sys_dict_item" domainObjectName="SysDictItemEntity" mapperName="SysDictItemMapper" sqlProviderName="SysDictItemMapper">
+            <columnOverride column="SECRET_KEY_NAME" javaType="String"/>
+        </table>-->
+        <table tableName="trade_acct_book" domainObjectName="TradeAcctBookEntity" mapperName="TradeAcctBookMapper" sqlProviderName="TradeAcctBookMapper">
+            <columnOverride column="SECRET_KEY_NAME" javaType="String"/>
+        </table>
+        <table tableName="trade_bookkeeping_category" domainObjectName="TradeBookkeepingCategoryEntity" mapperName="TradeBookkeepingCategoryMapper" sqlProviderName="TradeBookkeepingCategoryMapper">
+            <columnOverride column="SECRET_KEY_NAME" javaType="String"/>
+        </table>
+
+
+    </context>
+</generatorConfiguration>

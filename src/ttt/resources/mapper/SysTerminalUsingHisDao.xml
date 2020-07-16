@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysTerminalUsingHisDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalUsingHisEntity">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="TERMINAL_CODE" jdbcType="DECIMAL" property="terminalCode" />
+    <result column="TERMINAL_SERIAL_NO" jdbcType="VARCHAR" property="terminalSerialNo" />
+    <result column="TERMINAL_TYPE" jdbcType="VARCHAR" property="terminalType" />
+    <result column="TERMINAL_NET_WAY" jdbcType="VARCHAR" property="terminalNetWay" />
+    <result column="TELECOM_OPERATOR" jdbcType="DECIMAL" property="telecomOperator" />
+    <result column="BIND_PHONE_NO" jdbcType="VARCHAR" property="bindPhoneNo" />
+    <result column="SIM_CARD_SERIAL" jdbcType="VARCHAR" property="simCardSerial" />
+    <result column="WITHHOLDING_AGREEMENT_PHOTO" jdbcType="DECIMAL" property="withholdingAgreementPhoto" />
+    <result column="DEFAULT_DEPOSIT" jdbcType="DECIMAL" property="defaultDeposit" />
+    <result column="ACTUAL_DEPOSIT" jdbcType="DECIMAL" property="actualDeposit" />
+    <result column="BRANCH_CODE" jdbcType="DECIMAL" property="branchCode" />
+    <result column="REG_AUTH_CODE" jdbcType="VARCHAR" property="regAuthCode" />
+    <result column="PUBLIC_KEY" jdbcType="VARCHAR" property="publicKey" />
+    <result column="UP_TERMINAL_CODE" jdbcType="DECIMAL" property="upTerminalCode" />
+    <result column="UP_TERMINAL_TYPE" jdbcType="VARCHAR" property="upTerminalType" />
+    <result column="UP_QR_FUNC" jdbcType="DECIMAL" property="upQrFunc" />
+    <result column="UP_MAGNETIC_CARD" jdbcType="DECIMAL" property="upMagneticCard" />
+    <result column="UP_CONTACT_IC_CARD" jdbcType="DECIMAL" property="upContactIcCard" />
+    <result column="UP_NONCONTACT_IC_CARD" jdbcType="DECIMAL" property="upNoncontactIcCard" />
+    <result column="UP_PAY_WITHOUT_CARD" jdbcType="DECIMAL" property="upPayWithoutCard" />
+    <result column="UP_TERMINAL_BUSI_FUNC" jdbcType="VARCHAR" property="upTerminalBusiFunc" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="REMARK" jdbcType="OTHER" property="remark" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPD_TIME" jdbcType="CHAR" property="updTime" />
+    <result column="APPLY_BATCH_NO" jdbcType="DECIMAL" property="applyBatchNo" />
+    <result column="POS_STATUS" jdbcType="DECIMAL" property="posStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, TERMINAL_CODE, TERMINAL_SERIAL_NO, TERMINAL_TYPE, TERMINAL_NET_WAY, TELECOM_OPERATOR, 
+    BIND_PHONE_NO, SIM_CARD_SERIAL, WITHHOLDING_AGREEMENT_PHOTO, DEFAULT_DEPOSIT, ACTUAL_DEPOSIT, 
+    BRANCH_CODE, REG_AUTH_CODE, PUBLIC_KEY, UP_TERMINAL_CODE, UP_TERMINAL_TYPE, UP_QR_FUNC, 
+    UP_MAGNETIC_CARD, UP_CONTACT_IC_CARD, UP_NONCONTACT_IC_CARD, UP_PAY_WITHOUT_CARD, 
+    UP_TERMINAL_BUSI_FUNC, STATUS, REMARK, CREATOR, CREATE_TIME, UPD_TIME, APPLY_BATCH_NO, 
+    POS_STATUS
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalUsingHisEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TERMINAL_USING_HIS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TERMINAL_USING_HIS
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_TERMINAL_USING_HIS
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalUsingHisEntityExample">
+    delete from SYS_TERMINAL_USING_HIS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalUsingHisEntity">
+    insert into SYS_TERMINAL_USING_HIS (ID, TERMINAL_CODE, TERMINAL_SERIAL_NO, 
+      TERMINAL_TYPE, TERMINAL_NET_WAY, TELECOM_OPERATOR, 
+      BIND_PHONE_NO, SIM_CARD_SERIAL, WITHHOLDING_AGREEMENT_PHOTO, 
+      DEFAULT_DEPOSIT, ACTUAL_DEPOSIT, BRANCH_CODE, 
+      REG_AUTH_CODE, PUBLIC_KEY, UP_TERMINAL_CODE, 
+      UP_TERMINAL_TYPE, UP_QR_FUNC, UP_MAGNETIC_CARD, 
+      UP_CONTACT_IC_CARD, UP_NONCONTACT_IC_CARD, UP_PAY_WITHOUT_CARD, 
+      UP_TERMINAL_BUSI_FUNC, STATUS, REMARK, 
+      CREATOR, CREATE_TIME, UPD_TIME, 
+      APPLY_BATCH_NO, POS_STATUS)
+    values (#{id,jdbcType=DECIMAL}, #{terminalCode,jdbcType=DECIMAL}, #{terminalSerialNo,jdbcType=VARCHAR}, 
+      #{terminalType,jdbcType=VARCHAR}, #{terminalNetWay,jdbcType=VARCHAR}, #{telecomOperator,jdbcType=DECIMAL}, 
+      #{bindPhoneNo,jdbcType=VARCHAR}, #{simCardSerial,jdbcType=VARCHAR}, #{withholdingAgreementPhoto,jdbcType=DECIMAL}, 
+      #{defaultDeposit,jdbcType=DECIMAL}, #{actualDeposit,jdbcType=DECIMAL}, #{branchCode,jdbcType=DECIMAL}, 
+      #{regAuthCode,jdbcType=VARCHAR}, #{publicKey,jdbcType=VARCHAR}, #{upTerminalCode,jdbcType=DECIMAL}, 
+      #{upTerminalType,jdbcType=VARCHAR}, #{upQrFunc,jdbcType=DECIMAL}, #{upMagneticCard,jdbcType=DECIMAL}, 
+      #{upContactIcCard,jdbcType=DECIMAL}, #{upNoncontactIcCard,jdbcType=DECIMAL}, #{upPayWithoutCard,jdbcType=DECIMAL}, 
+      #{upTerminalBusiFunc,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, #{remark,jdbcType=OTHER}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, #{updTime,jdbcType=CHAR}, 
+      #{applyBatchNo,jdbcType=DECIMAL}, #{posStatus,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalUsingHisEntity">
+    insert into SYS_TERMINAL_USING_HIS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="terminalCode != null">
+        TERMINAL_CODE,
+      </if>
+      <if test="terminalSerialNo != null">
+        TERMINAL_SERIAL_NO,
+      </if>
+      <if test="terminalType != null">
+        TERMINAL_TYPE,
+      </if>
+      <if test="terminalNetWay != null">
+        TERMINAL_NET_WAY,
+      </if>
+      <if test="telecomOperator != null">
+        TELECOM_OPERATOR,
+      </if>
+      <if test="bindPhoneNo != null">
+        BIND_PHONE_NO,
+      </if>
+      <if test="simCardSerial != null">
+        SIM_CARD_SERIAL,
+      </if>
+      <if test="withholdingAgreementPhoto != null">
+        WITHHOLDING_AGREEMENT_PHOTO,
+      </if>
+      <if test="defaultDeposit != null">
+        DEFAULT_DEPOSIT,
+      </if>
+      <if test="actualDeposit != null">
+        ACTUAL_DEPOSIT,
+      </if>
+      <if test="branchCode != null">
+        BRANCH_CODE,
+      </if>
+      <if test="regAuthCode != null">
+        REG_AUTH_CODE,
+      </if>
+      <if test="publicKey != null">
+        PUBLIC_KEY,
+      </if>
+      <if test="upTerminalCode != null">
+        UP_TERMINAL_CODE,
+      </if>
+      <if test="upTerminalType != null">
+        UP_TERMINAL_TYPE,
+      </if>
+      <if test="upQrFunc != null">
+        UP_QR_FUNC,
+      </if>
+      <if test="upMagneticCard != null">
+        UP_MAGNETIC_CARD,
+      </if>
+      <if test="upContactIcCard != null">
+        UP_CONTACT_IC_CARD,
+      </if>
+      <if test="upNoncontactIcCard != null">
+        UP_NONCONTACT_IC_CARD,
+      </if>
+      <if test="upPayWithoutCard != null">
+        UP_PAY_WITHOUT_CARD,
+      </if>
+      <if test="upTerminalBusiFunc != null">
+        UP_TERMINAL_BUSI_FUNC,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updTime != null">
+        UPD_TIME,
+      </if>
+      <if test="applyBatchNo != null">
+        APPLY_BATCH_NO,
+      </if>
+      <if test="posStatus != null">
+        POS_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="terminalCode != null">
+        #{terminalCode,jdbcType=DECIMAL},
+      </if>
+      <if test="terminalSerialNo != null">
+        #{terminalSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalType != null">
+        #{terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalNetWay != null">
+        #{terminalNetWay,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomOperator != null">
+        #{telecomOperator,jdbcType=DECIMAL},
+      </if>
+      <if test="bindPhoneNo != null">
+        #{bindPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="simCardSerial != null">
+        #{simCardSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="withholdingAgreementPhoto != null">
+        #{withholdingAgreementPhoto,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultDeposit != null">
+        #{defaultDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="actualDeposit != null">
+        #{actualDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="branchCode != null">
+        #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="regAuthCode != null">
+        #{regAuthCode,jdbcType=VARCHAR},
+      </if>
+      <if test="publicKey != null">
+        #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="upTerminalCode != null">
+        #{upTerminalCode,jdbcType=DECIMAL},
+      </if>
+      <if test="upTerminalType != null">
+        #{upTerminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="upQrFunc != null">
+        #{upQrFunc,jdbcType=DECIMAL},
+      </if>
+      <if test="upMagneticCard != null">
+        #{upMagneticCard,jdbcType=DECIMAL},
+      </if>
+      <if test="upContactIcCard != null">
+        #{upContactIcCard,jdbcType=DECIMAL},
+      </if>
+      <if test="upNoncontactIcCard != null">
+        #{upNoncontactIcCard,jdbcType=DECIMAL},
+      </if>
+      <if test="upPayWithoutCard != null">
+        #{upPayWithoutCard,jdbcType=DECIMAL},
+      </if>
+      <if test="upTerminalBusiFunc != null">
+        #{upTerminalBusiFunc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="applyBatchNo != null">
+        #{applyBatchNo,jdbcType=DECIMAL},
+      </if>
+      <if test="posStatus != null">
+        #{posStatus,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalUsingHisEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_TERMINAL_USING_HIS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_TERMINAL_USING_HIS
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.terminalCode != null">
+        TERMINAL_CODE = #{record.terminalCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.terminalSerialNo != null">
+        TERMINAL_SERIAL_NO = #{record.terminalSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalType != null">
+        TERMINAL_TYPE = #{record.terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalNetWay != null">
+        TERMINAL_NET_WAY = #{record.terminalNetWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telecomOperator != null">
+        TELECOM_OPERATOR = #{record.telecomOperator,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bindPhoneNo != null">
+        BIND_PHONE_NO = #{record.bindPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.simCardSerial != null">
+        SIM_CARD_SERIAL = #{record.simCardSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.withholdingAgreementPhoto != null">
+        WITHHOLDING_AGREEMENT_PHOTO = #{record.withholdingAgreementPhoto,jdbcType=DECIMAL},
+      </if>
+      <if test="record.defaultDeposit != null">
+        DEFAULT_DEPOSIT = #{record.defaultDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.actualDeposit != null">
+        ACTUAL_DEPOSIT = #{record.actualDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.branchCode != null">
+        BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.regAuthCode != null">
+        REG_AUTH_CODE = #{record.regAuthCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.publicKey != null">
+        PUBLIC_KEY = #{record.publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upTerminalCode != null">
+        UP_TERMINAL_CODE = #{record.upTerminalCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.upTerminalType != null">
+        UP_TERMINAL_TYPE = #{record.upTerminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upQrFunc != null">
+        UP_QR_FUNC = #{record.upQrFunc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.upMagneticCard != null">
+        UP_MAGNETIC_CARD = #{record.upMagneticCard,jdbcType=DECIMAL},
+      </if>
+      <if test="record.upContactIcCard != null">
+        UP_CONTACT_IC_CARD = #{record.upContactIcCard,jdbcType=DECIMAL},
+      </if>
+      <if test="record.upNoncontactIcCard != null">
+        UP_NONCONTACT_IC_CARD = #{record.upNoncontactIcCard,jdbcType=DECIMAL},
+      </if>
+      <if test="record.upPayWithoutCard != null">
+        UP_PAY_WITHOUT_CARD = #{record.upPayWithoutCard,jdbcType=DECIMAL},
+      </if>
+      <if test="record.upTerminalBusiFunc != null">
+        UP_TERMINAL_BUSI_FUNC = #{record.upTerminalBusiFunc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=OTHER},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updTime != null">
+        UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      </if>
+      <if test="record.applyBatchNo != null">
+        APPLY_BATCH_NO = #{record.applyBatchNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.posStatus != null">
+        POS_STATUS = #{record.posStatus,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_TERMINAL_USING_HIS
+    set ID = #{record.id,jdbcType=DECIMAL},
+      TERMINAL_CODE = #{record.terminalCode,jdbcType=DECIMAL},
+      TERMINAL_SERIAL_NO = #{record.terminalSerialNo,jdbcType=VARCHAR},
+      TERMINAL_TYPE = #{record.terminalType,jdbcType=VARCHAR},
+      TERMINAL_NET_WAY = #{record.terminalNetWay,jdbcType=VARCHAR},
+      TELECOM_OPERATOR = #{record.telecomOperator,jdbcType=DECIMAL},
+      BIND_PHONE_NO = #{record.bindPhoneNo,jdbcType=VARCHAR},
+      SIM_CARD_SERIAL = #{record.simCardSerial,jdbcType=VARCHAR},
+      WITHHOLDING_AGREEMENT_PHOTO = #{record.withholdingAgreementPhoto,jdbcType=DECIMAL},
+      DEFAULT_DEPOSIT = #{record.defaultDeposit,jdbcType=DECIMAL},
+      ACTUAL_DEPOSIT = #{record.actualDeposit,jdbcType=DECIMAL},
+      BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      REG_AUTH_CODE = #{record.regAuthCode,jdbcType=VARCHAR},
+      PUBLIC_KEY = #{record.publicKey,jdbcType=VARCHAR},
+      UP_TERMINAL_CODE = #{record.upTerminalCode,jdbcType=DECIMAL},
+      UP_TERMINAL_TYPE = #{record.upTerminalType,jdbcType=VARCHAR},
+      UP_QR_FUNC = #{record.upQrFunc,jdbcType=DECIMAL},
+      UP_MAGNETIC_CARD = #{record.upMagneticCard,jdbcType=DECIMAL},
+      UP_CONTACT_IC_CARD = #{record.upContactIcCard,jdbcType=DECIMAL},
+      UP_NONCONTACT_IC_CARD = #{record.upNoncontactIcCard,jdbcType=DECIMAL},
+      UP_PAY_WITHOUT_CARD = #{record.upPayWithoutCard,jdbcType=DECIMAL},
+      UP_TERMINAL_BUSI_FUNC = #{record.upTerminalBusiFunc,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=OTHER},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      APPLY_BATCH_NO = #{record.applyBatchNo,jdbcType=DECIMAL},
+      POS_STATUS = #{record.posStatus,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalUsingHisEntity">
+    update SYS_TERMINAL_USING_HIS
+    <set>
+      <if test="terminalCode != null">
+        TERMINAL_CODE = #{terminalCode,jdbcType=DECIMAL},
+      </if>
+      <if test="terminalSerialNo != null">
+        TERMINAL_SERIAL_NO = #{terminalSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalType != null">
+        TERMINAL_TYPE = #{terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalNetWay != null">
+        TERMINAL_NET_WAY = #{terminalNetWay,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomOperator != null">
+        TELECOM_OPERATOR = #{telecomOperator,jdbcType=DECIMAL},
+      </if>
+      <if test="bindPhoneNo != null">
+        BIND_PHONE_NO = #{bindPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="simCardSerial != null">
+        SIM_CARD_SERIAL = #{simCardSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="withholdingAgreementPhoto != null">
+        WITHHOLDING_AGREEMENT_PHOTO = #{withholdingAgreementPhoto,jdbcType=DECIMAL},
+      </if>
+      <if test="defaultDeposit != null">
+        DEFAULT_DEPOSIT = #{defaultDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="actualDeposit != null">
+        ACTUAL_DEPOSIT = #{actualDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="branchCode != null">
+        BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="regAuthCode != null">
+        REG_AUTH_CODE = #{regAuthCode,jdbcType=VARCHAR},
+      </if>
+      <if test="publicKey != null">
+        PUBLIC_KEY = #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="upTerminalCode != null">
+        UP_TERMINAL_CODE = #{upTerminalCode,jdbcType=DECIMAL},
+      </if>
+      <if test="upTerminalType != null">
+        UP_TERMINAL_TYPE = #{upTerminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="upQrFunc != null">
+        UP_QR_FUNC = #{upQrFunc,jdbcType=DECIMAL},
+      </if>
+      <if test="upMagneticCard != null">
+        UP_MAGNETIC_CARD = #{upMagneticCard,jdbcType=DECIMAL},
+      </if>
+      <if test="upContactIcCard != null">
+        UP_CONTACT_IC_CARD = #{upContactIcCard,jdbcType=DECIMAL},
+      </if>
+      <if test="upNoncontactIcCard != null">
+        UP_NONCONTACT_IC_CARD = #{upNoncontactIcCard,jdbcType=DECIMAL},
+      </if>
+      <if test="upPayWithoutCard != null">
+        UP_PAY_WITHOUT_CARD = #{upPayWithoutCard,jdbcType=DECIMAL},
+      </if>
+      <if test="upTerminalBusiFunc != null">
+        UP_TERMINAL_BUSI_FUNC = #{upTerminalBusiFunc,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        UPD_TIME = #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="applyBatchNo != null">
+        APPLY_BATCH_NO = #{applyBatchNo,jdbcType=DECIMAL},
+      </if>
+      <if test="posStatus != null">
+        POS_STATUS = #{posStatus,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalUsingHisEntity">
+    update SYS_TERMINAL_USING_HIS
+    set TERMINAL_CODE = #{terminalCode,jdbcType=DECIMAL},
+      TERMINAL_SERIAL_NO = #{terminalSerialNo,jdbcType=VARCHAR},
+      TERMINAL_TYPE = #{terminalType,jdbcType=VARCHAR},
+      TERMINAL_NET_WAY = #{terminalNetWay,jdbcType=VARCHAR},
+      TELECOM_OPERATOR = #{telecomOperator,jdbcType=DECIMAL},
+      BIND_PHONE_NO = #{bindPhoneNo,jdbcType=VARCHAR},
+      SIM_CARD_SERIAL = #{simCardSerial,jdbcType=VARCHAR},
+      WITHHOLDING_AGREEMENT_PHOTO = #{withholdingAgreementPhoto,jdbcType=DECIMAL},
+      DEFAULT_DEPOSIT = #{defaultDeposit,jdbcType=DECIMAL},
+      ACTUAL_DEPOSIT = #{actualDeposit,jdbcType=DECIMAL},
+      BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      REG_AUTH_CODE = #{regAuthCode,jdbcType=VARCHAR},
+      PUBLIC_KEY = #{publicKey,jdbcType=VARCHAR},
+      UP_TERMINAL_CODE = #{upTerminalCode,jdbcType=DECIMAL},
+      UP_TERMINAL_TYPE = #{upTerminalType,jdbcType=VARCHAR},
+      UP_QR_FUNC = #{upQrFunc,jdbcType=DECIMAL},
+      UP_MAGNETIC_CARD = #{upMagneticCard,jdbcType=DECIMAL},
+      UP_CONTACT_IC_CARD = #{upContactIcCard,jdbcType=DECIMAL},
+      UP_NONCONTACT_IC_CARD = #{upNoncontactIcCard,jdbcType=DECIMAL},
+      UP_PAY_WITHOUT_CARD = #{upPayWithoutCard,jdbcType=DECIMAL},
+      UP_TERMINAL_BUSI_FUNC = #{upTerminalBusiFunc,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=OTHER},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPD_TIME = #{updTime,jdbcType=CHAR},
+      APPLY_BATCH_NO = #{applyBatchNo,jdbcType=DECIMAL},
+      POS_STATUS = #{posStatus,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

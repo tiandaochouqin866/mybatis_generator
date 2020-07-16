@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysBranchActDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchActEntity">
+    <id column="BRANCH_CODE" jdbcType="DECIMAL" property="branchCode" />
+    <result column="BANK_ACT_TYPE" jdbcType="DECIMAL" property="bankActType" />
+    <result column="BANK_ACT_NAME" jdbcType="OTHER" property="bankActName" />
+    <result column="BANK_CARD_NO" jdbcType="VARCHAR" property="bankCardNo" />
+    <result column="BANK_CARD_PHOTO" jdbcType="DECIMAL" property="bankCardPhoto" />
+    <result column="BANK_ACT_NO" jdbcType="VARCHAR" property="bankActNo" />
+    <result column="BANK_NAME" jdbcType="OTHER" property="bankName" />
+    <result column="PROVINCE_CODE" jdbcType="DECIMAL" property="provinceCode" />
+    <result column="CITY_CODE" jdbcType="DECIMAL" property="cityCode" />
+    <result column="BANK_BRANCH_NAME" jdbcType="OTHER" property="bankBranchName" />
+    <result column="QR_CODE" jdbcType="VARCHAR" property="qrCode" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="REMARK" jdbcType="OTHER" property="remark" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPD_TIME" jdbcType="CHAR" property="updTime" />
+    <result column="BANK_CUSTOMER_NO" jdbcType="VARCHAR" property="bankCustomerNo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BRANCH_CODE, BANK_ACT_TYPE, BANK_ACT_NAME, BANK_CARD_NO, BANK_CARD_PHOTO, BANK_ACT_NO, 
+    BANK_NAME, PROVINCE_CODE, CITY_CODE, BANK_BRANCH_NAME, QR_CODE, STATUS, REMARK, CREATOR, 
+    CREATE_TIME, UPD_TIME, BANK_CUSTOMER_NO
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchActEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_BRANCH_ACT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_BRANCH_ACT
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_BRANCH_ACT
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchActEntityExample">
+    delete from SYS_BRANCH_ACT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchActEntity">
+    insert into SYS_BRANCH_ACT (BRANCH_CODE, BANK_ACT_TYPE, BANK_ACT_NAME, 
+      BANK_CARD_NO, BANK_CARD_PHOTO, BANK_ACT_NO, 
+      BANK_NAME, PROVINCE_CODE, CITY_CODE, 
+      BANK_BRANCH_NAME, QR_CODE, STATUS, 
+      REMARK, CREATOR, CREATE_TIME, 
+      UPD_TIME, BANK_CUSTOMER_NO)
+    values (#{branchCode,jdbcType=DECIMAL}, #{bankActType,jdbcType=DECIMAL}, #{bankActName,jdbcType=OTHER}, 
+      #{bankCardNo,jdbcType=VARCHAR}, #{bankCardPhoto,jdbcType=DECIMAL}, #{bankActNo,jdbcType=VARCHAR}, 
+      #{bankName,jdbcType=OTHER}, #{provinceCode,jdbcType=DECIMAL}, #{cityCode,jdbcType=DECIMAL}, 
+      #{bankBranchName,jdbcType=OTHER}, #{qrCode,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=OTHER}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, 
+      #{updTime,jdbcType=CHAR}, #{bankCustomerNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchActEntity">
+    insert into SYS_BRANCH_ACT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="branchCode != null">
+        BRANCH_CODE,
+      </if>
+      <if test="bankActType != null">
+        BANK_ACT_TYPE,
+      </if>
+      <if test="bankActName != null">
+        BANK_ACT_NAME,
+      </if>
+      <if test="bankCardNo != null">
+        BANK_CARD_NO,
+      </if>
+      <if test="bankCardPhoto != null">
+        BANK_CARD_PHOTO,
+      </if>
+      <if test="bankActNo != null">
+        BANK_ACT_NO,
+      </if>
+      <if test="bankName != null">
+        BANK_NAME,
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE,
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE,
+      </if>
+      <if test="bankBranchName != null">
+        BANK_BRANCH_NAME,
+      </if>
+      <if test="qrCode != null">
+        QR_CODE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updTime != null">
+        UPD_TIME,
+      </if>
+      <if test="bankCustomerNo != null">
+        BANK_CUSTOMER_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="branchCode != null">
+        #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="bankActType != null">
+        #{bankActType,jdbcType=DECIMAL},
+      </if>
+      <if test="bankActName != null">
+        #{bankActName,jdbcType=OTHER},
+      </if>
+      <if test="bankCardNo != null">
+        #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardPhoto != null">
+        #{bankCardPhoto,jdbcType=DECIMAL},
+      </if>
+      <if test="bankActNo != null">
+        #{bankActNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        #{bankName,jdbcType=OTHER},
+      </if>
+      <if test="provinceCode != null">
+        #{provinceCode,jdbcType=DECIMAL},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=DECIMAL},
+      </if>
+      <if test="bankBranchName != null">
+        #{bankBranchName,jdbcType=OTHER},
+      </if>
+      <if test="qrCode != null">
+        #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="bankCustomerNo != null">
+        #{bankCustomerNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchActEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_BRANCH_ACT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_BRANCH_ACT
+    <set>
+      <if test="record.branchCode != null">
+        BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bankActType != null">
+        BANK_ACT_TYPE = #{record.bankActType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bankActName != null">
+        BANK_ACT_NAME = #{record.bankActName,jdbcType=OTHER},
+      </if>
+      <if test="record.bankCardNo != null">
+        BANK_CARD_NO = #{record.bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankCardPhoto != null">
+        BANK_CARD_PHOTO = #{record.bankCardPhoto,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bankActNo != null">
+        BANK_ACT_NO = #{record.bankActNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null">
+        BANK_NAME = #{record.bankName,jdbcType=OTHER},
+      </if>
+      <if test="record.provinceCode != null">
+        PROVINCE_CODE = #{record.provinceCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cityCode != null">
+        CITY_CODE = #{record.cityCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bankBranchName != null">
+        BANK_BRANCH_NAME = #{record.bankBranchName,jdbcType=OTHER},
+      </if>
+      <if test="record.qrCode != null">
+        QR_CODE = #{record.qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=OTHER},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updTime != null">
+        UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      </if>
+      <if test="record.bankCustomerNo != null">
+        BANK_CUSTOMER_NO = #{record.bankCustomerNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_BRANCH_ACT
+    set BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      BANK_ACT_TYPE = #{record.bankActType,jdbcType=DECIMAL},
+      BANK_ACT_NAME = #{record.bankActName,jdbcType=OTHER},
+      BANK_CARD_NO = #{record.bankCardNo,jdbcType=VARCHAR},
+      BANK_CARD_PHOTO = #{record.bankCardPhoto,jdbcType=DECIMAL},
+      BANK_ACT_NO = #{record.bankActNo,jdbcType=VARCHAR},
+      BANK_NAME = #{record.bankName,jdbcType=OTHER},
+      PROVINCE_CODE = #{record.provinceCode,jdbcType=DECIMAL},
+      CITY_CODE = #{record.cityCode,jdbcType=DECIMAL},
+      BANK_BRANCH_NAME = #{record.bankBranchName,jdbcType=OTHER},
+      QR_CODE = #{record.qrCode,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=OTHER},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      BANK_CUSTOMER_NO = #{record.bankCustomerNo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchActEntity">
+    update SYS_BRANCH_ACT
+    <set>
+      <if test="bankActType != null">
+        BANK_ACT_TYPE = #{bankActType,jdbcType=DECIMAL},
+      </if>
+      <if test="bankActName != null">
+        BANK_ACT_NAME = #{bankActName,jdbcType=OTHER},
+      </if>
+      <if test="bankCardNo != null">
+        BANK_CARD_NO = #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardPhoto != null">
+        BANK_CARD_PHOTO = #{bankCardPhoto,jdbcType=DECIMAL},
+      </if>
+      <if test="bankActNo != null">
+        BANK_ACT_NO = #{bankActNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        BANK_NAME = #{bankName,jdbcType=OTHER},
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE = #{provinceCode,jdbcType=DECIMAL},
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE = #{cityCode,jdbcType=DECIMAL},
+      </if>
+      <if test="bankBranchName != null">
+        BANK_BRANCH_NAME = #{bankBranchName,jdbcType=OTHER},
+      </if>
+      <if test="qrCode != null">
+        QR_CODE = #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        UPD_TIME = #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="bankCustomerNo != null">
+        BANK_CUSTOMER_NO = #{bankCustomerNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchActEntity">
+    update SYS_BRANCH_ACT
+    set BANK_ACT_TYPE = #{bankActType,jdbcType=DECIMAL},
+      BANK_ACT_NAME = #{bankActName,jdbcType=OTHER},
+      BANK_CARD_NO = #{bankCardNo,jdbcType=VARCHAR},
+      BANK_CARD_PHOTO = #{bankCardPhoto,jdbcType=DECIMAL},
+      BANK_ACT_NO = #{bankActNo,jdbcType=VARCHAR},
+      BANK_NAME = #{bankName,jdbcType=OTHER},
+      PROVINCE_CODE = #{provinceCode,jdbcType=DECIMAL},
+      CITY_CODE = #{cityCode,jdbcType=DECIMAL},
+      BANK_BRANCH_NAME = #{bankBranchName,jdbcType=OTHER},
+      QR_CODE = #{qrCode,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=OTHER},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPD_TIME = #{updTime,jdbcType=CHAR},
+      BANK_CUSTOMER_NO = #{bankCustomerNo,jdbcType=VARCHAR}
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </update>
+</mapper>

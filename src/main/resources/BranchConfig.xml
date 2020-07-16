@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="my" targetRuntime="MyBatis3">
+        <!--不需要配置-->
+        <jdbcConnection driverClass="" connectionURL="" userId="" password=""/>
+
+        <!--entity实体类-->
+        <javaModelGenerator targetPackage="com.zs.test.trade.api.entity"
+                            targetProject="D:\mybatis">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--mybatis映射xml文件-->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="D:\mybatis">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!--mapper接口-->
+        <javaClientGenerator targetPackage="om.zs.test.operational.server.mapper"
+                             targetProject="D:\mybatis" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!--不需要配置-->
+        <table tableName="" domainObjectName="" mapperName="" sqlProviderName=""/>
+    </context>
+</generatorConfiguration>

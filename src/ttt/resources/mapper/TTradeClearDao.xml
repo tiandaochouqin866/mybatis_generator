@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.TTradeClearDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TTradeClearEntity">
+    <id column="SERIAL_NO" jdbcType="DECIMAL" property="serialNo" />
+    <result column="CLEAR_BATCH_NO" jdbcType="DECIMAL" property="clearBatchNo" />
+    <result column="THIRD_PLAT_CODE" jdbcType="DECIMAL" property="thirdPlatCode" />
+    <result column="TRAD_SERIAL_NO" jdbcType="DECIMAL" property="tradSerialNo" />
+    <result column="BEGIN_TIME" jdbcType="CHAR" property="beginTime" />
+    <result column="END_TIME" jdbcType="CHAR" property="endTime" />
+    <result column="CLEARING_ADVANCE_ACT" jdbcType="VARCHAR" property="clearingAdvanceAct" />
+    <result column="BRANCH_CODE" jdbcType="DECIMAL" property="branchCode" />
+    <result column="BANK_ACT_NO" jdbcType="VARCHAR" property="bankActNo" />
+    <result column="CLEAR_AMT" jdbcType="DECIMAL" property="clearAmt" />
+    <result column="PLAT_SERIAL_NO" jdbcType="DECIMAL" property="platSerialNo" />
+    <result column="CORE_SERIAL_NO" jdbcType="VARCHAR" property="coreSerialNo" />
+    <result column="CLEAR_TIME" jdbcType="CHAR" property="clearTime" />
+    <result column="CLEAR_RESULT" jdbcType="DECIMAL" property="clearResult" />
+    <result column="RESP_MSG" jdbcType="VARCHAR" property="respMsg" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="PROFIT_TYPE" jdbcType="DECIMAL" property="profitType" />
+    <result column="CLEARING_RULE" jdbcType="VARCHAR" property="clearingRule" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SERIAL_NO, CLEAR_BATCH_NO, THIRD_PLAT_CODE, TRAD_SERIAL_NO, BEGIN_TIME, END_TIME, 
+    CLEARING_ADVANCE_ACT, BRANCH_CODE, BANK_ACT_NO, CLEAR_AMT, PLAT_SERIAL_NO, CORE_SERIAL_NO, 
+    CLEAR_TIME, CLEAR_RESULT, RESP_MSG, CREATE_TIME, PROFIT_TYPE, CLEARING_RULE
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TTradeClearEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_TRADE_CLEAR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_TRADE_CLEAR
+    where SERIAL_NO = #{serialNo,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from T_TRADE_CLEAR
+    where SERIAL_NO = #{serialNo,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TTradeClearEntityExample">
+    delete from T_TRADE_CLEAR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TTradeClearEntity">
+    insert into T_TRADE_CLEAR (SERIAL_NO, CLEAR_BATCH_NO, THIRD_PLAT_CODE, 
+      TRAD_SERIAL_NO, BEGIN_TIME, END_TIME, 
+      CLEARING_ADVANCE_ACT, BRANCH_CODE, BANK_ACT_NO, 
+      CLEAR_AMT, PLAT_SERIAL_NO, CORE_SERIAL_NO, 
+      CLEAR_TIME, CLEAR_RESULT, RESP_MSG, 
+      CREATE_TIME, PROFIT_TYPE, CLEARING_RULE
+      )
+    values (#{serialNo,jdbcType=DECIMAL}, #{clearBatchNo,jdbcType=DECIMAL}, #{thirdPlatCode,jdbcType=DECIMAL}, 
+      #{tradSerialNo,jdbcType=DECIMAL}, #{beginTime,jdbcType=CHAR}, #{endTime,jdbcType=CHAR}, 
+      #{clearingAdvanceAct,jdbcType=VARCHAR}, #{branchCode,jdbcType=DECIMAL}, #{bankActNo,jdbcType=VARCHAR}, 
+      #{clearAmt,jdbcType=DECIMAL}, #{platSerialNo,jdbcType=DECIMAL}, #{coreSerialNo,jdbcType=VARCHAR}, 
+      #{clearTime,jdbcType=CHAR}, #{clearResult,jdbcType=DECIMAL}, #{respMsg,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=CHAR}, #{profitType,jdbcType=DECIMAL}, #{clearingRule,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TTradeClearEntity">
+    insert into T_TRADE_CLEAR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serialNo != null">
+        SERIAL_NO,
+      </if>
+      <if test="clearBatchNo != null">
+        CLEAR_BATCH_NO,
+      </if>
+      <if test="thirdPlatCode != null">
+        THIRD_PLAT_CODE,
+      </if>
+      <if test="tradSerialNo != null">
+        TRAD_SERIAL_NO,
+      </if>
+      <if test="beginTime != null">
+        BEGIN_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="clearingAdvanceAct != null">
+        CLEARING_ADVANCE_ACT,
+      </if>
+      <if test="branchCode != null">
+        BRANCH_CODE,
+      </if>
+      <if test="bankActNo != null">
+        BANK_ACT_NO,
+      </if>
+      <if test="clearAmt != null">
+        CLEAR_AMT,
+      </if>
+      <if test="platSerialNo != null">
+        PLAT_SERIAL_NO,
+      </if>
+      <if test="coreSerialNo != null">
+        CORE_SERIAL_NO,
+      </if>
+      <if test="clearTime != null">
+        CLEAR_TIME,
+      </if>
+      <if test="clearResult != null">
+        CLEAR_RESULT,
+      </if>
+      <if test="respMsg != null">
+        RESP_MSG,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="profitType != null">
+        PROFIT_TYPE,
+      </if>
+      <if test="clearingRule != null">
+        CLEARING_RULE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serialNo != null">
+        #{serialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="clearBatchNo != null">
+        #{clearBatchNo,jdbcType=DECIMAL},
+      </if>
+      <if test="thirdPlatCode != null">
+        #{thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+      <if test="tradSerialNo != null">
+        #{tradSerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=CHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=CHAR},
+      </if>
+      <if test="clearingAdvanceAct != null">
+        #{clearingAdvanceAct,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCode != null">
+        #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="bankActNo != null">
+        #{bankActNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clearAmt != null">
+        #{clearAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="platSerialNo != null">
+        #{platSerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="coreSerialNo != null">
+        #{coreSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clearTime != null">
+        #{clearTime,jdbcType=CHAR},
+      </if>
+      <if test="clearResult != null">
+        #{clearResult,jdbcType=DECIMAL},
+      </if>
+      <if test="respMsg != null">
+        #{respMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="profitType != null">
+        #{profitType,jdbcType=DECIMAL},
+      </if>
+      <if test="clearingRule != null">
+        #{clearingRule,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TTradeClearEntityExample" resultType="java.lang.Long">
+    select count(*) from T_TRADE_CLEAR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_TRADE_CLEAR
+    <set>
+      <if test="record.serialNo != null">
+        SERIAL_NO = #{record.serialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.clearBatchNo != null">
+        CLEAR_BATCH_NO = #{record.clearBatchNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.thirdPlatCode != null">
+        THIRD_PLAT_CODE = #{record.thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tradSerialNo != null">
+        TRAD_SERIAL_NO = #{record.tradSerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.beginTime != null">
+        BEGIN_TIME = #{record.beginTime,jdbcType=CHAR},
+      </if>
+      <if test="record.endTime != null">
+        END_TIME = #{record.endTime,jdbcType=CHAR},
+      </if>
+      <if test="record.clearingAdvanceAct != null">
+        CLEARING_ADVANCE_ACT = #{record.clearingAdvanceAct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchCode != null">
+        BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bankActNo != null">
+        BANK_ACT_NO = #{record.bankActNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clearAmt != null">
+        CLEAR_AMT = #{record.clearAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.platSerialNo != null">
+        PLAT_SERIAL_NO = #{record.platSerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.coreSerialNo != null">
+        CORE_SERIAL_NO = #{record.coreSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clearTime != null">
+        CLEAR_TIME = #{record.clearTime,jdbcType=CHAR},
+      </if>
+      <if test="record.clearResult != null">
+        CLEAR_RESULT = #{record.clearResult,jdbcType=DECIMAL},
+      </if>
+      <if test="record.respMsg != null">
+        RESP_MSG = #{record.respMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.profitType != null">
+        PROFIT_TYPE = #{record.profitType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.clearingRule != null">
+        CLEARING_RULE = #{record.clearingRule,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_TRADE_CLEAR
+    set SERIAL_NO = #{record.serialNo,jdbcType=DECIMAL},
+      CLEAR_BATCH_NO = #{record.clearBatchNo,jdbcType=DECIMAL},
+      THIRD_PLAT_CODE = #{record.thirdPlatCode,jdbcType=DECIMAL},
+      TRAD_SERIAL_NO = #{record.tradSerialNo,jdbcType=DECIMAL},
+      BEGIN_TIME = #{record.beginTime,jdbcType=CHAR},
+      END_TIME = #{record.endTime,jdbcType=CHAR},
+      CLEARING_ADVANCE_ACT = #{record.clearingAdvanceAct,jdbcType=VARCHAR},
+      BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      BANK_ACT_NO = #{record.bankActNo,jdbcType=VARCHAR},
+      CLEAR_AMT = #{record.clearAmt,jdbcType=DECIMAL},
+      PLAT_SERIAL_NO = #{record.platSerialNo,jdbcType=DECIMAL},
+      CORE_SERIAL_NO = #{record.coreSerialNo,jdbcType=VARCHAR},
+      CLEAR_TIME = #{record.clearTime,jdbcType=CHAR},
+      CLEAR_RESULT = #{record.clearResult,jdbcType=DECIMAL},
+      RESP_MSG = #{record.respMsg,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      PROFIT_TYPE = #{record.profitType,jdbcType=DECIMAL},
+      CLEARING_RULE = #{record.clearingRule,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TTradeClearEntity">
+    update T_TRADE_CLEAR
+    <set>
+      <if test="clearBatchNo != null">
+        CLEAR_BATCH_NO = #{clearBatchNo,jdbcType=DECIMAL},
+      </if>
+      <if test="thirdPlatCode != null">
+        THIRD_PLAT_CODE = #{thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+      <if test="tradSerialNo != null">
+        TRAD_SERIAL_NO = #{tradSerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="beginTime != null">
+        BEGIN_TIME = #{beginTime,jdbcType=CHAR},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=CHAR},
+      </if>
+      <if test="clearingAdvanceAct != null">
+        CLEARING_ADVANCE_ACT = #{clearingAdvanceAct,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCode != null">
+        BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="bankActNo != null">
+        BANK_ACT_NO = #{bankActNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clearAmt != null">
+        CLEAR_AMT = #{clearAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="platSerialNo != null">
+        PLAT_SERIAL_NO = #{platSerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="coreSerialNo != null">
+        CORE_SERIAL_NO = #{coreSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clearTime != null">
+        CLEAR_TIME = #{clearTime,jdbcType=CHAR},
+      </if>
+      <if test="clearResult != null">
+        CLEAR_RESULT = #{clearResult,jdbcType=DECIMAL},
+      </if>
+      <if test="respMsg != null">
+        RESP_MSG = #{respMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="profitType != null">
+        PROFIT_TYPE = #{profitType,jdbcType=DECIMAL},
+      </if>
+      <if test="clearingRule != null">
+        CLEARING_RULE = #{clearingRule,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SERIAL_NO = #{serialNo,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TTradeClearEntity">
+    update T_TRADE_CLEAR
+    set CLEAR_BATCH_NO = #{clearBatchNo,jdbcType=DECIMAL},
+      THIRD_PLAT_CODE = #{thirdPlatCode,jdbcType=DECIMAL},
+      TRAD_SERIAL_NO = #{tradSerialNo,jdbcType=DECIMAL},
+      BEGIN_TIME = #{beginTime,jdbcType=CHAR},
+      END_TIME = #{endTime,jdbcType=CHAR},
+      CLEARING_ADVANCE_ACT = #{clearingAdvanceAct,jdbcType=VARCHAR},
+      BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      BANK_ACT_NO = #{bankActNo,jdbcType=VARCHAR},
+      CLEAR_AMT = #{clearAmt,jdbcType=DECIMAL},
+      PLAT_SERIAL_NO = #{platSerialNo,jdbcType=DECIMAL},
+      CORE_SERIAL_NO = #{coreSerialNo,jdbcType=VARCHAR},
+      CLEAR_TIME = #{clearTime,jdbcType=CHAR},
+      CLEAR_RESULT = #{clearResult,jdbcType=DECIMAL},
+      RESP_MSG = #{respMsg,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      PROFIT_TYPE = #{profitType,jdbcType=DECIMAL},
+      CLEARING_RULE = #{clearingRule,jdbcType=VARCHAR}
+    where SERIAL_NO = #{serialNo,jdbcType=DECIMAL}
+  </update>
+</mapper>

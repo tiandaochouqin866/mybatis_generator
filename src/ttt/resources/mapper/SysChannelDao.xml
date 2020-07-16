@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysChannelDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysChannelEntity">
+    <id column="CHANNEL_NO" jdbcType="DECIMAL" property="channelNo" />
+    <result column="THIRD_PLAT_CODE" jdbcType="DECIMAL" property="thirdPlatCode" />
+    <result column="THIRD_PLAT_NAME" jdbcType="VARCHAR" property="thirdPlatName" />
+    <result column="THIRD_PLAT_ACT" jdbcType="VARCHAR" property="thirdPlatAct" />
+    <result column="APP_ID" jdbcType="VARCHAR" property="appId" />
+    <result column="UP_STANDARD_CODE" jdbcType="VARCHAR" property="upStandardCode" />
+    <result column="KEY_TYPE" jdbcType="DECIMAL" property="keyType" />
+    <result column="PUBLIC_KEY" jdbcType="VARCHAR" property="publicKey" />
+    <result column="PRIVATE_KEY" jdbcType="VARCHAR" property="privateKey" />
+    <result column="KEY_PWD" jdbcType="VARCHAR" property="keyPwd" />
+    <result column="BRANCH_CODE" jdbcType="DECIMAL" property="branchCode" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="REMARK" jdbcType="OTHER" property="remark" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPD_TIME" jdbcType="CHAR" property="updTime" />
+    <result column="APP_SECRET" jdbcType="VARCHAR" property="appSecret" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CHANNEL_NO, THIRD_PLAT_CODE, THIRD_PLAT_NAME, THIRD_PLAT_ACT, APP_ID, UP_STANDARD_CODE, 
+    KEY_TYPE, PUBLIC_KEY, PRIVATE_KEY, KEY_PWD, BRANCH_CODE, STATUS, REMARK, CREATOR, 
+    CREATE_TIME, UPD_TIME, APP_SECRET
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysChannelEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_CHANNEL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_CHANNEL
+    where CHANNEL_NO = #{channelNo,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_CHANNEL
+    where CHANNEL_NO = #{channelNo,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysChannelEntityExample">
+    delete from SYS_CHANNEL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysChannelEntity">
+    insert into SYS_CHANNEL (CHANNEL_NO, THIRD_PLAT_CODE, THIRD_PLAT_NAME, 
+      THIRD_PLAT_ACT, APP_ID, UP_STANDARD_CODE, 
+      KEY_TYPE, PUBLIC_KEY, PRIVATE_KEY, 
+      KEY_PWD, BRANCH_CODE, STATUS, 
+      REMARK, CREATOR, CREATE_TIME, 
+      UPD_TIME, APP_SECRET)
+    values (#{channelNo,jdbcType=DECIMAL}, #{thirdPlatCode,jdbcType=DECIMAL}, #{thirdPlatName,jdbcType=VARCHAR}, 
+      #{thirdPlatAct,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, #{upStandardCode,jdbcType=VARCHAR}, 
+      #{keyType,jdbcType=DECIMAL}, #{publicKey,jdbcType=VARCHAR}, #{privateKey,jdbcType=VARCHAR}, 
+      #{keyPwd,jdbcType=VARCHAR}, #{branchCode,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=OTHER}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, 
+      #{updTime,jdbcType=CHAR}, #{appSecret,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysChannelEntity">
+    insert into SYS_CHANNEL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="channelNo != null">
+        CHANNEL_NO,
+      </if>
+      <if test="thirdPlatCode != null">
+        THIRD_PLAT_CODE,
+      </if>
+      <if test="thirdPlatName != null">
+        THIRD_PLAT_NAME,
+      </if>
+      <if test="thirdPlatAct != null">
+        THIRD_PLAT_ACT,
+      </if>
+      <if test="appId != null">
+        APP_ID,
+      </if>
+      <if test="upStandardCode != null">
+        UP_STANDARD_CODE,
+      </if>
+      <if test="keyType != null">
+        KEY_TYPE,
+      </if>
+      <if test="publicKey != null">
+        PUBLIC_KEY,
+      </if>
+      <if test="privateKey != null">
+        PRIVATE_KEY,
+      </if>
+      <if test="keyPwd != null">
+        KEY_PWD,
+      </if>
+      <if test="branchCode != null">
+        BRANCH_CODE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updTime != null">
+        UPD_TIME,
+      </if>
+      <if test="appSecret != null">
+        APP_SECRET,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="channelNo != null">
+        #{channelNo,jdbcType=DECIMAL},
+      </if>
+      <if test="thirdPlatCode != null">
+        #{thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+      <if test="thirdPlatName != null">
+        #{thirdPlatName,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdPlatAct != null">
+        #{thirdPlatAct,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="upStandardCode != null">
+        #{upStandardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyType != null">
+        #{keyType,jdbcType=DECIMAL},
+      </if>
+      <if test="publicKey != null">
+        #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null">
+        #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPwd != null">
+        #{keyPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCode != null">
+        #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="appSecret != null">
+        #{appSecret,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysChannelEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_CHANNEL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_CHANNEL
+    <set>
+      <if test="record.channelNo != null">
+        CHANNEL_NO = #{record.channelNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.thirdPlatCode != null">
+        THIRD_PLAT_CODE = #{record.thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.thirdPlatName != null">
+        THIRD_PLAT_NAME = #{record.thirdPlatName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdPlatAct != null">
+        THIRD_PLAT_ACT = #{record.thirdPlatAct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appId != null">
+        APP_ID = #{record.appId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upStandardCode != null">
+        UP_STANDARD_CODE = #{record.upStandardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyType != null">
+        KEY_TYPE = #{record.keyType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.publicKey != null">
+        PUBLIC_KEY = #{record.publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privateKey != null">
+        PRIVATE_KEY = #{record.privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyPwd != null">
+        KEY_PWD = #{record.keyPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchCode != null">
+        BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=OTHER},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updTime != null">
+        UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      </if>
+      <if test="record.appSecret != null">
+        APP_SECRET = #{record.appSecret,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_CHANNEL
+    set CHANNEL_NO = #{record.channelNo,jdbcType=DECIMAL},
+      THIRD_PLAT_CODE = #{record.thirdPlatCode,jdbcType=DECIMAL},
+      THIRD_PLAT_NAME = #{record.thirdPlatName,jdbcType=VARCHAR},
+      THIRD_PLAT_ACT = #{record.thirdPlatAct,jdbcType=VARCHAR},
+      APP_ID = #{record.appId,jdbcType=VARCHAR},
+      UP_STANDARD_CODE = #{record.upStandardCode,jdbcType=VARCHAR},
+      KEY_TYPE = #{record.keyType,jdbcType=DECIMAL},
+      PUBLIC_KEY = #{record.publicKey,jdbcType=VARCHAR},
+      PRIVATE_KEY = #{record.privateKey,jdbcType=VARCHAR},
+      KEY_PWD = #{record.keyPwd,jdbcType=VARCHAR},
+      BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=OTHER},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      APP_SECRET = #{record.appSecret,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysChannelEntity">
+    update SYS_CHANNEL
+    <set>
+      <if test="thirdPlatCode != null">
+        THIRD_PLAT_CODE = #{thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+      <if test="thirdPlatName != null">
+        THIRD_PLAT_NAME = #{thirdPlatName,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdPlatAct != null">
+        THIRD_PLAT_ACT = #{thirdPlatAct,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        APP_ID = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="upStandardCode != null">
+        UP_STANDARD_CODE = #{upStandardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyType != null">
+        KEY_TYPE = #{keyType,jdbcType=DECIMAL},
+      </if>
+      <if test="publicKey != null">
+        PUBLIC_KEY = #{publicKey,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null">
+        PRIVATE_KEY = #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="keyPwd != null">
+        KEY_PWD = #{keyPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCode != null">
+        BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        UPD_TIME = #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="appSecret != null">
+        APP_SECRET = #{appSecret,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CHANNEL_NO = #{channelNo,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysChannelEntity">
+    update SYS_CHANNEL
+    set THIRD_PLAT_CODE = #{thirdPlatCode,jdbcType=DECIMAL},
+      THIRD_PLAT_NAME = #{thirdPlatName,jdbcType=VARCHAR},
+      THIRD_PLAT_ACT = #{thirdPlatAct,jdbcType=VARCHAR},
+      APP_ID = #{appId,jdbcType=VARCHAR},
+      UP_STANDARD_CODE = #{upStandardCode,jdbcType=VARCHAR},
+      KEY_TYPE = #{keyType,jdbcType=DECIMAL},
+      PUBLIC_KEY = #{publicKey,jdbcType=VARCHAR},
+      PRIVATE_KEY = #{privateKey,jdbcType=VARCHAR},
+      KEY_PWD = #{keyPwd,jdbcType=VARCHAR},
+      BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=OTHER},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPD_TIME = #{updTime,jdbcType=CHAR},
+      APP_SECRET = #{appSecret,jdbcType=VARCHAR}
+    where CHANNEL_NO = #{channelNo,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysTerminalStorageDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalStorageEntity">
+    <id column="STORAGE_BATCH_NO" jdbcType="DECIMAL" property="storageBatchNo" />
+    <result column="BEGIN_SERIAL_NO" jdbcType="VARCHAR" property="beginSerialNo" />
+    <result column="TERMINAL_MODEL" jdbcType="VARCHAR" property="terminalModel" />
+    <result column="TERMINAL_COUNT" jdbcType="DECIMAL" property="terminalCount" />
+    <result column="REMARK" jdbcType="OTHER" property="remark" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    STORAGE_BATCH_NO, BEGIN_SERIAL_NO, TERMINAL_MODEL, TERMINAL_COUNT, REMARK, CREATOR, 
+    CREATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalStorageEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TERMINAL_STORAGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TERMINAL_STORAGE
+    where STORAGE_BATCH_NO = #{storageBatchNo,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_TERMINAL_STORAGE
+    where STORAGE_BATCH_NO = #{storageBatchNo,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalStorageEntityExample">
+    delete from SYS_TERMINAL_STORAGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalStorageEntity">
+    insert into SYS_TERMINAL_STORAGE (STORAGE_BATCH_NO, BEGIN_SERIAL_NO, TERMINAL_MODEL, 
+      TERMINAL_COUNT, REMARK, CREATOR, 
+      CREATE_TIME)
+    values (#{storageBatchNo,jdbcType=DECIMAL}, #{beginSerialNo,jdbcType=VARCHAR}, #{terminalModel,jdbcType=VARCHAR}, 
+      #{terminalCount,jdbcType=DECIMAL}, #{remark,jdbcType=OTHER}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalStorageEntity">
+    insert into SYS_TERMINAL_STORAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="storageBatchNo != null">
+        STORAGE_BATCH_NO,
+      </if>
+      <if test="beginSerialNo != null">
+        BEGIN_SERIAL_NO,
+      </if>
+      <if test="terminalModel != null">
+        TERMINAL_MODEL,
+      </if>
+      <if test="terminalCount != null">
+        TERMINAL_COUNT,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="storageBatchNo != null">
+        #{storageBatchNo,jdbcType=DECIMAL},
+      </if>
+      <if test="beginSerialNo != null">
+        #{beginSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalModel != null">
+        #{terminalModel,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalCount != null">
+        #{terminalCount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalStorageEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_TERMINAL_STORAGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_TERMINAL_STORAGE
+    <set>
+      <if test="record.storageBatchNo != null">
+        STORAGE_BATCH_NO = #{record.storageBatchNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.beginSerialNo != null">
+        BEGIN_SERIAL_NO = #{record.beginSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalModel != null">
+        TERMINAL_MODEL = #{record.terminalModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalCount != null">
+        TERMINAL_COUNT = #{record.terminalCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=OTHER},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_TERMINAL_STORAGE
+    set STORAGE_BATCH_NO = #{record.storageBatchNo,jdbcType=DECIMAL},
+      BEGIN_SERIAL_NO = #{record.beginSerialNo,jdbcType=VARCHAR},
+      TERMINAL_MODEL = #{record.terminalModel,jdbcType=VARCHAR},
+      TERMINAL_COUNT = #{record.terminalCount,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=OTHER},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalStorageEntity">
+    update SYS_TERMINAL_STORAGE
+    <set>
+      <if test="beginSerialNo != null">
+        BEGIN_SERIAL_NO = #{beginSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalModel != null">
+        TERMINAL_MODEL = #{terminalModel,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalCount != null">
+        TERMINAL_COUNT = #{terminalCount,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+    </set>
+    where STORAGE_BATCH_NO = #{storageBatchNo,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalStorageEntity">
+    update SYS_TERMINAL_STORAGE
+    set BEGIN_SERIAL_NO = #{beginSerialNo,jdbcType=VARCHAR},
+      TERMINAL_MODEL = #{terminalModel,jdbcType=VARCHAR},
+      TERMINAL_COUNT = #{terminalCount,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=OTHER},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR}
+    where STORAGE_BATCH_NO = #{storageBatchNo,jdbcType=DECIMAL}
+  </update>
+</mapper>

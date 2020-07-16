@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.TFundSerialQRDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TFundSerialQREntity">
+    <id column="TRAD_SERIAL_NO" jdbcType="DECIMAL" property="tradSerialNo" />
+    <result column="BRANCH_CODE" jdbcType="DECIMAL" property="branchCode" />
+    <result column="BRANCH_SIMPLE_NAME" jdbcType="OTHER" property="branchSimpleName" />
+    <result column="TERMINAL_CODE" jdbcType="DECIMAL" property="terminalCode" />
+    <result column="TERMINAL_SERIAL_NO" jdbcType="VARCHAR" property="terminalSerialNo" />
+    <result column="THIRD_PLAT_CODE" jdbcType="DECIMAL" property="thirdPlatCode" />
+    <result column="PAY_TYPE" jdbcType="DECIMAL" property="payType" />
+    <result column="PAY_SCENE" jdbcType="DECIMAL" property="payScene" />
+    <result column="ORDER_AMT" jdbcType="DECIMAL" property="orderAmt" />
+    <result column="BUYER_AUTH_CODE" jdbcType="VARCHAR" property="buyerAuthCode" />
+    <result column="PAY_ACCOUNT_NO" jdbcType="VARCHAR" property="payAccountNo" />
+    <result column="GOODS_DESC" jdbcType="OTHER" property="goodsDesc" />
+    <result column="CURRENCY_CODE" jdbcType="VARCHAR" property="currencyCode" />
+    <result column="EXCHANGE_RATE" jdbcType="DECIMAL" property="exchangeRate" />
+    <result column="ORIGINAL_RELATED_SERIAL" jdbcType="DECIMAL" property="originalRelatedSerial" />
+    <result column="REQ_SERIAL_NO" jdbcType="VARCHAR" property="reqSerialNo" />
+    <result column="REQ_TIME" jdbcType="CHAR" property="reqTime" />
+    <result column="CHANNEL_SERIAL_NO" jdbcType="VARCHAR" property="channelSerialNo" />
+    <result column="CHANNEL_RESP_TIME" jdbcType="CHAR" property="channelRespTime" />
+    <result column="RESP_CODE" jdbcType="VARCHAR" property="respCode" />
+    <result column="RESP_MSG" jdbcType="VARCHAR" property="respMsg" />
+    <result column="PAY_STATUS" jdbcType="DECIMAL" property="payStatus" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPD_TIME" jdbcType="CHAR" property="updTime" />
+    <result column="BANK_CARD_TYPE" jdbcType="VARCHAR" property="bankCardType" />
+    <result column="TRANS_CODE" jdbcType="DECIMAL" property="transCode" />
+    <result column="ORIGINAL_PAY_STATUS" jdbcType="DECIMAL" property="originalPayStatus" />
+    <result column="CANCEL_FLAG" jdbcType="DECIMAL" property="cancelFlag" />
+    <result column="BILL_NO" jdbcType="VARCHAR" property="billNo" />
+    <result column="CASH_AMT" jdbcType="DECIMAL" property="cashAmt" />
+    <result column="VOUCHER_AMT" jdbcType="DECIMAL" property="voucherAmt" />
+    <result column="CLEAR_BASE_AMT" jdbcType="DECIMAL" property="clearBaseAmt" />
+    <result column="CHANNEL_NO" jdbcType="DECIMAL" property="channelNo" />
+    <result column="SETTLE_KEY" jdbcType="VARCHAR" property="settleKey" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TRAD_SERIAL_NO, BRANCH_CODE, BRANCH_SIMPLE_NAME, TERMINAL_CODE, TERMINAL_SERIAL_NO, 
+    THIRD_PLAT_CODE, PAY_TYPE, PAY_SCENE, ORDER_AMT, BUYER_AUTH_CODE, PAY_ACCOUNT_NO, 
+    GOODS_DESC, CURRENCY_CODE, EXCHANGE_RATE, ORIGINAL_RELATED_SERIAL, REQ_SERIAL_NO, 
+    REQ_TIME, CHANNEL_SERIAL_NO, CHANNEL_RESP_TIME, RESP_CODE, RESP_MSG, PAY_STATUS, 
+    CREATE_TIME, UPD_TIME, BANK_CARD_TYPE, TRANS_CODE, ORIGINAL_PAY_STATUS, CANCEL_FLAG, 
+    BILL_NO, CASH_AMT, VOUCHER_AMT, CLEAR_BASE_AMT, CHANNEL_NO, SETTLE_KEY
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TFundSerialQREntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_FUND_SERIAL_QR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_FUND_SERIAL_QR
+    where TRAD_SERIAL_NO = #{tradSerialNo,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from T_FUND_SERIAL_QR
+    where TRAD_SERIAL_NO = #{tradSerialNo,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TFundSerialQREntityExample">
+    delete from T_FUND_SERIAL_QR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TFundSerialQREntity">
+    insert into T_FUND_SERIAL_QR (TRAD_SERIAL_NO, BRANCH_CODE, BRANCH_SIMPLE_NAME, 
+      TERMINAL_CODE, TERMINAL_SERIAL_NO, THIRD_PLAT_CODE, 
+      PAY_TYPE, PAY_SCENE, ORDER_AMT, 
+      BUYER_AUTH_CODE, PAY_ACCOUNT_NO, GOODS_DESC, 
+      CURRENCY_CODE, EXCHANGE_RATE, ORIGINAL_RELATED_SERIAL, 
+      REQ_SERIAL_NO, REQ_TIME, CHANNEL_SERIAL_NO, 
+      CHANNEL_RESP_TIME, RESP_CODE, RESP_MSG, 
+      PAY_STATUS, CREATE_TIME, UPD_TIME, 
+      BANK_CARD_TYPE, TRANS_CODE, ORIGINAL_PAY_STATUS, 
+      CANCEL_FLAG, BILL_NO, CASH_AMT, 
+      VOUCHER_AMT, CLEAR_BASE_AMT, CHANNEL_NO, 
+      SETTLE_KEY)
+    values (#{tradSerialNo,jdbcType=DECIMAL}, #{branchCode,jdbcType=DECIMAL}, #{branchSimpleName,jdbcType=OTHER}, 
+      #{terminalCode,jdbcType=DECIMAL}, #{terminalSerialNo,jdbcType=VARCHAR}, #{thirdPlatCode,jdbcType=DECIMAL}, 
+      #{payType,jdbcType=DECIMAL}, #{payScene,jdbcType=DECIMAL}, #{orderAmt,jdbcType=DECIMAL}, 
+      #{buyerAuthCode,jdbcType=VARCHAR}, #{payAccountNo,jdbcType=VARCHAR}, #{goodsDesc,jdbcType=OTHER}, 
+      #{currencyCode,jdbcType=VARCHAR}, #{exchangeRate,jdbcType=DECIMAL}, #{originalRelatedSerial,jdbcType=DECIMAL}, 
+      #{reqSerialNo,jdbcType=VARCHAR}, #{reqTime,jdbcType=CHAR}, #{channelSerialNo,jdbcType=VARCHAR}, 
+      #{channelRespTime,jdbcType=CHAR}, #{respCode,jdbcType=VARCHAR}, #{respMsg,jdbcType=VARCHAR}, 
+      #{payStatus,jdbcType=DECIMAL}, #{createTime,jdbcType=CHAR}, #{updTime,jdbcType=CHAR}, 
+      #{bankCardType,jdbcType=VARCHAR}, #{transCode,jdbcType=DECIMAL}, #{originalPayStatus,jdbcType=DECIMAL}, 
+      #{cancelFlag,jdbcType=DECIMAL}, #{billNo,jdbcType=VARCHAR}, #{cashAmt,jdbcType=DECIMAL}, 
+      #{voucherAmt,jdbcType=DECIMAL}, #{clearBaseAmt,jdbcType=DECIMAL}, #{channelNo,jdbcType=DECIMAL}, 
+      #{settleKey,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TFundSerialQREntity">
+    insert into T_FUND_SERIAL_QR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tradSerialNo != null">
+        TRAD_SERIAL_NO,
+      </if>
+      <if test="branchCode != null">
+        BRANCH_CODE,
+      </if>
+      <if test="branchSimpleName != null">
+        BRANCH_SIMPLE_NAME,
+      </if>
+      <if test="terminalCode != null">
+        TERMINAL_CODE,
+      </if>
+      <if test="terminalSerialNo != null">
+        TERMINAL_SERIAL_NO,
+      </if>
+      <if test="thirdPlatCode != null">
+        THIRD_PLAT_CODE,
+      </if>
+      <if test="payType != null">
+        PAY_TYPE,
+      </if>
+      <if test="payScene != null">
+        PAY_SCENE,
+      </if>
+      <if test="orderAmt != null">
+        ORDER_AMT,
+      </if>
+      <if test="buyerAuthCode != null">
+        BUYER_AUTH_CODE,
+      </if>
+      <if test="payAccountNo != null">
+        PAY_ACCOUNT_NO,
+      </if>
+      <if test="goodsDesc != null">
+        GOODS_DESC,
+      </if>
+      <if test="currencyCode != null">
+        CURRENCY_CODE,
+      </if>
+      <if test="exchangeRate != null">
+        EXCHANGE_RATE,
+      </if>
+      <if test="originalRelatedSerial != null">
+        ORIGINAL_RELATED_SERIAL,
+      </if>
+      <if test="reqSerialNo != null">
+        REQ_SERIAL_NO,
+      </if>
+      <if test="reqTime != null">
+        REQ_TIME,
+      </if>
+      <if test="channelSerialNo != null">
+        CHANNEL_SERIAL_NO,
+      </if>
+      <if test="channelRespTime != null">
+        CHANNEL_RESP_TIME,
+      </if>
+      <if test="respCode != null">
+        RESP_CODE,
+      </if>
+      <if test="respMsg != null">
+        RESP_MSG,
+      </if>
+      <if test="payStatus != null">
+        PAY_STATUS,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updTime != null">
+        UPD_TIME,
+      </if>
+      <if test="bankCardType != null">
+        BANK_CARD_TYPE,
+      </if>
+      <if test="transCode != null">
+        TRANS_CODE,
+      </if>
+      <if test="originalPayStatus != null">
+        ORIGINAL_PAY_STATUS,
+      </if>
+      <if test="cancelFlag != null">
+        CANCEL_FLAG,
+      </if>
+      <if test="billNo != null">
+        BILL_NO,
+      </if>
+      <if test="cashAmt != null">
+        CASH_AMT,
+      </if>
+      <if test="voucherAmt != null">
+        VOUCHER_AMT,
+      </if>
+      <if test="clearBaseAmt != null">
+        CLEAR_BASE_AMT,
+      </if>
+      <if test="channelNo != null">
+        CHANNEL_NO,
+      </if>
+      <if test="settleKey != null">
+        SETTLE_KEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tradSerialNo != null">
+        #{tradSerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="branchCode != null">
+        #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="branchSimpleName != null">
+        #{branchSimpleName,jdbcType=OTHER},
+      </if>
+      <if test="terminalCode != null">
+        #{terminalCode,jdbcType=DECIMAL},
+      </if>
+      <if test="terminalSerialNo != null">
+        #{terminalSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdPlatCode != null">
+        #{thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=DECIMAL},
+      </if>
+      <if test="payScene != null">
+        #{payScene,jdbcType=DECIMAL},
+      </if>
+      <if test="orderAmt != null">
+        #{orderAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="buyerAuthCode != null">
+        #{buyerAuthCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payAccountNo != null">
+        #{payAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDesc != null">
+        #{goodsDesc,jdbcType=OTHER},
+      </if>
+      <if test="currencyCode != null">
+        #{currencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeRate != null">
+        #{exchangeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="originalRelatedSerial != null">
+        #{originalRelatedSerial,jdbcType=DECIMAL},
+      </if>
+      <if test="reqSerialNo != null">
+        #{reqSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="reqTime != null">
+        #{reqTime,jdbcType=CHAR},
+      </if>
+      <if test="channelSerialNo != null">
+        #{channelSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelRespTime != null">
+        #{channelRespTime,jdbcType=CHAR},
+      </if>
+      <if test="respCode != null">
+        #{respCode,jdbcType=VARCHAR},
+      </if>
+      <if test="respMsg != null">
+        #{respMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="bankCardType != null">
+        #{bankCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="transCode != null">
+        #{transCode,jdbcType=DECIMAL},
+      </if>
+      <if test="originalPayStatus != null">
+        #{originalPayStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="cancelFlag != null">
+        #{cancelFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="billNo != null">
+        #{billNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cashAmt != null">
+        #{cashAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="voucherAmt != null">
+        #{voucherAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="clearBaseAmt != null">
+        #{clearBaseAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="channelNo != null">
+        #{channelNo,jdbcType=DECIMAL},
+      </if>
+      <if test="settleKey != null">
+        #{settleKey,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TFundSerialQREntityExample" resultType="java.lang.Long">
+    select count(*) from T_FUND_SERIAL_QR
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_FUND_SERIAL_QR
+    <set>
+      <if test="record.tradSerialNo != null">
+        TRAD_SERIAL_NO = #{record.tradSerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.branchCode != null">
+        BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.branchSimpleName != null">
+        BRANCH_SIMPLE_NAME = #{record.branchSimpleName,jdbcType=OTHER},
+      </if>
+      <if test="record.terminalCode != null">
+        TERMINAL_CODE = #{record.terminalCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.terminalSerialNo != null">
+        TERMINAL_SERIAL_NO = #{record.terminalSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdPlatCode != null">
+        THIRD_PLAT_CODE = #{record.thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payType != null">
+        PAY_TYPE = #{record.payType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payScene != null">
+        PAY_SCENE = #{record.payScene,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderAmt != null">
+        ORDER_AMT = #{record.orderAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.buyerAuthCode != null">
+        BUYER_AUTH_CODE = #{record.buyerAuthCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payAccountNo != null">
+        PAY_ACCOUNT_NO = #{record.payAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsDesc != null">
+        GOODS_DESC = #{record.goodsDesc,jdbcType=OTHER},
+      </if>
+      <if test="record.currencyCode != null">
+        CURRENCY_CODE = #{record.currencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exchangeRate != null">
+        EXCHANGE_RATE = #{record.exchangeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.originalRelatedSerial != null">
+        ORIGINAL_RELATED_SERIAL = #{record.originalRelatedSerial,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reqSerialNo != null">
+        REQ_SERIAL_NO = #{record.reqSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqTime != null">
+        REQ_TIME = #{record.reqTime,jdbcType=CHAR},
+      </if>
+      <if test="record.channelSerialNo != null">
+        CHANNEL_SERIAL_NO = #{record.channelSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelRespTime != null">
+        CHANNEL_RESP_TIME = #{record.channelRespTime,jdbcType=CHAR},
+      </if>
+      <if test="record.respCode != null">
+        RESP_CODE = #{record.respCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.respMsg != null">
+        RESP_MSG = #{record.respMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payStatus != null">
+        PAY_STATUS = #{record.payStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updTime != null">
+        UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      </if>
+      <if test="record.bankCardType != null">
+        BANK_CARD_TYPE = #{record.bankCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transCode != null">
+        TRANS_CODE = #{record.transCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.originalPayStatus != null">
+        ORIGINAL_PAY_STATUS = #{record.originalPayStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cancelFlag != null">
+        CANCEL_FLAG = #{record.cancelFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="record.billNo != null">
+        BILL_NO = #{record.billNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cashAmt != null">
+        CASH_AMT = #{record.cashAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.voucherAmt != null">
+        VOUCHER_AMT = #{record.voucherAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.clearBaseAmt != null">
+        CLEAR_BASE_AMT = #{record.clearBaseAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.channelNo != null">
+        CHANNEL_NO = #{record.channelNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.settleKey != null">
+        SETTLE_KEY = #{record.settleKey,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_FUND_SERIAL_QR
+    set TRAD_SERIAL_NO = #{record.tradSerialNo,jdbcType=DECIMAL},
+      BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      BRANCH_SIMPLE_NAME = #{record.branchSimpleName,jdbcType=OTHER},
+      TERMINAL_CODE = #{record.terminalCode,jdbcType=DECIMAL},
+      TERMINAL_SERIAL_NO = #{record.terminalSerialNo,jdbcType=VARCHAR},
+      THIRD_PLAT_CODE = #{record.thirdPlatCode,jdbcType=DECIMAL},
+      PAY_TYPE = #{record.payType,jdbcType=DECIMAL},
+      PAY_SCENE = #{record.payScene,jdbcType=DECIMAL},
+      ORDER_AMT = #{record.orderAmt,jdbcType=DECIMAL},
+      BUYER_AUTH_CODE = #{record.buyerAuthCode,jdbcType=VARCHAR},
+      PAY_ACCOUNT_NO = #{record.payAccountNo,jdbcType=VARCHAR},
+      GOODS_DESC = #{record.goodsDesc,jdbcType=OTHER},
+      CURRENCY_CODE = #{record.currencyCode,jdbcType=VARCHAR},
+      EXCHANGE_RATE = #{record.exchangeRate,jdbcType=DECIMAL},
+      ORIGINAL_RELATED_SERIAL = #{record.originalRelatedSerial,jdbcType=DECIMAL},
+      REQ_SERIAL_NO = #{record.reqSerialNo,jdbcType=VARCHAR},
+      REQ_TIME = #{record.reqTime,jdbcType=CHAR},
+      CHANNEL_SERIAL_NO = #{record.channelSerialNo,jdbcType=VARCHAR},
+      CHANNEL_RESP_TIME = #{record.channelRespTime,jdbcType=CHAR},
+      RESP_CODE = #{record.respCode,jdbcType=VARCHAR},
+      RESP_MSG = #{record.respMsg,jdbcType=VARCHAR},
+      PAY_STATUS = #{record.payStatus,jdbcType=DECIMAL},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      BANK_CARD_TYPE = #{record.bankCardType,jdbcType=VARCHAR},
+      TRANS_CODE = #{record.transCode,jdbcType=DECIMAL},
+      ORIGINAL_PAY_STATUS = #{record.originalPayStatus,jdbcType=DECIMAL},
+      CANCEL_FLAG = #{record.cancelFlag,jdbcType=DECIMAL},
+      BILL_NO = #{record.billNo,jdbcType=VARCHAR},
+      CASH_AMT = #{record.cashAmt,jdbcType=DECIMAL},
+      VOUCHER_AMT = #{record.voucherAmt,jdbcType=DECIMAL},
+      CLEAR_BASE_AMT = #{record.clearBaseAmt,jdbcType=DECIMAL},
+      CHANNEL_NO = #{record.channelNo,jdbcType=DECIMAL},
+      SETTLE_KEY = #{record.settleKey,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TFundSerialQREntity">
+    update T_FUND_SERIAL_QR
+    <set>
+      <if test="branchCode != null">
+        BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="branchSimpleName != null">
+        BRANCH_SIMPLE_NAME = #{branchSimpleName,jdbcType=OTHER},
+      </if>
+      <if test="terminalCode != null">
+        TERMINAL_CODE = #{terminalCode,jdbcType=DECIMAL},
+      </if>
+      <if test="terminalSerialNo != null">
+        TERMINAL_SERIAL_NO = #{terminalSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdPlatCode != null">
+        THIRD_PLAT_CODE = #{thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+      <if test="payType != null">
+        PAY_TYPE = #{payType,jdbcType=DECIMAL},
+      </if>
+      <if test="payScene != null">
+        PAY_SCENE = #{payScene,jdbcType=DECIMAL},
+      </if>
+      <if test="orderAmt != null">
+        ORDER_AMT = #{orderAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="buyerAuthCode != null">
+        BUYER_AUTH_CODE = #{buyerAuthCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payAccountNo != null">
+        PAY_ACCOUNT_NO = #{payAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDesc != null">
+        GOODS_DESC = #{goodsDesc,jdbcType=OTHER},
+      </if>
+      <if test="currencyCode != null">
+        CURRENCY_CODE = #{currencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeRate != null">
+        EXCHANGE_RATE = #{exchangeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="originalRelatedSerial != null">
+        ORIGINAL_RELATED_SERIAL = #{originalRelatedSerial,jdbcType=DECIMAL},
+      </if>
+      <if test="reqSerialNo != null">
+        REQ_SERIAL_NO = #{reqSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="reqTime != null">
+        REQ_TIME = #{reqTime,jdbcType=CHAR},
+      </if>
+      <if test="channelSerialNo != null">
+        CHANNEL_SERIAL_NO = #{channelSerialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelRespTime != null">
+        CHANNEL_RESP_TIME = #{channelRespTime,jdbcType=CHAR},
+      </if>
+      <if test="respCode != null">
+        RESP_CODE = #{respCode,jdbcType=VARCHAR},
+      </if>
+      <if test="respMsg != null">
+        RESP_MSG = #{respMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        PAY_STATUS = #{payStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        UPD_TIME = #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="bankCardType != null">
+        BANK_CARD_TYPE = #{bankCardType,jdbcType=VARCHAR},
+      </if>
+      <if test="transCode != null">
+        TRANS_CODE = #{transCode,jdbcType=DECIMAL},
+      </if>
+      <if test="originalPayStatus != null">
+        ORIGINAL_PAY_STATUS = #{originalPayStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="cancelFlag != null">
+        CANCEL_FLAG = #{cancelFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="billNo != null">
+        BILL_NO = #{billNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cashAmt != null">
+        CASH_AMT = #{cashAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="voucherAmt != null">
+        VOUCHER_AMT = #{voucherAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="clearBaseAmt != null">
+        CLEAR_BASE_AMT = #{clearBaseAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="channelNo != null">
+        CHANNEL_NO = #{channelNo,jdbcType=DECIMAL},
+      </if>
+      <if test="settleKey != null">
+        SETTLE_KEY = #{settleKey,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TRAD_SERIAL_NO = #{tradSerialNo,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TFundSerialQREntity">
+    update T_FUND_SERIAL_QR
+    set BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      BRANCH_SIMPLE_NAME = #{branchSimpleName,jdbcType=OTHER},
+      TERMINAL_CODE = #{terminalCode,jdbcType=DECIMAL},
+      TERMINAL_SERIAL_NO = #{terminalSerialNo,jdbcType=VARCHAR},
+      THIRD_PLAT_CODE = #{thirdPlatCode,jdbcType=DECIMAL},
+      PAY_TYPE = #{payType,jdbcType=DECIMAL},
+      PAY_SCENE = #{payScene,jdbcType=DECIMAL},
+      ORDER_AMT = #{orderAmt,jdbcType=DECIMAL},
+      BUYER_AUTH_CODE = #{buyerAuthCode,jdbcType=VARCHAR},
+      PAY_ACCOUNT_NO = #{payAccountNo,jdbcType=VARCHAR},
+      GOODS_DESC = #{goodsDesc,jdbcType=OTHER},
+      CURRENCY_CODE = #{currencyCode,jdbcType=VARCHAR},
+      EXCHANGE_RATE = #{exchangeRate,jdbcType=DECIMAL},
+      ORIGINAL_RELATED_SERIAL = #{originalRelatedSerial,jdbcType=DECIMAL},
+      REQ_SERIAL_NO = #{reqSerialNo,jdbcType=VARCHAR},
+      REQ_TIME = #{reqTime,jdbcType=CHAR},
+      CHANNEL_SERIAL_NO = #{channelSerialNo,jdbcType=VARCHAR},
+      CHANNEL_RESP_TIME = #{channelRespTime,jdbcType=CHAR},
+      RESP_CODE = #{respCode,jdbcType=VARCHAR},
+      RESP_MSG = #{respMsg,jdbcType=VARCHAR},
+      PAY_STATUS = #{payStatus,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPD_TIME = #{updTime,jdbcType=CHAR},
+      BANK_CARD_TYPE = #{bankCardType,jdbcType=VARCHAR},
+      TRANS_CODE = #{transCode,jdbcType=DECIMAL},
+      ORIGINAL_PAY_STATUS = #{originalPayStatus,jdbcType=DECIMAL},
+      CANCEL_FLAG = #{cancelFlag,jdbcType=DECIMAL},
+      BILL_NO = #{billNo,jdbcType=VARCHAR},
+      CASH_AMT = #{cashAmt,jdbcType=DECIMAL},
+      VOUCHER_AMT = #{voucherAmt,jdbcType=DECIMAL},
+      CLEAR_BASE_AMT = #{clearBaseAmt,jdbcType=DECIMAL},
+      CHANNEL_NO = #{channelNo,jdbcType=DECIMAL},
+      SETTLE_KEY = #{settleKey,jdbcType=VARCHAR}
+    where TRAD_SERIAL_NO = #{tradSerialNo,jdbcType=DECIMAL}
+  </update>
+</mapper>

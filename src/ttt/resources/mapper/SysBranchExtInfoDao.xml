@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysBranchExtInfoDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchExtInfoEntity">
+    <id column="BRANCH_CODE" jdbcType="DECIMAL" property="branchCode" />
+    <result column="UP_MCHNT_CD" jdbcType="CHAR" property="upMchntCd" />
+    <result column="UP_MCHNT_SVC_TP" jdbcType="CHAR" property="upMchntSvcTp" />
+    <result column="UP_ACQ_INS_ID_CD" jdbcType="DECIMAL" property="upAcqInsIdCd" />
+    <result column="UP_DIRECT_ACQ_SETTLE_IN" jdbcType="CHAR" property="upDirectAcqSettleIn" />
+    <result column="UP_PAY_SYS_SETTLE_NO1" jdbcType="OTHER" property="upPaySysSettleNo1" />
+    <result column="UP_SPEC_DISC_TP" jdbcType="CHAR" property="upSpecDiscTp" />
+    <result column="UP_SPEC_DISC_LVL" jdbcType="CHAR" property="upSpecDiscLvl" />
+    <result column="UP_ALLOT_ALGO" jdbcType="VARCHAR" property="upAllotAlgo" />
+    <result column="UP_ALLOT_CD" jdbcType="VARCHAR" property="upAllotCd" />
+    <result column="UP_MCHNT_DISC_DET_INDEX" jdbcType="VARCHAR" property="upMchntDiscDetIndex" />
+    <result column="UP_SVC_NET_URL" jdbcType="OTHER" property="upSvcNetUrl" />
+    <result column="UP_MCHNT_WEB_SITE_NM" jdbcType="OTHER" property="upMchntWebSiteNm" />
+    <result column="UP_BUSS_TP" jdbcType="VARCHAR" property="upBussTp" />
+    <result column="UP_PROD_FUNC" jdbcType="OTHER" property="upProdFunc" />
+    <result column="UP_BUSS_CONT1_EMAIL" jdbcType="VARCHAR" property="upBussCont1Email" />
+    <result column="UP_SINGLE_AT_LIMIT" jdbcType="CHAR" property="upSingleAtLimit" />
+    <result column="UP_SINGLE_AT_LIMIT_DESC" jdbcType="VARCHAR" property="upSingleAtLimitDesc" />
+    <result column="UP_SINGLE_CARD_DAY_AT_LIMIT" jdbcType="CHAR" property="upSingleCardDayAtLimit" />
+    <result column="UP_SINGLE_CARD_DAY_AT_LIMIT_DC" jdbcType="VARCHAR" property="upSingleCardDayAtLimitDc" />
+    <result column="UP_SUBMCHNT_IN" jdbcType="CHAR" property="upSubmchntIn" />
+    <result column="UP_SVC_INS_NM" jdbcType="VARCHAR" property="upSvcInsNm" />
+    <result column="REMARK" jdbcType="OTHER" property="remark" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPD_TIME" jdbcType="CHAR" property="updTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BRANCH_CODE, UP_MCHNT_CD, UP_MCHNT_SVC_TP, UP_ACQ_INS_ID_CD, UP_DIRECT_ACQ_SETTLE_IN, 
+    UP_PAY_SYS_SETTLE_NO1, UP_SPEC_DISC_TP, UP_SPEC_DISC_LVL, UP_ALLOT_ALGO, UP_ALLOT_CD, 
+    UP_MCHNT_DISC_DET_INDEX, UP_SVC_NET_URL, UP_MCHNT_WEB_SITE_NM, UP_BUSS_TP, UP_PROD_FUNC, 
+    UP_BUSS_CONT1_EMAIL, UP_SINGLE_AT_LIMIT, UP_SINGLE_AT_LIMIT_DESC, UP_SINGLE_CARD_DAY_AT_LIMIT, 
+    UP_SINGLE_CARD_DAY_AT_LIMIT_DC, UP_SUBMCHNT_IN, UP_SVC_INS_NM, REMARK, CREATOR, CREATE_TIME, 
+    UPD_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchExtInfoEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_BRANCH_EXT_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_BRANCH_EXT_INFO
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_BRANCH_EXT_INFO
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchExtInfoEntityExample">
+    delete from SYS_BRANCH_EXT_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchExtInfoEntity">
+    insert into SYS_BRANCH_EXT_INFO (BRANCH_CODE, UP_MCHNT_CD, UP_MCHNT_SVC_TP, 
+      UP_ACQ_INS_ID_CD, UP_DIRECT_ACQ_SETTLE_IN, UP_PAY_SYS_SETTLE_NO1, 
+      UP_SPEC_DISC_TP, UP_SPEC_DISC_LVL, UP_ALLOT_ALGO, 
+      UP_ALLOT_CD, UP_MCHNT_DISC_DET_INDEX, UP_SVC_NET_URL, 
+      UP_MCHNT_WEB_SITE_NM, UP_BUSS_TP, UP_PROD_FUNC, 
+      UP_BUSS_CONT1_EMAIL, UP_SINGLE_AT_LIMIT, UP_SINGLE_AT_LIMIT_DESC, 
+      UP_SINGLE_CARD_DAY_AT_LIMIT, UP_SINGLE_CARD_DAY_AT_LIMIT_DC, 
+      UP_SUBMCHNT_IN, UP_SVC_INS_NM, REMARK, 
+      CREATOR, CREATE_TIME, UPD_TIME
+      )
+    values (#{branchCode,jdbcType=DECIMAL}, #{upMchntCd,jdbcType=CHAR}, #{upMchntSvcTp,jdbcType=CHAR}, 
+      #{upAcqInsIdCd,jdbcType=DECIMAL}, #{upDirectAcqSettleIn,jdbcType=CHAR}, #{upPaySysSettleNo1,jdbcType=OTHER}, 
+      #{upSpecDiscTp,jdbcType=CHAR}, #{upSpecDiscLvl,jdbcType=CHAR}, #{upAllotAlgo,jdbcType=VARCHAR}, 
+      #{upAllotCd,jdbcType=VARCHAR}, #{upMchntDiscDetIndex,jdbcType=VARCHAR}, #{upSvcNetUrl,jdbcType=OTHER}, 
+      #{upMchntWebSiteNm,jdbcType=OTHER}, #{upBussTp,jdbcType=VARCHAR}, #{upProdFunc,jdbcType=OTHER}, 
+      #{upBussCont1Email,jdbcType=VARCHAR}, #{upSingleAtLimit,jdbcType=CHAR}, #{upSingleAtLimitDesc,jdbcType=VARCHAR}, 
+      #{upSingleCardDayAtLimit,jdbcType=CHAR}, #{upSingleCardDayAtLimitDc,jdbcType=VARCHAR}, 
+      #{upSubmchntIn,jdbcType=CHAR}, #{upSvcInsNm,jdbcType=VARCHAR}, #{remark,jdbcType=OTHER}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, #{updTime,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchExtInfoEntity">
+    insert into SYS_BRANCH_EXT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="branchCode != null">
+        BRANCH_CODE,
+      </if>
+      <if test="upMchntCd != null">
+        UP_MCHNT_CD,
+      </if>
+      <if test="upMchntSvcTp != null">
+        UP_MCHNT_SVC_TP,
+      </if>
+      <if test="upAcqInsIdCd != null">
+        UP_ACQ_INS_ID_CD,
+      </if>
+      <if test="upDirectAcqSettleIn != null">
+        UP_DIRECT_ACQ_SETTLE_IN,
+      </if>
+      <if test="upPaySysSettleNo1 != null">
+        UP_PAY_SYS_SETTLE_NO1,
+      </if>
+      <if test="upSpecDiscTp != null">
+        UP_SPEC_DISC_TP,
+      </if>
+      <if test="upSpecDiscLvl != null">
+        UP_SPEC_DISC_LVL,
+      </if>
+      <if test="upAllotAlgo != null">
+        UP_ALLOT_ALGO,
+      </if>
+      <if test="upAllotCd != null">
+        UP_ALLOT_CD,
+      </if>
+      <if test="upMchntDiscDetIndex != null">
+        UP_MCHNT_DISC_DET_INDEX,
+      </if>
+      <if test="upSvcNetUrl != null">
+        UP_SVC_NET_URL,
+      </if>
+      <if test="upMchntWebSiteNm != null">
+        UP_MCHNT_WEB_SITE_NM,
+      </if>
+      <if test="upBussTp != null">
+        UP_BUSS_TP,
+      </if>
+      <if test="upProdFunc != null">
+        UP_PROD_FUNC,
+      </if>
+      <if test="upBussCont1Email != null">
+        UP_BUSS_CONT1_EMAIL,
+      </if>
+      <if test="upSingleAtLimit != null">
+        UP_SINGLE_AT_LIMIT,
+      </if>
+      <if test="upSingleAtLimitDesc != null">
+        UP_SINGLE_AT_LIMIT_DESC,
+      </if>
+      <if test="upSingleCardDayAtLimit != null">
+        UP_SINGLE_CARD_DAY_AT_LIMIT,
+      </if>
+      <if test="upSingleCardDayAtLimitDc != null">
+        UP_SINGLE_CARD_DAY_AT_LIMIT_DC,
+      </if>
+      <if test="upSubmchntIn != null">
+        UP_SUBMCHNT_IN,
+      </if>
+      <if test="upSvcInsNm != null">
+        UP_SVC_INS_NM,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updTime != null">
+        UPD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="branchCode != null">
+        #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="upMchntCd != null">
+        #{upMchntCd,jdbcType=CHAR},
+      </if>
+      <if test="upMchntSvcTp != null">
+        #{upMchntSvcTp,jdbcType=CHAR},
+      </if>
+      <if test="upAcqInsIdCd != null">
+        #{upAcqInsIdCd,jdbcType=DECIMAL},
+      </if>
+      <if test="upDirectAcqSettleIn != null">
+        #{upDirectAcqSettleIn,jdbcType=CHAR},
+      </if>
+      <if test="upPaySysSettleNo1 != null">
+        #{upPaySysSettleNo1,jdbcType=OTHER},
+      </if>
+      <if test="upSpecDiscTp != null">
+        #{upSpecDiscTp,jdbcType=CHAR},
+      </if>
+      <if test="upSpecDiscLvl != null">
+        #{upSpecDiscLvl,jdbcType=CHAR},
+      </if>
+      <if test="upAllotAlgo != null">
+        #{upAllotAlgo,jdbcType=VARCHAR},
+      </if>
+      <if test="upAllotCd != null">
+        #{upAllotCd,jdbcType=VARCHAR},
+      </if>
+      <if test="upMchntDiscDetIndex != null">
+        #{upMchntDiscDetIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="upSvcNetUrl != null">
+        #{upSvcNetUrl,jdbcType=OTHER},
+      </if>
+      <if test="upMchntWebSiteNm != null">
+        #{upMchntWebSiteNm,jdbcType=OTHER},
+      </if>
+      <if test="upBussTp != null">
+        #{upBussTp,jdbcType=VARCHAR},
+      </if>
+      <if test="upProdFunc != null">
+        #{upProdFunc,jdbcType=OTHER},
+      </if>
+      <if test="upBussCont1Email != null">
+        #{upBussCont1Email,jdbcType=VARCHAR},
+      </if>
+      <if test="upSingleAtLimit != null">
+        #{upSingleAtLimit,jdbcType=CHAR},
+      </if>
+      <if test="upSingleAtLimitDesc != null">
+        #{upSingleAtLimitDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="upSingleCardDayAtLimit != null">
+        #{upSingleCardDayAtLimit,jdbcType=CHAR},
+      </if>
+      <if test="upSingleCardDayAtLimitDc != null">
+        #{upSingleCardDayAtLimitDc,jdbcType=VARCHAR},
+      </if>
+      <if test="upSubmchntIn != null">
+        #{upSubmchntIn,jdbcType=CHAR},
+      </if>
+      <if test="upSvcInsNm != null">
+        #{upSvcInsNm,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchExtInfoEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_BRANCH_EXT_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_BRANCH_EXT_INFO
+    <set>
+      <if test="record.branchCode != null">
+        BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.upMchntCd != null">
+        UP_MCHNT_CD = #{record.upMchntCd,jdbcType=CHAR},
+      </if>
+      <if test="record.upMchntSvcTp != null">
+        UP_MCHNT_SVC_TP = #{record.upMchntSvcTp,jdbcType=CHAR},
+      </if>
+      <if test="record.upAcqInsIdCd != null">
+        UP_ACQ_INS_ID_CD = #{record.upAcqInsIdCd,jdbcType=DECIMAL},
+      </if>
+      <if test="record.upDirectAcqSettleIn != null">
+        UP_DIRECT_ACQ_SETTLE_IN = #{record.upDirectAcqSettleIn,jdbcType=CHAR},
+      </if>
+      <if test="record.upPaySysSettleNo1 != null">
+        UP_PAY_SYS_SETTLE_NO1 = #{record.upPaySysSettleNo1,jdbcType=OTHER},
+      </if>
+      <if test="record.upSpecDiscTp != null">
+        UP_SPEC_DISC_TP = #{record.upSpecDiscTp,jdbcType=CHAR},
+      </if>
+      <if test="record.upSpecDiscLvl != null">
+        UP_SPEC_DISC_LVL = #{record.upSpecDiscLvl,jdbcType=CHAR},
+      </if>
+      <if test="record.upAllotAlgo != null">
+        UP_ALLOT_ALGO = #{record.upAllotAlgo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upAllotCd != null">
+        UP_ALLOT_CD = #{record.upAllotCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upMchntDiscDetIndex != null">
+        UP_MCHNT_DISC_DET_INDEX = #{record.upMchntDiscDetIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upSvcNetUrl != null">
+        UP_SVC_NET_URL = #{record.upSvcNetUrl,jdbcType=OTHER},
+      </if>
+      <if test="record.upMchntWebSiteNm != null">
+        UP_MCHNT_WEB_SITE_NM = #{record.upMchntWebSiteNm,jdbcType=OTHER},
+      </if>
+      <if test="record.upBussTp != null">
+        UP_BUSS_TP = #{record.upBussTp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upProdFunc != null">
+        UP_PROD_FUNC = #{record.upProdFunc,jdbcType=OTHER},
+      </if>
+      <if test="record.upBussCont1Email != null">
+        UP_BUSS_CONT1_EMAIL = #{record.upBussCont1Email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upSingleAtLimit != null">
+        UP_SINGLE_AT_LIMIT = #{record.upSingleAtLimit,jdbcType=CHAR},
+      </if>
+      <if test="record.upSingleAtLimitDesc != null">
+        UP_SINGLE_AT_LIMIT_DESC = #{record.upSingleAtLimitDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upSingleCardDayAtLimit != null">
+        UP_SINGLE_CARD_DAY_AT_LIMIT = #{record.upSingleCardDayAtLimit,jdbcType=CHAR},
+      </if>
+      <if test="record.upSingleCardDayAtLimitDc != null">
+        UP_SINGLE_CARD_DAY_AT_LIMIT_DC = #{record.upSingleCardDayAtLimitDc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upSubmchntIn != null">
+        UP_SUBMCHNT_IN = #{record.upSubmchntIn,jdbcType=CHAR},
+      </if>
+      <if test="record.upSvcInsNm != null">
+        UP_SVC_INS_NM = #{record.upSvcInsNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=OTHER},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updTime != null">
+        UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_BRANCH_EXT_INFO
+    set BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      UP_MCHNT_CD = #{record.upMchntCd,jdbcType=CHAR},
+      UP_MCHNT_SVC_TP = #{record.upMchntSvcTp,jdbcType=CHAR},
+      UP_ACQ_INS_ID_CD = #{record.upAcqInsIdCd,jdbcType=DECIMAL},
+      UP_DIRECT_ACQ_SETTLE_IN = #{record.upDirectAcqSettleIn,jdbcType=CHAR},
+      UP_PAY_SYS_SETTLE_NO1 = #{record.upPaySysSettleNo1,jdbcType=OTHER},
+      UP_SPEC_DISC_TP = #{record.upSpecDiscTp,jdbcType=CHAR},
+      UP_SPEC_DISC_LVL = #{record.upSpecDiscLvl,jdbcType=CHAR},
+      UP_ALLOT_ALGO = #{record.upAllotAlgo,jdbcType=VARCHAR},
+      UP_ALLOT_CD = #{record.upAllotCd,jdbcType=VARCHAR},
+      UP_MCHNT_DISC_DET_INDEX = #{record.upMchntDiscDetIndex,jdbcType=VARCHAR},
+      UP_SVC_NET_URL = #{record.upSvcNetUrl,jdbcType=OTHER},
+      UP_MCHNT_WEB_SITE_NM = #{record.upMchntWebSiteNm,jdbcType=OTHER},
+      UP_BUSS_TP = #{record.upBussTp,jdbcType=VARCHAR},
+      UP_PROD_FUNC = #{record.upProdFunc,jdbcType=OTHER},
+      UP_BUSS_CONT1_EMAIL = #{record.upBussCont1Email,jdbcType=VARCHAR},
+      UP_SINGLE_AT_LIMIT = #{record.upSingleAtLimit,jdbcType=CHAR},
+      UP_SINGLE_AT_LIMIT_DESC = #{record.upSingleAtLimitDesc,jdbcType=VARCHAR},
+      UP_SINGLE_CARD_DAY_AT_LIMIT = #{record.upSingleCardDayAtLimit,jdbcType=CHAR},
+      UP_SINGLE_CARD_DAY_AT_LIMIT_DC = #{record.upSingleCardDayAtLimitDc,jdbcType=VARCHAR},
+      UP_SUBMCHNT_IN = #{record.upSubmchntIn,jdbcType=CHAR},
+      UP_SVC_INS_NM = #{record.upSvcInsNm,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=OTHER},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPD_TIME = #{record.updTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchExtInfoEntity">
+    update SYS_BRANCH_EXT_INFO
+    <set>
+      <if test="upMchntCd != null">
+        UP_MCHNT_CD = #{upMchntCd,jdbcType=CHAR},
+      </if>
+      <if test="upMchntSvcTp != null">
+        UP_MCHNT_SVC_TP = #{upMchntSvcTp,jdbcType=CHAR},
+      </if>
+      <if test="upAcqInsIdCd != null">
+        UP_ACQ_INS_ID_CD = #{upAcqInsIdCd,jdbcType=DECIMAL},
+      </if>
+      <if test="upDirectAcqSettleIn != null">
+        UP_DIRECT_ACQ_SETTLE_IN = #{upDirectAcqSettleIn,jdbcType=CHAR},
+      </if>
+      <if test="upPaySysSettleNo1 != null">
+        UP_PAY_SYS_SETTLE_NO1 = #{upPaySysSettleNo1,jdbcType=OTHER},
+      </if>
+      <if test="upSpecDiscTp != null">
+        UP_SPEC_DISC_TP = #{upSpecDiscTp,jdbcType=CHAR},
+      </if>
+      <if test="upSpecDiscLvl != null">
+        UP_SPEC_DISC_LVL = #{upSpecDiscLvl,jdbcType=CHAR},
+      </if>
+      <if test="upAllotAlgo != null">
+        UP_ALLOT_ALGO = #{upAllotAlgo,jdbcType=VARCHAR},
+      </if>
+      <if test="upAllotCd != null">
+        UP_ALLOT_CD = #{upAllotCd,jdbcType=VARCHAR},
+      </if>
+      <if test="upMchntDiscDetIndex != null">
+        UP_MCHNT_DISC_DET_INDEX = #{upMchntDiscDetIndex,jdbcType=VARCHAR},
+      </if>
+      <if test="upSvcNetUrl != null">
+        UP_SVC_NET_URL = #{upSvcNetUrl,jdbcType=OTHER},
+      </if>
+      <if test="upMchntWebSiteNm != null">
+        UP_MCHNT_WEB_SITE_NM = #{upMchntWebSiteNm,jdbcType=OTHER},
+      </if>
+      <if test="upBussTp != null">
+        UP_BUSS_TP = #{upBussTp,jdbcType=VARCHAR},
+      </if>
+      <if test="upProdFunc != null">
+        UP_PROD_FUNC = #{upProdFunc,jdbcType=OTHER},
+      </if>
+      <if test="upBussCont1Email != null">
+        UP_BUSS_CONT1_EMAIL = #{upBussCont1Email,jdbcType=VARCHAR},
+      </if>
+      <if test="upSingleAtLimit != null">
+        UP_SINGLE_AT_LIMIT = #{upSingleAtLimit,jdbcType=CHAR},
+      </if>
+      <if test="upSingleAtLimitDesc != null">
+        UP_SINGLE_AT_LIMIT_DESC = #{upSingleAtLimitDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="upSingleCardDayAtLimit != null">
+        UP_SINGLE_CARD_DAY_AT_LIMIT = #{upSingleCardDayAtLimit,jdbcType=CHAR},
+      </if>
+      <if test="upSingleCardDayAtLimitDc != null">
+        UP_SINGLE_CARD_DAY_AT_LIMIT_DC = #{upSingleCardDayAtLimitDc,jdbcType=VARCHAR},
+      </if>
+      <if test="upSubmchntIn != null">
+        UP_SUBMCHNT_IN = #{upSubmchntIn,jdbcType=CHAR},
+      </if>
+      <if test="upSvcInsNm != null">
+        UP_SVC_INS_NM = #{upSvcInsNm,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        UPD_TIME = #{updTime,jdbcType=CHAR},
+      </if>
+    </set>
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchExtInfoEntity">
+    update SYS_BRANCH_EXT_INFO
+    set UP_MCHNT_CD = #{upMchntCd,jdbcType=CHAR},
+      UP_MCHNT_SVC_TP = #{upMchntSvcTp,jdbcType=CHAR},
+      UP_ACQ_INS_ID_CD = #{upAcqInsIdCd,jdbcType=DECIMAL},
+      UP_DIRECT_ACQ_SETTLE_IN = #{upDirectAcqSettleIn,jdbcType=CHAR},
+      UP_PAY_SYS_SETTLE_NO1 = #{upPaySysSettleNo1,jdbcType=OTHER},
+      UP_SPEC_DISC_TP = #{upSpecDiscTp,jdbcType=CHAR},
+      UP_SPEC_DISC_LVL = #{upSpecDiscLvl,jdbcType=CHAR},
+      UP_ALLOT_ALGO = #{upAllotAlgo,jdbcType=VARCHAR},
+      UP_ALLOT_CD = #{upAllotCd,jdbcType=VARCHAR},
+      UP_MCHNT_DISC_DET_INDEX = #{upMchntDiscDetIndex,jdbcType=VARCHAR},
+      UP_SVC_NET_URL = #{upSvcNetUrl,jdbcType=OTHER},
+      UP_MCHNT_WEB_SITE_NM = #{upMchntWebSiteNm,jdbcType=OTHER},
+      UP_BUSS_TP = #{upBussTp,jdbcType=VARCHAR},
+      UP_PROD_FUNC = #{upProdFunc,jdbcType=OTHER},
+      UP_BUSS_CONT1_EMAIL = #{upBussCont1Email,jdbcType=VARCHAR},
+      UP_SINGLE_AT_LIMIT = #{upSingleAtLimit,jdbcType=CHAR},
+      UP_SINGLE_AT_LIMIT_DESC = #{upSingleAtLimitDesc,jdbcType=VARCHAR},
+      UP_SINGLE_CARD_DAY_AT_LIMIT = #{upSingleCardDayAtLimit,jdbcType=CHAR},
+      UP_SINGLE_CARD_DAY_AT_LIMIT_DC = #{upSingleCardDayAtLimitDc,jdbcType=VARCHAR},
+      UP_SUBMCHNT_IN = #{upSubmchntIn,jdbcType=CHAR},
+      UP_SVC_INS_NM = #{upSvcInsNm,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=OTHER},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPD_TIME = #{updTime,jdbcType=CHAR}
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </update>
+</mapper>

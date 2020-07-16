@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysFunctionDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysFunctionEntity">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="FUNCTION_CODE" jdbcType="VARCHAR" property="functionCode" />
+    <result column="PARENT_CODE" jdbcType="VARCHAR" property="parentCode" />
+    <result column="TRANS_CODE" jdbcType="VARCHAR" property="transCode" />
+    <result column="FUNCTION_NAME" jdbcType="OTHER" property="functionName" />
+    <result column="FUNCTION_URL" jdbcType="VARCHAR" property="functionUrl" />
+    <result column="FUNCTION_ICON" jdbcType="VARCHAR" property="functionIcon" />
+    <result column="OPER_CODE" jdbcType="VARCHAR" property="operCode" />
+    <result column="FUNCTION_TYPE" jdbcType="DECIMAL" property="functionType" />
+    <result column="FUNCTION_DESC" jdbcType="OTHER" property="functionDesc" />
+    <result column="SORT_NUM" jdbcType="DECIMAL" property="sortNum" />
+    <result column="REMARK" jdbcType="OTHER" property="remark" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPD_TIME" jdbcType="CHAR" property="updTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, FUNCTION_CODE, PARENT_CODE, TRANS_CODE, FUNCTION_NAME, FUNCTION_URL, FUNCTION_ICON, 
+    OPER_CODE, FUNCTION_TYPE, FUNCTION_DESC, SORT_NUM, REMARK, CREATOR, CREATE_TIME, 
+    UPD_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysFunctionEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FUNCTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FUNCTION
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_FUNCTION
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysFunctionEntityExample">
+    delete from SYS_FUNCTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysFunctionEntity">
+    insert into SYS_FUNCTION (ID, FUNCTION_CODE, PARENT_CODE, 
+      TRANS_CODE, FUNCTION_NAME, FUNCTION_URL, 
+      FUNCTION_ICON, OPER_CODE, FUNCTION_TYPE, 
+      FUNCTION_DESC, SORT_NUM, REMARK, 
+      CREATOR, CREATE_TIME, UPD_TIME
+      )
+    values (#{id,jdbcType=DECIMAL}, #{functionCode,jdbcType=VARCHAR}, #{parentCode,jdbcType=VARCHAR}, 
+      #{transCode,jdbcType=VARCHAR}, #{functionName,jdbcType=OTHER}, #{functionUrl,jdbcType=VARCHAR}, 
+      #{functionIcon,jdbcType=VARCHAR}, #{operCode,jdbcType=VARCHAR}, #{functionType,jdbcType=DECIMAL}, 
+      #{functionDesc,jdbcType=OTHER}, #{sortNum,jdbcType=DECIMAL}, #{remark,jdbcType=OTHER}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, #{updTime,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysFunctionEntity">
+    insert into SYS_FUNCTION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="functionCode != null">
+        FUNCTION_CODE,
+      </if>
+      <if test="parentCode != null">
+        PARENT_CODE,
+      </if>
+      <if test="transCode != null">
+        TRANS_CODE,
+      </if>
+      <if test="functionName != null">
+        FUNCTION_NAME,
+      </if>
+      <if test="functionUrl != null">
+        FUNCTION_URL,
+      </if>
+      <if test="functionIcon != null">
+        FUNCTION_ICON,
+      </if>
+      <if test="operCode != null">
+        OPER_CODE,
+      </if>
+      <if test="functionType != null">
+        FUNCTION_TYPE,
+      </if>
+      <if test="functionDesc != null">
+        FUNCTION_DESC,
+      </if>
+      <if test="sortNum != null">
+        SORT_NUM,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updTime != null">
+        UPD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="functionCode != null">
+        #{functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null">
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="transCode != null">
+        #{transCode,jdbcType=VARCHAR},
+      </if>
+      <if test="functionName != null">
+        #{functionName,jdbcType=OTHER},
+      </if>
+      <if test="functionUrl != null">
+        #{functionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="functionIcon != null">
+        #{functionIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="operCode != null">
+        #{operCode,jdbcType=VARCHAR},
+      </if>
+      <if test="functionType != null">
+        #{functionType,jdbcType=DECIMAL},
+      </if>
+      <if test="functionDesc != null">
+        #{functionDesc,jdbcType=OTHER},
+      </if>
+      <if test="sortNum != null">
+        #{sortNum,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysFunctionEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_FUNCTION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_FUNCTION
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.functionCode != null">
+        FUNCTION_CODE = #{record.functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentCode != null">
+        PARENT_CODE = #{record.parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transCode != null">
+        TRANS_CODE = #{record.transCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functionName != null">
+        FUNCTION_NAME = #{record.functionName,jdbcType=OTHER},
+      </if>
+      <if test="record.functionUrl != null">
+        FUNCTION_URL = #{record.functionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functionIcon != null">
+        FUNCTION_ICON = #{record.functionIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operCode != null">
+        OPER_CODE = #{record.operCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functionType != null">
+        FUNCTION_TYPE = #{record.functionType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.functionDesc != null">
+        FUNCTION_DESC = #{record.functionDesc,jdbcType=OTHER},
+      </if>
+      <if test="record.sortNum != null">
+        SORT_NUM = #{record.sortNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=OTHER},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updTime != null">
+        UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_FUNCTION
+    set ID = #{record.id,jdbcType=DECIMAL},
+      FUNCTION_CODE = #{record.functionCode,jdbcType=VARCHAR},
+      PARENT_CODE = #{record.parentCode,jdbcType=VARCHAR},
+      TRANS_CODE = #{record.transCode,jdbcType=VARCHAR},
+      FUNCTION_NAME = #{record.functionName,jdbcType=OTHER},
+      FUNCTION_URL = #{record.functionUrl,jdbcType=VARCHAR},
+      FUNCTION_ICON = #{record.functionIcon,jdbcType=VARCHAR},
+      OPER_CODE = #{record.operCode,jdbcType=VARCHAR},
+      FUNCTION_TYPE = #{record.functionType,jdbcType=DECIMAL},
+      FUNCTION_DESC = #{record.functionDesc,jdbcType=OTHER},
+      SORT_NUM = #{record.sortNum,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=OTHER},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPD_TIME = #{record.updTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysFunctionEntity">
+    update SYS_FUNCTION
+    <set>
+      <if test="functionCode != null">
+        FUNCTION_CODE = #{functionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null">
+        PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="transCode != null">
+        TRANS_CODE = #{transCode,jdbcType=VARCHAR},
+      </if>
+      <if test="functionName != null">
+        FUNCTION_NAME = #{functionName,jdbcType=OTHER},
+      </if>
+      <if test="functionUrl != null">
+        FUNCTION_URL = #{functionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="functionIcon != null">
+        FUNCTION_ICON = #{functionIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="operCode != null">
+        OPER_CODE = #{operCode,jdbcType=VARCHAR},
+      </if>
+      <if test="functionType != null">
+        FUNCTION_TYPE = #{functionType,jdbcType=DECIMAL},
+      </if>
+      <if test="functionDesc != null">
+        FUNCTION_DESC = #{functionDesc,jdbcType=OTHER},
+      </if>
+      <if test="sortNum != null">
+        SORT_NUM = #{sortNum,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        UPD_TIME = #{updTime,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysFunctionEntity">
+    update SYS_FUNCTION
+    set FUNCTION_CODE = #{functionCode,jdbcType=VARCHAR},
+      PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+      TRANS_CODE = #{transCode,jdbcType=VARCHAR},
+      FUNCTION_NAME = #{functionName,jdbcType=OTHER},
+      FUNCTION_URL = #{functionUrl,jdbcType=VARCHAR},
+      FUNCTION_ICON = #{functionIcon,jdbcType=VARCHAR},
+      OPER_CODE = #{operCode,jdbcType=VARCHAR},
+      FUNCTION_TYPE = #{functionType,jdbcType=DECIMAL},
+      FUNCTION_DESC = #{functionDesc,jdbcType=OTHER},
+      SORT_NUM = #{sortNum,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=OTHER},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPD_TIME = #{updTime,jdbcType=CHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.TCheckApplyRecordDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TCheckApplyRecordEntity">
+    <id column="APPLY_SERIAL_NO" jdbcType="DECIMAL" property="applySerialNo" />
+    <result column="CHANNEL_NO" jdbcType="DECIMAL" property="channelNo" />
+    <result column="APPLY_DATE" jdbcType="CHAR" property="applyDate" />
+    <result column="APPLY_STATUS" jdbcType="DECIMAL" property="applyStatus" />
+    <result column="FINISH_TIME" jdbcType="CHAR" property="finishTime" />
+    <result column="CHECK_STATUS" jdbcType="DECIMAL" property="checkStatus" />
+    <result column="CHECK_FILE_PATH" jdbcType="VARCHAR" property="checkFilePath" />
+    <result column="CHECK_FILE_NAME" jdbcType="VARCHAR" property="checkFileName" />
+    <result column="CHECK_FILE_START_TIME" jdbcType="CHAR" property="checkFileStartTime" />
+    <result column="CHECK_FILE_END_TIME" jdbcType="CHAR" property="checkFileEndTime" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="THIRD_PLAT_CODE" jdbcType="DECIMAL" property="thirdPlatCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    APPLY_SERIAL_NO, CHANNEL_NO, APPLY_DATE, APPLY_STATUS, FINISH_TIME, CHECK_STATUS, 
+    CHECK_FILE_PATH, CHECK_FILE_NAME, CHECK_FILE_START_TIME, CHECK_FILE_END_TIME, CREATE_TIME, 
+    THIRD_PLAT_CODE
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TCheckApplyRecordEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_CHECK_APPLY_RECORD
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_CHECK_APPLY_RECORD
+    where APPLY_SERIAL_NO = #{applySerialNo,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from T_CHECK_APPLY_RECORD
+    where APPLY_SERIAL_NO = #{applySerialNo,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TCheckApplyRecordEntityExample">
+    delete from T_CHECK_APPLY_RECORD
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TCheckApplyRecordEntity">
+    insert into T_CHECK_APPLY_RECORD (APPLY_SERIAL_NO, CHANNEL_NO, APPLY_DATE, 
+      APPLY_STATUS, FINISH_TIME, CHECK_STATUS, 
+      CHECK_FILE_PATH, CHECK_FILE_NAME, CHECK_FILE_START_TIME, 
+      CHECK_FILE_END_TIME, CREATE_TIME, THIRD_PLAT_CODE
+      )
+    values (#{applySerialNo,jdbcType=DECIMAL}, #{channelNo,jdbcType=DECIMAL}, #{applyDate,jdbcType=CHAR}, 
+      #{applyStatus,jdbcType=DECIMAL}, #{finishTime,jdbcType=CHAR}, #{checkStatus,jdbcType=DECIMAL}, 
+      #{checkFilePath,jdbcType=VARCHAR}, #{checkFileName,jdbcType=VARCHAR}, #{checkFileStartTime,jdbcType=CHAR}, 
+      #{checkFileEndTime,jdbcType=CHAR}, #{createTime,jdbcType=CHAR}, #{thirdPlatCode,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TCheckApplyRecordEntity">
+    insert into T_CHECK_APPLY_RECORD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="applySerialNo != null">
+        APPLY_SERIAL_NO,
+      </if>
+      <if test="channelNo != null">
+        CHANNEL_NO,
+      </if>
+      <if test="applyDate != null">
+        APPLY_DATE,
+      </if>
+      <if test="applyStatus != null">
+        APPLY_STATUS,
+      </if>
+      <if test="finishTime != null">
+        FINISH_TIME,
+      </if>
+      <if test="checkStatus != null">
+        CHECK_STATUS,
+      </if>
+      <if test="checkFilePath != null">
+        CHECK_FILE_PATH,
+      </if>
+      <if test="checkFileName != null">
+        CHECK_FILE_NAME,
+      </if>
+      <if test="checkFileStartTime != null">
+        CHECK_FILE_START_TIME,
+      </if>
+      <if test="checkFileEndTime != null">
+        CHECK_FILE_END_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="thirdPlatCode != null">
+        THIRD_PLAT_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="applySerialNo != null">
+        #{applySerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="channelNo != null">
+        #{channelNo,jdbcType=DECIMAL},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=CHAR},
+      </if>
+      <if test="applyStatus != null">
+        #{applyStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="finishTime != null">
+        #{finishTime,jdbcType=CHAR},
+      </if>
+      <if test="checkStatus != null">
+        #{checkStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="checkFilePath != null">
+        #{checkFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="checkFileName != null">
+        #{checkFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkFileStartTime != null">
+        #{checkFileStartTime,jdbcType=CHAR},
+      </if>
+      <if test="checkFileEndTime != null">
+        #{checkFileEndTime,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="thirdPlatCode != null">
+        #{thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TCheckApplyRecordEntityExample" resultType="java.lang.Long">
+    select count(*) from T_CHECK_APPLY_RECORD
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_CHECK_APPLY_RECORD
+    <set>
+      <if test="record.applySerialNo != null">
+        APPLY_SERIAL_NO = #{record.applySerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.channelNo != null">
+        CHANNEL_NO = #{record.channelNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.applyDate != null">
+        APPLY_DATE = #{record.applyDate,jdbcType=CHAR},
+      </if>
+      <if test="record.applyStatus != null">
+        APPLY_STATUS = #{record.applyStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.finishTime != null">
+        FINISH_TIME = #{record.finishTime,jdbcType=CHAR},
+      </if>
+      <if test="record.checkStatus != null">
+        CHECK_STATUS = #{record.checkStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkFilePath != null">
+        CHECK_FILE_PATH = #{record.checkFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkFileName != null">
+        CHECK_FILE_NAME = #{record.checkFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkFileStartTime != null">
+        CHECK_FILE_START_TIME = #{record.checkFileStartTime,jdbcType=CHAR},
+      </if>
+      <if test="record.checkFileEndTime != null">
+        CHECK_FILE_END_TIME = #{record.checkFileEndTime,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.thirdPlatCode != null">
+        THIRD_PLAT_CODE = #{record.thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_CHECK_APPLY_RECORD
+    set APPLY_SERIAL_NO = #{record.applySerialNo,jdbcType=DECIMAL},
+      CHANNEL_NO = #{record.channelNo,jdbcType=DECIMAL},
+      APPLY_DATE = #{record.applyDate,jdbcType=CHAR},
+      APPLY_STATUS = #{record.applyStatus,jdbcType=DECIMAL},
+      FINISH_TIME = #{record.finishTime,jdbcType=CHAR},
+      CHECK_STATUS = #{record.checkStatus,jdbcType=DECIMAL},
+      CHECK_FILE_PATH = #{record.checkFilePath,jdbcType=VARCHAR},
+      CHECK_FILE_NAME = #{record.checkFileName,jdbcType=VARCHAR},
+      CHECK_FILE_START_TIME = #{record.checkFileStartTime,jdbcType=CHAR},
+      CHECK_FILE_END_TIME = #{record.checkFileEndTime,jdbcType=CHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      THIRD_PLAT_CODE = #{record.thirdPlatCode,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TCheckApplyRecordEntity">
+    update T_CHECK_APPLY_RECORD
+    <set>
+      <if test="channelNo != null">
+        CHANNEL_NO = #{channelNo,jdbcType=DECIMAL},
+      </if>
+      <if test="applyDate != null">
+        APPLY_DATE = #{applyDate,jdbcType=CHAR},
+      </if>
+      <if test="applyStatus != null">
+        APPLY_STATUS = #{applyStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="finishTime != null">
+        FINISH_TIME = #{finishTime,jdbcType=CHAR},
+      </if>
+      <if test="checkStatus != null">
+        CHECK_STATUS = #{checkStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="checkFilePath != null">
+        CHECK_FILE_PATH = #{checkFilePath,jdbcType=VARCHAR},
+      </if>
+      <if test="checkFileName != null">
+        CHECK_FILE_NAME = #{checkFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkFileStartTime != null">
+        CHECK_FILE_START_TIME = #{checkFileStartTime,jdbcType=CHAR},
+      </if>
+      <if test="checkFileEndTime != null">
+        CHECK_FILE_END_TIME = #{checkFileEndTime,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="thirdPlatCode != null">
+        THIRD_PLAT_CODE = #{thirdPlatCode,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where APPLY_SERIAL_NO = #{applySerialNo,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TCheckApplyRecordEntity">
+    update T_CHECK_APPLY_RECORD
+    set CHANNEL_NO = #{channelNo,jdbcType=DECIMAL},
+      APPLY_DATE = #{applyDate,jdbcType=CHAR},
+      APPLY_STATUS = #{applyStatus,jdbcType=DECIMAL},
+      FINISH_TIME = #{finishTime,jdbcType=CHAR},
+      CHECK_STATUS = #{checkStatus,jdbcType=DECIMAL},
+      CHECK_FILE_PATH = #{checkFilePath,jdbcType=VARCHAR},
+      CHECK_FILE_NAME = #{checkFileName,jdbcType=VARCHAR},
+      CHECK_FILE_START_TIME = #{checkFileStartTime,jdbcType=CHAR},
+      CHECK_FILE_END_TIME = #{checkFileEndTime,jdbcType=CHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      THIRD_PLAT_CODE = #{thirdPlatCode,jdbcType=DECIMAL}
+    where APPLY_SERIAL_NO = #{applySerialNo,jdbcType=DECIMAL}
+  </update>
+</mapper>

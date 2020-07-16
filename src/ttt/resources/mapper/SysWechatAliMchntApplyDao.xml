@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysWechatAliMchntApplyDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysWechatAliMchntApplyEntity">
+    <id column="COMMON_SERIAL_NO" jdbcType="DECIMAL" property="commonSerialNo" />
+    <result column="BRANCH_CODE" jdbcType="DECIMAL" property="branchCode" />
+    <result column="OPER_IN" jdbcType="CHAR" property="operIn" />
+    <result column="PAY_COMPY_CODE" jdbcType="DECIMAL" property="payCompyCode" />
+    <result column="PAY_COMPY_ACT" jdbcType="VARCHAR" property="payCompyAct" />
+    <result column="APPID" jdbcType="VARCHAR" property="appid" />
+    <result column="BRANCH_NAME" jdbcType="OTHER" property="branchName" />
+    <result column="BRANCH_SIMPLE_NAME" jdbcType="OTHER" property="branchSimpleName" />
+    <result column="MOBILE_NO" jdbcType="VARCHAR" property="mobileNo" />
+    <result column="WECHAT_CHANNEL_ID" jdbcType="VARCHAR" property="wechatChannelId" />
+    <result column="BUSI_TYPE" jdbcType="VARCHAR" property="busiType" />
+    <result column="LIC_TYPE" jdbcType="VARCHAR" property="licType" />
+    <result column="LIC_NO" jdbcType="VARCHAR" property="licNo" />
+    <result column="CONTACTER_TYPE" jdbcType="VARCHAR" property="contacterType" />
+    <result column="LEGAL_CERT_NAME" jdbcType="OTHER" property="legalCertName" />
+    <result column="ID_CERT_NO" jdbcType="VARCHAR" property="idCertNo" />
+    <result column="PROVINCE_CODE" jdbcType="VARCHAR" property="provinceCode" />
+    <result column="CITY_CODE" jdbcType="VARCHAR" property="cityCode" />
+    <result column="DISTRICT_CODE" jdbcType="VARCHAR" property="districtCode" />
+    <result column="BUSI_ADDR" jdbcType="OTHER" property="busiAddr" />
+    <result column="MERCHANT_REMARK" jdbcType="OTHER" property="merchantRemark" />
+    <result column="SUB_MERCHANT_ID" jdbcType="VARCHAR" property="subMerchantId" />
+    <result column="RESP_CPDE" jdbcType="VARCHAR" property="respCpde" />
+    <result column="RESP_MSG" jdbcType="OTHER" property="respMsg" />
+    <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COMMON_SERIAL_NO, BRANCH_CODE, OPER_IN, PAY_COMPY_CODE, PAY_COMPY_ACT, APPID, BRANCH_NAME, 
+    BRANCH_SIMPLE_NAME, MOBILE_NO, WECHAT_CHANNEL_ID, BUSI_TYPE, LIC_TYPE, LIC_NO, CONTACTER_TYPE, 
+    LEGAL_CERT_NAME, ID_CERT_NO, PROVINCE_CODE, CITY_CODE, DISTRICT_CODE, BUSI_ADDR, 
+    MERCHANT_REMARK, SUB_MERCHANT_ID, RESP_CPDE, RESP_MSG, CREATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysWechatAliMchntApplyEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_WECHAT_ALI_MCHNT_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_WECHAT_ALI_MCHNT_APPLY
+    where COMMON_SERIAL_NO = #{commonSerialNo,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from SYS_WECHAT_ALI_MCHNT_APPLY
+    where COMMON_SERIAL_NO = #{commonSerialNo,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysWechatAliMchntApplyEntityExample">
+    delete from SYS_WECHAT_ALI_MCHNT_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysWechatAliMchntApplyEntity">
+    insert into SYS_WECHAT_ALI_MCHNT_APPLY (COMMON_SERIAL_NO, BRANCH_CODE, OPER_IN, 
+      PAY_COMPY_CODE, PAY_COMPY_ACT, APPID, 
+      BRANCH_NAME, BRANCH_SIMPLE_NAME, MOBILE_NO, 
+      WECHAT_CHANNEL_ID, BUSI_TYPE, LIC_TYPE, 
+      LIC_NO, CONTACTER_TYPE, LEGAL_CERT_NAME, 
+      ID_CERT_NO, PROVINCE_CODE, CITY_CODE, 
+      DISTRICT_CODE, BUSI_ADDR, MERCHANT_REMARK, 
+      SUB_MERCHANT_ID, RESP_CPDE, RESP_MSG, 
+      CREATE_TIME)
+    values (#{commonSerialNo,jdbcType=DECIMAL}, #{branchCode,jdbcType=DECIMAL}, #{operIn,jdbcType=CHAR}, 
+      #{payCompyCode,jdbcType=DECIMAL}, #{payCompyAct,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR}, 
+      #{branchName,jdbcType=OTHER}, #{branchSimpleName,jdbcType=OTHER}, #{mobileNo,jdbcType=VARCHAR}, 
+      #{wechatChannelId,jdbcType=VARCHAR}, #{busiType,jdbcType=VARCHAR}, #{licType,jdbcType=VARCHAR}, 
+      #{licNo,jdbcType=VARCHAR}, #{contacterType,jdbcType=VARCHAR}, #{legalCertName,jdbcType=OTHER}, 
+      #{idCertNo,jdbcType=VARCHAR}, #{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
+      #{districtCode,jdbcType=VARCHAR}, #{busiAddr,jdbcType=OTHER}, #{merchantRemark,jdbcType=OTHER}, 
+      #{subMerchantId,jdbcType=VARCHAR}, #{respCpde,jdbcType=VARCHAR}, #{respMsg,jdbcType=OTHER}, 
+      #{createTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysWechatAliMchntApplyEntity">
+    insert into SYS_WECHAT_ALI_MCHNT_APPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commonSerialNo != null">
+        COMMON_SERIAL_NO,
+      </if>
+      <if test="branchCode != null">
+        BRANCH_CODE,
+      </if>
+      <if test="operIn != null">
+        OPER_IN,
+      </if>
+      <if test="payCompyCode != null">
+        PAY_COMPY_CODE,
+      </if>
+      <if test="payCompyAct != null">
+        PAY_COMPY_ACT,
+      </if>
+      <if test="appid != null">
+        APPID,
+      </if>
+      <if test="branchName != null">
+        BRANCH_NAME,
+      </if>
+      <if test="branchSimpleName != null">
+        BRANCH_SIMPLE_NAME,
+      </if>
+      <if test="mobileNo != null">
+        MOBILE_NO,
+      </if>
+      <if test="wechatChannelId != null">
+        WECHAT_CHANNEL_ID,
+      </if>
+      <if test="busiType != null">
+        BUSI_TYPE,
+      </if>
+      <if test="licType != null">
+        LIC_TYPE,
+      </if>
+      <if test="licNo != null">
+        LIC_NO,
+      </if>
+      <if test="contacterType != null">
+        CONTACTER_TYPE,
+      </if>
+      <if test="legalCertName != null">
+        LEGAL_CERT_NAME,
+      </if>
+      <if test="idCertNo != null">
+        ID_CERT_NO,
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE,
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE,
+      </if>
+      <if test="districtCode != null">
+        DISTRICT_CODE,
+      </if>
+      <if test="busiAddr != null">
+        BUSI_ADDR,
+      </if>
+      <if test="merchantRemark != null">
+        MERCHANT_REMARK,
+      </if>
+      <if test="subMerchantId != null">
+        SUB_MERCHANT_ID,
+      </if>
+      <if test="respCpde != null">
+        RESP_CPDE,
+      </if>
+      <if test="respMsg != null">
+        RESP_MSG,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commonSerialNo != null">
+        #{commonSerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="branchCode != null">
+        #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="operIn != null">
+        #{operIn,jdbcType=CHAR},
+      </if>
+      <if test="payCompyCode != null">
+        #{payCompyCode,jdbcType=DECIMAL},
+      </if>
+      <if test="payCompyAct != null">
+        #{payCompyAct,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="branchName != null">
+        #{branchName,jdbcType=OTHER},
+      </if>
+      <if test="branchSimpleName != null">
+        #{branchSimpleName,jdbcType=OTHER},
+      </if>
+      <if test="mobileNo != null">
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatChannelId != null">
+        #{wechatChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="busiType != null">
+        #{busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="licType != null">
+        #{licType,jdbcType=VARCHAR},
+      </if>
+      <if test="licNo != null">
+        #{licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contacterType != null">
+        #{contacterType,jdbcType=VARCHAR},
+      </if>
+      <if test="legalCertName != null">
+        #{legalCertName,jdbcType=OTHER},
+      </if>
+      <if test="idCertNo != null">
+        #{idCertNo,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null">
+        #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="busiAddr != null">
+        #{busiAddr,jdbcType=OTHER},
+      </if>
+      <if test="merchantRemark != null">
+        #{merchantRemark,jdbcType=OTHER},
+      </if>
+      <if test="subMerchantId != null">
+        #{subMerchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="respCpde != null">
+        #{respCpde,jdbcType=VARCHAR},
+      </if>
+      <if test="respMsg != null">
+        #{respMsg,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysWechatAliMchntApplyEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_WECHAT_ALI_MCHNT_APPLY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_WECHAT_ALI_MCHNT_APPLY
+    <set>
+      <if test="record.commonSerialNo != null">
+        COMMON_SERIAL_NO = #{record.commonSerialNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.branchCode != null">
+        BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operIn != null">
+        OPER_IN = #{record.operIn,jdbcType=CHAR},
+      </if>
+      <if test="record.payCompyCode != null">
+        PAY_COMPY_CODE = #{record.payCompyCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payCompyAct != null">
+        PAY_COMPY_ACT = #{record.payCompyAct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appid != null">
+        APPID = #{record.appid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchName != null">
+        BRANCH_NAME = #{record.branchName,jdbcType=OTHER},
+      </if>
+      <if test="record.branchSimpleName != null">
+        BRANCH_SIMPLE_NAME = #{record.branchSimpleName,jdbcType=OTHER},
+      </if>
+      <if test="record.mobileNo != null">
+        MOBILE_NO = #{record.mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechatChannelId != null">
+        WECHAT_CHANNEL_ID = #{record.wechatChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busiType != null">
+        BUSI_TYPE = #{record.busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licType != null">
+        LIC_TYPE = #{record.licType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.licNo != null">
+        LIC_NO = #{record.licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contacterType != null">
+        CONTACTER_TYPE = #{record.contacterType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.legalCertName != null">
+        LEGAL_CERT_NAME = #{record.legalCertName,jdbcType=OTHER},
+      </if>
+      <if test="record.idCertNo != null">
+        ID_CERT_NO = #{record.idCertNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceCode != null">
+        PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null">
+        CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtCode != null">
+        DISTRICT_CODE = #{record.districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busiAddr != null">
+        BUSI_ADDR = #{record.busiAddr,jdbcType=OTHER},
+      </if>
+      <if test="record.merchantRemark != null">
+        MERCHANT_REMARK = #{record.merchantRemark,jdbcType=OTHER},
+      </if>
+      <if test="record.subMerchantId != null">
+        SUB_MERCHANT_ID = #{record.subMerchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.respCpde != null">
+        RESP_CPDE = #{record.respCpde,jdbcType=VARCHAR},
+      </if>
+      <if test="record.respMsg != null">
+        RESP_MSG = #{record.respMsg,jdbcType=OTHER},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_WECHAT_ALI_MCHNT_APPLY
+    set COMMON_SERIAL_NO = #{record.commonSerialNo,jdbcType=DECIMAL},
+      BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      OPER_IN = #{record.operIn,jdbcType=CHAR},
+      PAY_COMPY_CODE = #{record.payCompyCode,jdbcType=DECIMAL},
+      PAY_COMPY_ACT = #{record.payCompyAct,jdbcType=VARCHAR},
+      APPID = #{record.appid,jdbcType=VARCHAR},
+      BRANCH_NAME = #{record.branchName,jdbcType=OTHER},
+      BRANCH_SIMPLE_NAME = #{record.branchSimpleName,jdbcType=OTHER},
+      MOBILE_NO = #{record.mobileNo,jdbcType=VARCHAR},
+      WECHAT_CHANNEL_ID = #{record.wechatChannelId,jdbcType=VARCHAR},
+      BUSI_TYPE = #{record.busiType,jdbcType=VARCHAR},
+      LIC_TYPE = #{record.licType,jdbcType=VARCHAR},
+      LIC_NO = #{record.licNo,jdbcType=VARCHAR},
+      CONTACTER_TYPE = #{record.contacterType,jdbcType=VARCHAR},
+      LEGAL_CERT_NAME = #{record.legalCertName,jdbcType=OTHER},
+      ID_CERT_NO = #{record.idCertNo,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{record.provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{record.cityCode,jdbcType=VARCHAR},
+      DISTRICT_CODE = #{record.districtCode,jdbcType=VARCHAR},
+      BUSI_ADDR = #{record.busiAddr,jdbcType=OTHER},
+      MERCHANT_REMARK = #{record.merchantRemark,jdbcType=OTHER},
+      SUB_MERCHANT_ID = #{record.subMerchantId,jdbcType=VARCHAR},
+      RESP_CPDE = #{record.respCpde,jdbcType=VARCHAR},
+      RESP_MSG = #{record.respMsg,jdbcType=OTHER},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysWechatAliMchntApplyEntity">
+    update SYS_WECHAT_ALI_MCHNT_APPLY
+    <set>
+      <if test="branchCode != null">
+        BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="operIn != null">
+        OPER_IN = #{operIn,jdbcType=CHAR},
+      </if>
+      <if test="payCompyCode != null">
+        PAY_COMPY_CODE = #{payCompyCode,jdbcType=DECIMAL},
+      </if>
+      <if test="payCompyAct != null">
+        PAY_COMPY_ACT = #{payCompyAct,jdbcType=VARCHAR},
+      </if>
+      <if test="appid != null">
+        APPID = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="branchName != null">
+        BRANCH_NAME = #{branchName,jdbcType=OTHER},
+      </if>
+      <if test="branchSimpleName != null">
+        BRANCH_SIMPLE_NAME = #{branchSimpleName,jdbcType=OTHER},
+      </if>
+      <if test="mobileNo != null">
+        MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatChannelId != null">
+        WECHAT_CHANNEL_ID = #{wechatChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="busiType != null">
+        BUSI_TYPE = #{busiType,jdbcType=VARCHAR},
+      </if>
+      <if test="licType != null">
+        LIC_TYPE = #{licType,jdbcType=VARCHAR},
+      </if>
+      <if test="licNo != null">
+        LIC_NO = #{licNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contacterType != null">
+        CONTACTER_TYPE = #{contacterType,jdbcType=VARCHAR},
+      </if>
+      <if test="legalCertName != null">
+        LEGAL_CERT_NAME = #{legalCertName,jdbcType=OTHER},
+      </if>
+      <if test="idCertNo != null">
+        ID_CERT_NO = #{idCertNo,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null">
+        PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null">
+        DISTRICT_CODE = #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="busiAddr != null">
+        BUSI_ADDR = #{busiAddr,jdbcType=OTHER},
+      </if>
+      <if test="merchantRemark != null">
+        MERCHANT_REMARK = #{merchantRemark,jdbcType=OTHER},
+      </if>
+      <if test="subMerchantId != null">
+        SUB_MERCHANT_ID = #{subMerchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="respCpde != null">
+        RESP_CPDE = #{respCpde,jdbcType=VARCHAR},
+      </if>
+      <if test="respMsg != null">
+        RESP_MSG = #{respMsg,jdbcType=OTHER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COMMON_SERIAL_NO = #{commonSerialNo,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysWechatAliMchntApplyEntity">
+    update SYS_WECHAT_ALI_MCHNT_APPLY
+    set BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      OPER_IN = #{operIn,jdbcType=CHAR},
+      PAY_COMPY_CODE = #{payCompyCode,jdbcType=DECIMAL},
+      PAY_COMPY_ACT = #{payCompyAct,jdbcType=VARCHAR},
+      APPID = #{appid,jdbcType=VARCHAR},
+      BRANCH_NAME = #{branchName,jdbcType=OTHER},
+      BRANCH_SIMPLE_NAME = #{branchSimpleName,jdbcType=OTHER},
+      MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      WECHAT_CHANNEL_ID = #{wechatChannelId,jdbcType=VARCHAR},
+      BUSI_TYPE = #{busiType,jdbcType=VARCHAR},
+      LIC_TYPE = #{licType,jdbcType=VARCHAR},
+      LIC_NO = #{licNo,jdbcType=VARCHAR},
+      CONTACTER_TYPE = #{contacterType,jdbcType=VARCHAR},
+      LEGAL_CERT_NAME = #{legalCertName,jdbcType=OTHER},
+      ID_CERT_NO = #{idCertNo,jdbcType=VARCHAR},
+      PROVINCE_CODE = #{provinceCode,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      DISTRICT_CODE = #{districtCode,jdbcType=VARCHAR},
+      BUSI_ADDR = #{busiAddr,jdbcType=OTHER},
+      MERCHANT_REMARK = #{merchantRemark,jdbcType=OTHER},
+      SUB_MERCHANT_ID = #{subMerchantId,jdbcType=VARCHAR},
+      RESP_CPDE = #{respCpde,jdbcType=VARCHAR},
+      RESP_MSG = #{respMsg,jdbcType=OTHER},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR}
+    where COMMON_SERIAL_NO = #{commonSerialNo,jdbcType=DECIMAL}
+  </update>
+</mapper>

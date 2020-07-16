@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysBranchDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchEntity">
+    <id column="BRANCH_CODE" jdbcType="DECIMAL" property="branchCode" />
+    <result column="BRANCH_NAME" jdbcType="OTHER" property="branchName" />
+    <result column="BRANCH_SIMPLE_NAME" jdbcType="OTHER" property="branchSimpleName" />
+    <result column="BRANCH_TYPE" jdbcType="DECIMAL" property="branchType" />
+    <result column="BRANCH_LEVEL" jdbcType="DECIMAL" property="branchLevel" />
+    <result column="PARENT_BRANCH" jdbcType="DECIMAL" property="parentBranch" />
+    <result column="CONTACTOR" jdbcType="OTHER" property="contactor" />
+    <result column="MOBILE_NO" jdbcType="VARCHAR" property="mobileNo" />
+    <result column="E_MAIL" jdbcType="VARCHAR" property="eMail" />
+    <result column="CONTACT_ADDR" jdbcType="OTHER" property="contactAddr" />
+    <result column="BUSI_MANAGER" jdbcType="VARCHAR" property="busiManager" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="OPERATION_STAFF" jdbcType="VARCHAR" property="operationStaff" />
+    <result column="IS_INDEPENDENT_ACT" jdbcType="DECIMAL" property="isIndependentAct" />
+    <result column="REMARK" jdbcType="OTHER" property="remark" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPD_TIME" jdbcType="CHAR" property="updTime" />
+    <result column="IS_BUSI_SHOP" jdbcType="DECIMAL" property="isBusiShop" />
+    <result column="INNER_BRANCH_CODE" jdbcType="VARCHAR" property="innerBranchCode" />
+    <result column="BUSI_EXPAND" jdbcType="VARCHAR" property="busiExpand" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BRANCH_CODE, BRANCH_NAME, BRANCH_SIMPLE_NAME, BRANCH_TYPE, BRANCH_LEVEL, PARENT_BRANCH, 
+    CONTACTOR, MOBILE_NO, E_MAIL, CONTACT_ADDR, BUSI_MANAGER, STATUS, OPERATION_STAFF, 
+    IS_INDEPENDENT_ACT, REMARK, CREATOR, CREATE_TIME, UPD_TIME, IS_BUSI_SHOP, INNER_BRANCH_CODE, 
+    BUSI_EXPAND
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_BRANCH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_BRANCH
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_BRANCH
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchEntityExample">
+    delete from SYS_BRANCH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchEntity">
+    insert into SYS_BRANCH (BRANCH_CODE, BRANCH_NAME, BRANCH_SIMPLE_NAME, 
+      BRANCH_TYPE, BRANCH_LEVEL, PARENT_BRANCH, 
+      CONTACTOR, MOBILE_NO, E_MAIL, 
+      CONTACT_ADDR, BUSI_MANAGER, STATUS, 
+      OPERATION_STAFF, IS_INDEPENDENT_ACT, REMARK, 
+      CREATOR, CREATE_TIME, UPD_TIME, 
+      IS_BUSI_SHOP, INNER_BRANCH_CODE, BUSI_EXPAND
+      )
+    values (#{branchCode,jdbcType=DECIMAL}, #{branchName,jdbcType=OTHER}, #{branchSimpleName,jdbcType=OTHER}, 
+      #{branchType,jdbcType=DECIMAL}, #{branchLevel,jdbcType=DECIMAL}, #{parentBranch,jdbcType=DECIMAL}, 
+      #{contactor,jdbcType=OTHER}, #{mobileNo,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, 
+      #{contactAddr,jdbcType=OTHER}, #{busiManager,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, 
+      #{operationStaff,jdbcType=VARCHAR}, #{isIndependentAct,jdbcType=DECIMAL}, #{remark,jdbcType=OTHER}, 
+      #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, #{updTime,jdbcType=CHAR}, 
+      #{isBusiShop,jdbcType=DECIMAL}, #{innerBranchCode,jdbcType=VARCHAR}, #{busiExpand,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchEntity">
+    insert into SYS_BRANCH
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="branchCode != null">
+        BRANCH_CODE,
+      </if>
+      <if test="branchName != null">
+        BRANCH_NAME,
+      </if>
+      <if test="branchSimpleName != null">
+        BRANCH_SIMPLE_NAME,
+      </if>
+      <if test="branchType != null">
+        BRANCH_TYPE,
+      </if>
+      <if test="branchLevel != null">
+        BRANCH_LEVEL,
+      </if>
+      <if test="parentBranch != null">
+        PARENT_BRANCH,
+      </if>
+      <if test="contactor != null">
+        CONTACTOR,
+      </if>
+      <if test="mobileNo != null">
+        MOBILE_NO,
+      </if>
+      <if test="eMail != null">
+        E_MAIL,
+      </if>
+      <if test="contactAddr != null">
+        CONTACT_ADDR,
+      </if>
+      <if test="busiManager != null">
+        BUSI_MANAGER,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="operationStaff != null">
+        OPERATION_STAFF,
+      </if>
+      <if test="isIndependentAct != null">
+        IS_INDEPENDENT_ACT,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updTime != null">
+        UPD_TIME,
+      </if>
+      <if test="isBusiShop != null">
+        IS_BUSI_SHOP,
+      </if>
+      <if test="innerBranchCode != null">
+        INNER_BRANCH_CODE,
+      </if>
+      <if test="busiExpand != null">
+        BUSI_EXPAND,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="branchCode != null">
+        #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="branchName != null">
+        #{branchName,jdbcType=OTHER},
+      </if>
+      <if test="branchSimpleName != null">
+        #{branchSimpleName,jdbcType=OTHER},
+      </if>
+      <if test="branchType != null">
+        #{branchType,jdbcType=DECIMAL},
+      </if>
+      <if test="branchLevel != null">
+        #{branchLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="parentBranch != null">
+        #{parentBranch,jdbcType=DECIMAL},
+      </if>
+      <if test="contactor != null">
+        #{contactor,jdbcType=OTHER},
+      </if>
+      <if test="mobileNo != null">
+        #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null">
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="contactAddr != null">
+        #{contactAddr,jdbcType=OTHER},
+      </if>
+      <if test="busiManager != null">
+        #{busiManager,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="operationStaff != null">
+        #{operationStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="isIndependentAct != null">
+        #{isIndependentAct,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="isBusiShop != null">
+        #{isBusiShop,jdbcType=DECIMAL},
+      </if>
+      <if test="innerBranchCode != null">
+        #{innerBranchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="busiExpand != null">
+        #{busiExpand,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_BRANCH
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_BRANCH
+    <set>
+      <if test="record.branchCode != null">
+        BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.branchName != null">
+        BRANCH_NAME = #{record.branchName,jdbcType=OTHER},
+      </if>
+      <if test="record.branchSimpleName != null">
+        BRANCH_SIMPLE_NAME = #{record.branchSimpleName,jdbcType=OTHER},
+      </if>
+      <if test="record.branchType != null">
+        BRANCH_TYPE = #{record.branchType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.branchLevel != null">
+        BRANCH_LEVEL = #{record.branchLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parentBranch != null">
+        PARENT_BRANCH = #{record.parentBranch,jdbcType=DECIMAL},
+      </if>
+      <if test="record.contactor != null">
+        CONTACTOR = #{record.contactor,jdbcType=OTHER},
+      </if>
+      <if test="record.mobileNo != null">
+        MOBILE_NO = #{record.mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eMail != null">
+        E_MAIL = #{record.eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactAddr != null">
+        CONTACT_ADDR = #{record.contactAddr,jdbcType=OTHER},
+      </if>
+      <if test="record.busiManager != null">
+        BUSI_MANAGER = #{record.busiManager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operationStaff != null">
+        OPERATION_STAFF = #{record.operationStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isIndependentAct != null">
+        IS_INDEPENDENT_ACT = #{record.isIndependentAct,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=OTHER},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updTime != null">
+        UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      </if>
+      <if test="record.isBusiShop != null">
+        IS_BUSI_SHOP = #{record.isBusiShop,jdbcType=DECIMAL},
+      </if>
+      <if test="record.innerBranchCode != null">
+        INNER_BRANCH_CODE = #{record.innerBranchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.busiExpand != null">
+        BUSI_EXPAND = #{record.busiExpand,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_BRANCH
+    set BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      BRANCH_NAME = #{record.branchName,jdbcType=OTHER},
+      BRANCH_SIMPLE_NAME = #{record.branchSimpleName,jdbcType=OTHER},
+      BRANCH_TYPE = #{record.branchType,jdbcType=DECIMAL},
+      BRANCH_LEVEL = #{record.branchLevel,jdbcType=DECIMAL},
+      PARENT_BRANCH = #{record.parentBranch,jdbcType=DECIMAL},
+      CONTACTOR = #{record.contactor,jdbcType=OTHER},
+      MOBILE_NO = #{record.mobileNo,jdbcType=VARCHAR},
+      E_MAIL = #{record.eMail,jdbcType=VARCHAR},
+      CONTACT_ADDR = #{record.contactAddr,jdbcType=OTHER},
+      BUSI_MANAGER = #{record.busiManager,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=DECIMAL},
+      OPERATION_STAFF = #{record.operationStaff,jdbcType=VARCHAR},
+      IS_INDEPENDENT_ACT = #{record.isIndependentAct,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=OTHER},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      IS_BUSI_SHOP = #{record.isBusiShop,jdbcType=DECIMAL},
+      INNER_BRANCH_CODE = #{record.innerBranchCode,jdbcType=VARCHAR},
+      BUSI_EXPAND = #{record.busiExpand,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchEntity">
+    update SYS_BRANCH
+    <set>
+      <if test="branchName != null">
+        BRANCH_NAME = #{branchName,jdbcType=OTHER},
+      </if>
+      <if test="branchSimpleName != null">
+        BRANCH_SIMPLE_NAME = #{branchSimpleName,jdbcType=OTHER},
+      </if>
+      <if test="branchType != null">
+        BRANCH_TYPE = #{branchType,jdbcType=DECIMAL},
+      </if>
+      <if test="branchLevel != null">
+        BRANCH_LEVEL = #{branchLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="parentBranch != null">
+        PARENT_BRANCH = #{parentBranch,jdbcType=DECIMAL},
+      </if>
+      <if test="contactor != null">
+        CONTACTOR = #{contactor,jdbcType=OTHER},
+      </if>
+      <if test="mobileNo != null">
+        MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null">
+        E_MAIL = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="contactAddr != null">
+        CONTACT_ADDR = #{contactAddr,jdbcType=OTHER},
+      </if>
+      <if test="busiManager != null">
+        BUSI_MANAGER = #{busiManager,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="operationStaff != null">
+        OPERATION_STAFF = #{operationStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="isIndependentAct != null">
+        IS_INDEPENDENT_ACT = #{isIndependentAct,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=OTHER},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        UPD_TIME = #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="isBusiShop != null">
+        IS_BUSI_SHOP = #{isBusiShop,jdbcType=DECIMAL},
+      </if>
+      <if test="innerBranchCode != null">
+        INNER_BRANCH_CODE = #{innerBranchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="busiExpand != null">
+        BUSI_EXPAND = #{busiExpand,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchEntity">
+    update SYS_BRANCH
+    set BRANCH_NAME = #{branchName,jdbcType=OTHER},
+      BRANCH_SIMPLE_NAME = #{branchSimpleName,jdbcType=OTHER},
+      BRANCH_TYPE = #{branchType,jdbcType=DECIMAL},
+      BRANCH_LEVEL = #{branchLevel,jdbcType=DECIMAL},
+      PARENT_BRANCH = #{parentBranch,jdbcType=DECIMAL},
+      CONTACTOR = #{contactor,jdbcType=OTHER},
+      MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+      E_MAIL = #{eMail,jdbcType=VARCHAR},
+      CONTACT_ADDR = #{contactAddr,jdbcType=OTHER},
+      BUSI_MANAGER = #{busiManager,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      OPERATION_STAFF = #{operationStaff,jdbcType=VARCHAR},
+      IS_INDEPENDENT_ACT = #{isIndependentAct,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=OTHER},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPD_TIME = #{updTime,jdbcType=CHAR},
+      IS_BUSI_SHOP = #{isBusiShop,jdbcType=DECIMAL},
+      INNER_BRANCH_CODE = #{innerBranchCode,jdbcType=VARCHAR},
+      BUSI_EXPAND = #{busiExpand,jdbcType=VARCHAR}
+    where BRANCH_CODE = #{branchCode,jdbcType=DECIMAL}
+  </update>
+</mapper>

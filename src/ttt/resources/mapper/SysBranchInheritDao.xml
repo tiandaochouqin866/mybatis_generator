@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysBranchInheritDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchInheritEntity">
+    <id column="HIGHER_BRANCH" jdbcType="DECIMAL" property="higherBranch" />
+    <id column="LOWER_BRANCH" jdbcType="DECIMAL" property="lowerBranch" />
+    <result column="LOWER_BRANCH_LEVEL" jdbcType="DECIMAL" property="lowerBranchLevel" />
+    <result column="BRANCH_SUBTRACT" jdbcType="DECIMAL" property="branchSubtract" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPD_TIME" jdbcType="CHAR" property="updTime" />
+    <result column="HIGHER_BRANCH_LEVEL" jdbcType="DECIMAL" property="higherBranchLevel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    HIGHER_BRANCH, LOWER_BRANCH, LOWER_BRANCH_LEVEL, BRANCH_SUBTRACT, CREATOR, CREATE_TIME, 
+    UPD_TIME, HIGHER_BRANCH_LEVEL
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchInheritEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_BRANCH_INHERIT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchInheritEntityKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_BRANCH_INHERIT
+    where HIGHER_BRANCH = #{higherBranch,jdbcType=DECIMAL}
+      and LOWER_BRANCH = #{lowerBranch,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchInheritEntityKey">
+    delete from SYS_BRANCH_INHERIT
+    where HIGHER_BRANCH = #{higherBranch,jdbcType=DECIMAL}
+      and LOWER_BRANCH = #{lowerBranch,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchInheritEntityExample">
+    delete from SYS_BRANCH_INHERIT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchInheritEntity">
+    insert into SYS_BRANCH_INHERIT (HIGHER_BRANCH, LOWER_BRANCH, LOWER_BRANCH_LEVEL, 
+      BRANCH_SUBTRACT, CREATOR, CREATE_TIME, 
+      UPD_TIME, HIGHER_BRANCH_LEVEL)
+    values (#{higherBranch,jdbcType=DECIMAL}, #{lowerBranch,jdbcType=DECIMAL}, #{lowerBranchLevel,jdbcType=DECIMAL}, 
+      #{branchSubtract,jdbcType=DECIMAL}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, 
+      #{updTime,jdbcType=CHAR}, #{higherBranchLevel,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchInheritEntity">
+    insert into SYS_BRANCH_INHERIT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="higherBranch != null">
+        HIGHER_BRANCH,
+      </if>
+      <if test="lowerBranch != null">
+        LOWER_BRANCH,
+      </if>
+      <if test="lowerBranchLevel != null">
+        LOWER_BRANCH_LEVEL,
+      </if>
+      <if test="branchSubtract != null">
+        BRANCH_SUBTRACT,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updTime != null">
+        UPD_TIME,
+      </if>
+      <if test="higherBranchLevel != null">
+        HIGHER_BRANCH_LEVEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="higherBranch != null">
+        #{higherBranch,jdbcType=DECIMAL},
+      </if>
+      <if test="lowerBranch != null">
+        #{lowerBranch,jdbcType=DECIMAL},
+      </if>
+      <if test="lowerBranchLevel != null">
+        #{lowerBranchLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="branchSubtract != null">
+        #{branchSubtract,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="higherBranchLevel != null">
+        #{higherBranchLevel,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchInheritEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_BRANCH_INHERIT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_BRANCH_INHERIT
+    <set>
+      <if test="record.higherBranch != null">
+        HIGHER_BRANCH = #{record.higherBranch,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lowerBranch != null">
+        LOWER_BRANCH = #{record.lowerBranch,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lowerBranchLevel != null">
+        LOWER_BRANCH_LEVEL = #{record.lowerBranchLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="record.branchSubtract != null">
+        BRANCH_SUBTRACT = #{record.branchSubtract,jdbcType=DECIMAL},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updTime != null">
+        UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      </if>
+      <if test="record.higherBranchLevel != null">
+        HIGHER_BRANCH_LEVEL = #{record.higherBranchLevel,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_BRANCH_INHERIT
+    set HIGHER_BRANCH = #{record.higherBranch,jdbcType=DECIMAL},
+      LOWER_BRANCH = #{record.lowerBranch,jdbcType=DECIMAL},
+      LOWER_BRANCH_LEVEL = #{record.lowerBranchLevel,jdbcType=DECIMAL},
+      BRANCH_SUBTRACT = #{record.branchSubtract,jdbcType=DECIMAL},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      HIGHER_BRANCH_LEVEL = #{record.higherBranchLevel,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchInheritEntity">
+    update SYS_BRANCH_INHERIT
+    <set>
+      <if test="lowerBranchLevel != null">
+        LOWER_BRANCH_LEVEL = #{lowerBranchLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="branchSubtract != null">
+        BRANCH_SUBTRACT = #{branchSubtract,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        UPD_TIME = #{updTime,jdbcType=CHAR},
+      </if>
+      <if test="higherBranchLevel != null">
+        HIGHER_BRANCH_LEVEL = #{higherBranchLevel,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where HIGHER_BRANCH = #{higherBranch,jdbcType=DECIMAL}
+      and LOWER_BRANCH = #{lowerBranch,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysBranchInheritEntity">
+    update SYS_BRANCH_INHERIT
+    set LOWER_BRANCH_LEVEL = #{lowerBranchLevel,jdbcType=DECIMAL},
+      BRANCH_SUBTRACT = #{branchSubtract,jdbcType=DECIMAL},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPD_TIME = #{updTime,jdbcType=CHAR},
+      HIGHER_BRANCH_LEVEL = #{higherBranchLevel,jdbcType=DECIMAL}
+    where HIGHER_BRANCH = #{higherBranch,jdbcType=DECIMAL}
+      and LOWER_BRANCH = #{lowerBranch,jdbcType=DECIMAL}
+  </update>
+</mapper>

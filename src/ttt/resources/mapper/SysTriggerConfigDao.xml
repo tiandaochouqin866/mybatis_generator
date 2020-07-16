@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysTriggerConfigDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTriggerConfigEntity">
+    <id column="TRIGGER_CODE" jdbcType="VARCHAR" property="triggerCode" />
+    <result column="TRIGGER_DESC" jdbcType="OTHER" property="triggerDesc" />
+    <result column="TRIGGER_CRON" jdbcType="VARCHAR" property="triggerCron" />
+    <result column="TRIGGER_STATUS" jdbcType="DECIMAL" property="triggerStatus" />
+    <result column="PRE_TRIGGER_CODE" jdbcType="VARCHAR" property="preTriggerCode" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPD_TIME" jdbcType="CHAR" property="updTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TRIGGER_CODE, TRIGGER_DESC, TRIGGER_CRON, TRIGGER_STATUS, PRE_TRIGGER_CODE, CREATOR, 
+    CREATE_TIME, UPD_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTriggerConfigEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TRIGGER_CONFIG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TRIGGER_CONFIG
+    where TRIGGER_CODE = #{triggerCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_TRIGGER_CONFIG
+    where TRIGGER_CODE = #{triggerCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTriggerConfigEntityExample">
+    delete from SYS_TRIGGER_CONFIG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTriggerConfigEntity">
+    insert into SYS_TRIGGER_CONFIG (TRIGGER_CODE, TRIGGER_DESC, TRIGGER_CRON, 
+      TRIGGER_STATUS, PRE_TRIGGER_CODE, CREATOR, 
+      CREATE_TIME, UPD_TIME)
+    values (#{triggerCode,jdbcType=VARCHAR}, #{triggerDesc,jdbcType=OTHER}, #{triggerCron,jdbcType=VARCHAR}, 
+      #{triggerStatus,jdbcType=DECIMAL}, #{preTriggerCode,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=CHAR}, #{updTime,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTriggerConfigEntity">
+    insert into SYS_TRIGGER_CONFIG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="triggerCode != null">
+        TRIGGER_CODE,
+      </if>
+      <if test="triggerDesc != null">
+        TRIGGER_DESC,
+      </if>
+      <if test="triggerCron != null">
+        TRIGGER_CRON,
+      </if>
+      <if test="triggerStatus != null">
+        TRIGGER_STATUS,
+      </if>
+      <if test="preTriggerCode != null">
+        PRE_TRIGGER_CODE,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updTime != null">
+        UPD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="triggerCode != null">
+        #{triggerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerDesc != null">
+        #{triggerDesc,jdbcType=OTHER},
+      </if>
+      <if test="triggerCron != null">
+        #{triggerCron,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerStatus != null">
+        #{triggerStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="preTriggerCode != null">
+        #{preTriggerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTriggerConfigEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_TRIGGER_CONFIG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_TRIGGER_CONFIG
+    <set>
+      <if test="record.triggerCode != null">
+        TRIGGER_CODE = #{record.triggerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.triggerDesc != null">
+        TRIGGER_DESC = #{record.triggerDesc,jdbcType=OTHER},
+      </if>
+      <if test="record.triggerCron != null">
+        TRIGGER_CRON = #{record.triggerCron,jdbcType=VARCHAR},
+      </if>
+      <if test="record.triggerStatus != null">
+        TRIGGER_STATUS = #{record.triggerStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.preTriggerCode != null">
+        PRE_TRIGGER_CODE = #{record.preTriggerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updTime != null">
+        UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_TRIGGER_CONFIG
+    set TRIGGER_CODE = #{record.triggerCode,jdbcType=VARCHAR},
+      TRIGGER_DESC = #{record.triggerDesc,jdbcType=OTHER},
+      TRIGGER_CRON = #{record.triggerCron,jdbcType=VARCHAR},
+      TRIGGER_STATUS = #{record.triggerStatus,jdbcType=DECIMAL},
+      PRE_TRIGGER_CODE = #{record.preTriggerCode,jdbcType=VARCHAR},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPD_TIME = #{record.updTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTriggerConfigEntity">
+    update SYS_TRIGGER_CONFIG
+    <set>
+      <if test="triggerDesc != null">
+        TRIGGER_DESC = #{triggerDesc,jdbcType=OTHER},
+      </if>
+      <if test="triggerCron != null">
+        TRIGGER_CRON = #{triggerCron,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerStatus != null">
+        TRIGGER_STATUS = #{triggerStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="preTriggerCode != null">
+        PRE_TRIGGER_CODE = #{preTriggerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        UPD_TIME = #{updTime,jdbcType=CHAR},
+      </if>
+    </set>
+    where TRIGGER_CODE = #{triggerCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTriggerConfigEntity">
+    update SYS_TRIGGER_CONFIG
+    set TRIGGER_DESC = #{triggerDesc,jdbcType=OTHER},
+      TRIGGER_CRON = #{triggerCron,jdbcType=VARCHAR},
+      TRIGGER_STATUS = #{triggerStatus,jdbcType=DECIMAL},
+      PRE_TRIGGER_CODE = #{preTriggerCode,jdbcType=VARCHAR},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPD_TIME = #{updTime,jdbcType=CHAR}
+    where TRIGGER_CODE = #{triggerCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

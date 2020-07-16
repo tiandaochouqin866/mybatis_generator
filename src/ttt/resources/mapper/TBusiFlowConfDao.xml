@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.TBusiFlowConfDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TBusiFlowConfEntity">
+    <id column="FLOW_CONF_NO" jdbcType="DECIMAL" property="flowConfNo" />
+    <result column="BUSI_TYPE" jdbcType="DECIMAL" property="busiType" />
+    <result column="FLOW_CONF_VER" jdbcType="VARCHAR" property="flowConfVer" />
+    <result column="EFFECT_TIME" jdbcType="CHAR" property="effectTime" />
+    <result column="CUR_PRC_INDEX" jdbcType="DECIMAL" property="curPrcIndex" />
+    <result column="PRC_CODE" jdbcType="VARCHAR" property="prcCode" />
+    <result column="PRC_DESC" jdbcType="OTHER" property="prcDesc" />
+    <result column="PRC_TYPE" jdbcType="DECIMAL" property="prcType" />
+    <result column="FUNCTION_URL" jdbcType="VARCHAR" property="functionUrl" />
+    <result column="FRONT_PRC_INDEX" jdbcType="DECIMAL" property="frontPrcIndex" />
+    <result column="BACK_PRC_INDEX" jdbcType="DECIMAL" property="backPrcIndex" />
+    <result column="IS_BRANCH_NODE" jdbcType="DECIMAL" property="isBranchNode" />
+    <result column="SEND_MSG" jdbcType="DECIMAL" property="sendMsg" />
+    <result column="BRANCH_TYPE" jdbcType="DECIMAL" property="branchType" />
+    <result column="BRANCH_LEVEL" jdbcType="DECIMAL" property="branchLevel" />
+    <result column="ROLE_CODE" jdbcType="VARCHAR" property="roleCode" />
+    <result column="BRANCH_CODE" jdbcType="DECIMAL" property="branchCode" />
+    <result column="USER_CODE" jdbcType="VARCHAR" property="userCode" />
+    <result column="REMARK" jdbcType="OTHER" property="remark" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="UPD_TIME" jdbcType="CHAR" property="updTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FLOW_CONF_NO, BUSI_TYPE, FLOW_CONF_VER, EFFECT_TIME, CUR_PRC_INDEX, PRC_CODE, PRC_DESC, 
+    PRC_TYPE, FUNCTION_URL, FRONT_PRC_INDEX, BACK_PRC_INDEX, IS_BRANCH_NODE, SEND_MSG, 
+    BRANCH_TYPE, BRANCH_LEVEL, ROLE_CODE, BRANCH_CODE, USER_CODE, REMARK, STATUS, CREATOR, 
+    CREATE_TIME, UPD_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TBusiFlowConfEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_BUSI_FLOW_CONF
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_BUSI_FLOW_CONF
+    where FLOW_CONF_NO = #{flowConfNo,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_BUSI_FLOW_CONF
+    where FLOW_CONF_NO = #{flowConfNo,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TBusiFlowConfEntityExample">
+    delete from T_BUSI_FLOW_CONF
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TBusiFlowConfEntity">
+    insert into T_BUSI_FLOW_CONF (FLOW_CONF_NO, BUSI_TYPE, FLOW_CONF_VER, 
+      EFFECT_TIME, CUR_PRC_INDEX, PRC_CODE, 
+      PRC_DESC, PRC_TYPE, FUNCTION_URL, 
+      FRONT_PRC_INDEX, BACK_PRC_INDEX, IS_BRANCH_NODE, 
+      SEND_MSG, BRANCH_TYPE, BRANCH_LEVEL, 
+      ROLE_CODE, BRANCH_CODE, USER_CODE, 
+      REMARK, STATUS, CREATOR, 
+      CREATE_TIME, UPD_TIME)
+    values (#{flowConfNo,jdbcType=DECIMAL}, #{busiType,jdbcType=DECIMAL}, #{flowConfVer,jdbcType=VARCHAR}, 
+      #{effectTime,jdbcType=CHAR}, #{curPrcIndex,jdbcType=DECIMAL}, #{prcCode,jdbcType=VARCHAR}, 
+      #{prcDesc,jdbcType=OTHER}, #{prcType,jdbcType=DECIMAL}, #{functionUrl,jdbcType=VARCHAR}, 
+      #{frontPrcIndex,jdbcType=DECIMAL}, #{backPrcIndex,jdbcType=DECIMAL}, #{isBranchNode,jdbcType=DECIMAL}, 
+      #{sendMsg,jdbcType=DECIMAL}, #{branchType,jdbcType=DECIMAL}, #{branchLevel,jdbcType=DECIMAL}, 
+      #{roleCode,jdbcType=VARCHAR}, #{branchCode,jdbcType=DECIMAL}, #{userCode,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=OTHER}, #{status,jdbcType=DECIMAL}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=CHAR}, #{updTime,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TBusiFlowConfEntity">
+    insert into T_BUSI_FLOW_CONF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="flowConfNo != null">
+        FLOW_CONF_NO,
+      </if>
+      <if test="busiType != null">
+        BUSI_TYPE,
+      </if>
+      <if test="flowConfVer != null">
+        FLOW_CONF_VER,
+      </if>
+      <if test="effectTime != null">
+        EFFECT_TIME,
+      </if>
+      <if test="curPrcIndex != null">
+        CUR_PRC_INDEX,
+      </if>
+      <if test="prcCode != null">
+        PRC_CODE,
+      </if>
+      <if test="prcDesc != null">
+        PRC_DESC,
+      </if>
+      <if test="prcType != null">
+        PRC_TYPE,
+      </if>
+      <if test="functionUrl != null">
+        FUNCTION_URL,
+      </if>
+      <if test="frontPrcIndex != null">
+        FRONT_PRC_INDEX,
+      </if>
+      <if test="backPrcIndex != null">
+        BACK_PRC_INDEX,
+      </if>
+      <if test="isBranchNode != null">
+        IS_BRANCH_NODE,
+      </if>
+      <if test="sendMsg != null">
+        SEND_MSG,
+      </if>
+      <if test="branchType != null">
+        BRANCH_TYPE,
+      </if>
+      <if test="branchLevel != null">
+        BRANCH_LEVEL,
+      </if>
+      <if test="roleCode != null">
+        ROLE_CODE,
+      </if>
+      <if test="branchCode != null">
+        BRANCH_CODE,
+      </if>
+      <if test="userCode != null">
+        USER_CODE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updTime != null">
+        UPD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="flowConfNo != null">
+        #{flowConfNo,jdbcType=DECIMAL},
+      </if>
+      <if test="busiType != null">
+        #{busiType,jdbcType=DECIMAL},
+      </if>
+      <if test="flowConfVer != null">
+        #{flowConfVer,jdbcType=VARCHAR},
+      </if>
+      <if test="effectTime != null">
+        #{effectTime,jdbcType=CHAR},
+      </if>
+      <if test="curPrcIndex != null">
+        #{curPrcIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="prcCode != null">
+        #{prcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prcDesc != null">
+        #{prcDesc,jdbcType=OTHER},
+      </if>
+      <if test="prcType != null">
+        #{prcType,jdbcType=DECIMAL},
+      </if>
+      <if test="functionUrl != null">
+        #{functionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="frontPrcIndex != null">
+        #{frontPrcIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="backPrcIndex != null">
+        #{backPrcIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="isBranchNode != null">
+        #{isBranchNode,jdbcType=DECIMAL},
+      </if>
+      <if test="sendMsg != null">
+        #{sendMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="branchType != null">
+        #{branchType,jdbcType=DECIMAL},
+      </if>
+      <if test="branchLevel != null">
+        #{branchLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCode != null">
+        #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=OTHER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TBusiFlowConfEntityExample" resultType="java.lang.Long">
+    select count(*) from T_BUSI_FLOW_CONF
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_BUSI_FLOW_CONF
+    <set>
+      <if test="record.flowConfNo != null">
+        FLOW_CONF_NO = #{record.flowConfNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.busiType != null">
+        BUSI_TYPE = #{record.busiType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.flowConfVer != null">
+        FLOW_CONF_VER = #{record.flowConfVer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effectTime != null">
+        EFFECT_TIME = #{record.effectTime,jdbcType=CHAR},
+      </if>
+      <if test="record.curPrcIndex != null">
+        CUR_PRC_INDEX = #{record.curPrcIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="record.prcCode != null">
+        PRC_CODE = #{record.prcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prcDesc != null">
+        PRC_DESC = #{record.prcDesc,jdbcType=OTHER},
+      </if>
+      <if test="record.prcType != null">
+        PRC_TYPE = #{record.prcType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.functionUrl != null">
+        FUNCTION_URL = #{record.functionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frontPrcIndex != null">
+        FRONT_PRC_INDEX = #{record.frontPrcIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="record.backPrcIndex != null">
+        BACK_PRC_INDEX = #{record.backPrcIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isBranchNode != null">
+        IS_BRANCH_NODE = #{record.isBranchNode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sendMsg != null">
+        SEND_MSG = #{record.sendMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.branchType != null">
+        BRANCH_TYPE = #{record.branchType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.branchLevel != null">
+        BRANCH_LEVEL = #{record.branchLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="record.roleCode != null">
+        ROLE_CODE = #{record.roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchCode != null">
+        BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userCode != null">
+        USER_CODE = #{record.userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=OTHER},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=DECIMAL},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updTime != null">
+        UPD_TIME = #{record.updTime,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_BUSI_FLOW_CONF
+    set FLOW_CONF_NO = #{record.flowConfNo,jdbcType=DECIMAL},
+      BUSI_TYPE = #{record.busiType,jdbcType=DECIMAL},
+      FLOW_CONF_VER = #{record.flowConfVer,jdbcType=VARCHAR},
+      EFFECT_TIME = #{record.effectTime,jdbcType=CHAR},
+      CUR_PRC_INDEX = #{record.curPrcIndex,jdbcType=DECIMAL},
+      PRC_CODE = #{record.prcCode,jdbcType=VARCHAR},
+      PRC_DESC = #{record.prcDesc,jdbcType=OTHER},
+      PRC_TYPE = #{record.prcType,jdbcType=DECIMAL},
+      FUNCTION_URL = #{record.functionUrl,jdbcType=VARCHAR},
+      FRONT_PRC_INDEX = #{record.frontPrcIndex,jdbcType=DECIMAL},
+      BACK_PRC_INDEX = #{record.backPrcIndex,jdbcType=DECIMAL},
+      IS_BRANCH_NODE = #{record.isBranchNode,jdbcType=DECIMAL},
+      SEND_MSG = #{record.sendMsg,jdbcType=DECIMAL},
+      BRANCH_TYPE = #{record.branchType,jdbcType=DECIMAL},
+      BRANCH_LEVEL = #{record.branchLevel,jdbcType=DECIMAL},
+      ROLE_CODE = #{record.roleCode,jdbcType=VARCHAR},
+      BRANCH_CODE = #{record.branchCode,jdbcType=DECIMAL},
+      USER_CODE = #{record.userCode,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=OTHER},
+      STATUS = #{record.status,jdbcType=DECIMAL},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      UPD_TIME = #{record.updTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TBusiFlowConfEntity">
+    update T_BUSI_FLOW_CONF
+    <set>
+      <if test="busiType != null">
+        BUSI_TYPE = #{busiType,jdbcType=DECIMAL},
+      </if>
+      <if test="flowConfVer != null">
+        FLOW_CONF_VER = #{flowConfVer,jdbcType=VARCHAR},
+      </if>
+      <if test="effectTime != null">
+        EFFECT_TIME = #{effectTime,jdbcType=CHAR},
+      </if>
+      <if test="curPrcIndex != null">
+        CUR_PRC_INDEX = #{curPrcIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="prcCode != null">
+        PRC_CODE = #{prcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prcDesc != null">
+        PRC_DESC = #{prcDesc,jdbcType=OTHER},
+      </if>
+      <if test="prcType != null">
+        PRC_TYPE = #{prcType,jdbcType=DECIMAL},
+      </if>
+      <if test="functionUrl != null">
+        FUNCTION_URL = #{functionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="frontPrcIndex != null">
+        FRONT_PRC_INDEX = #{frontPrcIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="backPrcIndex != null">
+        BACK_PRC_INDEX = #{backPrcIndex,jdbcType=DECIMAL},
+      </if>
+      <if test="isBranchNode != null">
+        IS_BRANCH_NODE = #{isBranchNode,jdbcType=DECIMAL},
+      </if>
+      <if test="sendMsg != null">
+        SEND_MSG = #{sendMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="branchType != null">
+        BRANCH_TYPE = #{branchType,jdbcType=DECIMAL},
+      </if>
+      <if test="branchLevel != null">
+        BRANCH_LEVEL = #{branchLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="roleCode != null">
+        ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCode != null">
+        BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      </if>
+      <if test="userCode != null">
+        USER_CODE = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=OTHER},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="updTime != null">
+        UPD_TIME = #{updTime,jdbcType=CHAR},
+      </if>
+    </set>
+    where FLOW_CONF_NO = #{flowConfNo,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.TBusiFlowConfEntity">
+    update T_BUSI_FLOW_CONF
+    set BUSI_TYPE = #{busiType,jdbcType=DECIMAL},
+      FLOW_CONF_VER = #{flowConfVer,jdbcType=VARCHAR},
+      EFFECT_TIME = #{effectTime,jdbcType=CHAR},
+      CUR_PRC_INDEX = #{curPrcIndex,jdbcType=DECIMAL},
+      PRC_CODE = #{prcCode,jdbcType=VARCHAR},
+      PRC_DESC = #{prcDesc,jdbcType=OTHER},
+      PRC_TYPE = #{prcType,jdbcType=DECIMAL},
+      FUNCTION_URL = #{functionUrl,jdbcType=VARCHAR},
+      FRONT_PRC_INDEX = #{frontPrcIndex,jdbcType=DECIMAL},
+      BACK_PRC_INDEX = #{backPrcIndex,jdbcType=DECIMAL},
+      IS_BRANCH_NODE = #{isBranchNode,jdbcType=DECIMAL},
+      SEND_MSG = #{sendMsg,jdbcType=DECIMAL},
+      BRANCH_TYPE = #{branchType,jdbcType=DECIMAL},
+      BRANCH_LEVEL = #{branchLevel,jdbcType=DECIMAL},
+      ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      BRANCH_CODE = #{branchCode,jdbcType=DECIMAL},
+      USER_CODE = #{userCode,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=OTHER},
+      STATUS = #{status,jdbcType=DECIMAL},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPD_TIME = #{updTime,jdbcType=CHAR}
+    where FLOW_CONF_NO = #{flowConfNo,jdbcType=DECIMAL}
+  </update>
+</mapper>

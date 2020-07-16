@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hundsun.jrescloud.hxpoc.modules.sys.dao.SysTerminalApplyDetailDao">
+  <resultMap id="BaseResultMap" type="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalApplyDetailEntity">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="APPLY_BATCH_NO" jdbcType="DECIMAL" property="applyBatchNo" />
+    <result column="TERMINAL_TYPE" jdbcType="VARCHAR" property="terminalType" />
+    <result column="TERMINAL_NET_WAY" jdbcType="VARCHAR" property="terminalNetWay" />
+    <result column="TELECOM_OPERATOR" jdbcType="DECIMAL" property="telecomOperator" />
+    <result column="BIND_PHONE_NO" jdbcType="VARCHAR" property="bindPhoneNo" />
+    <result column="DEFAULT_DEPOSIT" jdbcType="DECIMAL" property="defaultDeposit" />
+    <result column="ACTUAL_DEPOSIT" jdbcType="DECIMAL" property="actualDeposit" />
+    <result column="CREATE_TIME" jdbcType="CHAR" property="createTime" />
+    <result column="CHECK_DEPOSIT" jdbcType="DECIMAL" property="checkDeposit" />
+    <result column="DEPOSIT_STATUS" jdbcType="VARCHAR" property="depositStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, APPLY_BATCH_NO, TERMINAL_TYPE, TERMINAL_NET_WAY, TELECOM_OPERATOR, BIND_PHONE_NO, 
+    DEFAULT_DEPOSIT, ACTUAL_DEPOSIT, CREATE_TIME, CHECK_DEPOSIT, DEPOSIT_STATUS
+  </sql>
+  <select id="selectByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalApplyDetailEntityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_TERMINAL_APPLY_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_TERMINAL_APPLY_DETAIL
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SYS_TERMINAL_APPLY_DETAIL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalApplyDetailEntityExample">
+    delete from SYS_TERMINAL_APPLY_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalApplyDetailEntity">
+    insert into SYS_TERMINAL_APPLY_DETAIL (ID, APPLY_BATCH_NO, TERMINAL_TYPE, 
+      TERMINAL_NET_WAY, TELECOM_OPERATOR, BIND_PHONE_NO, 
+      DEFAULT_DEPOSIT, ACTUAL_DEPOSIT, CREATE_TIME, 
+      CHECK_DEPOSIT, DEPOSIT_STATUS)
+    values (#{id,jdbcType=DECIMAL}, #{applyBatchNo,jdbcType=DECIMAL}, #{terminalType,jdbcType=VARCHAR}, 
+      #{terminalNetWay,jdbcType=VARCHAR}, #{telecomOperator,jdbcType=DECIMAL}, #{bindPhoneNo,jdbcType=VARCHAR}, 
+      #{defaultDeposit,jdbcType=DECIMAL}, #{actualDeposit,jdbcType=DECIMAL}, #{createTime,jdbcType=CHAR}, 
+      #{checkDeposit,jdbcType=DECIMAL}, #{depositStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalApplyDetailEntity">
+    insert into SYS_TERMINAL_APPLY_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applyBatchNo != null">
+        APPLY_BATCH_NO,
+      </if>
+      <if test="terminalType != null">
+        TERMINAL_TYPE,
+      </if>
+      <if test="terminalNetWay != null">
+        TERMINAL_NET_WAY,
+      </if>
+      <if test="telecomOperator != null">
+        TELECOM_OPERATOR,
+      </if>
+      <if test="bindPhoneNo != null">
+        BIND_PHONE_NO,
+      </if>
+      <if test="defaultDeposit != null">
+        DEFAULT_DEPOSIT,
+      </if>
+      <if test="actualDeposit != null">
+        ACTUAL_DEPOSIT,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="checkDeposit != null">
+        CHECK_DEPOSIT,
+      </if>
+      <if test="depositStatus != null">
+        DEPOSIT_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="applyBatchNo != null">
+        #{applyBatchNo,jdbcType=DECIMAL},
+      </if>
+      <if test="terminalType != null">
+        #{terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalNetWay != null">
+        #{terminalNetWay,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomOperator != null">
+        #{telecomOperator,jdbcType=DECIMAL},
+      </if>
+      <if test="bindPhoneNo != null">
+        #{bindPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultDeposit != null">
+        #{defaultDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="actualDeposit != null">
+        #{actualDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="checkDeposit != null">
+        #{checkDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="depositStatus != null">
+        #{depositStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalApplyDetailEntityExample" resultType="java.lang.Long">
+    select count(*) from SYS_TERMINAL_APPLY_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_TERMINAL_APPLY_DETAIL
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.applyBatchNo != null">
+        APPLY_BATCH_NO = #{record.applyBatchNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.terminalType != null">
+        TERMINAL_TYPE = #{record.terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalNetWay != null">
+        TERMINAL_NET_WAY = #{record.terminalNetWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telecomOperator != null">
+        TELECOM_OPERATOR = #{record.telecomOperator,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bindPhoneNo != null">
+        BIND_PHONE_NO = #{record.bindPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultDeposit != null">
+        DEFAULT_DEPOSIT = #{record.defaultDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.actualDeposit != null">
+        ACTUAL_DEPOSIT = #{record.actualDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.checkDeposit != null">
+        CHECK_DEPOSIT = #{record.checkDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.depositStatus != null">
+        DEPOSIT_STATUS = #{record.depositStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_TERMINAL_APPLY_DETAIL
+    set ID = #{record.id,jdbcType=DECIMAL},
+      APPLY_BATCH_NO = #{record.applyBatchNo,jdbcType=DECIMAL},
+      TERMINAL_TYPE = #{record.terminalType,jdbcType=VARCHAR},
+      TERMINAL_NET_WAY = #{record.terminalNetWay,jdbcType=VARCHAR},
+      TELECOM_OPERATOR = #{record.telecomOperator,jdbcType=DECIMAL},
+      BIND_PHONE_NO = #{record.bindPhoneNo,jdbcType=VARCHAR},
+      DEFAULT_DEPOSIT = #{record.defaultDeposit,jdbcType=DECIMAL},
+      ACTUAL_DEPOSIT = #{record.actualDeposit,jdbcType=DECIMAL},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      CHECK_DEPOSIT = #{record.checkDeposit,jdbcType=DECIMAL},
+      DEPOSIT_STATUS = #{record.depositStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalApplyDetailEntity">
+    update SYS_TERMINAL_APPLY_DETAIL
+    <set>
+      <if test="applyBatchNo != null">
+        APPLY_BATCH_NO = #{applyBatchNo,jdbcType=DECIMAL},
+      </if>
+      <if test="terminalType != null">
+        TERMINAL_TYPE = #{terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalNetWay != null">
+        TERMINAL_NET_WAY = #{terminalNetWay,jdbcType=VARCHAR},
+      </if>
+      <if test="telecomOperator != null">
+        TELECOM_OPERATOR = #{telecomOperator,jdbcType=DECIMAL},
+      </if>
+      <if test="bindPhoneNo != null">
+        BIND_PHONE_NO = #{bindPhoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultDeposit != null">
+        DEFAULT_DEPOSIT = #{defaultDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="actualDeposit != null">
+        ACTUAL_DEPOSIT = #{actualDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="checkDeposit != null">
+        CHECK_DEPOSIT = #{checkDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="depositStatus != null">
+        DEPOSIT_STATUS = #{depositStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hundsun.jrescloud.hxpoc.modules.sys.entity.SysTerminalApplyDetailEntity">
+    update SYS_TERMINAL_APPLY_DETAIL
+    set APPLY_BATCH_NO = #{applyBatchNo,jdbcType=DECIMAL},
+      TERMINAL_TYPE = #{terminalType,jdbcType=VARCHAR},
+      TERMINAL_NET_WAY = #{terminalNetWay,jdbcType=VARCHAR},
+      TELECOM_OPERATOR = #{telecomOperator,jdbcType=DECIMAL},
+      BIND_PHONE_NO = #{bindPhoneNo,jdbcType=VARCHAR},
+      DEFAULT_DEPOSIT = #{defaultDeposit,jdbcType=DECIMAL},
+      ACTUAL_DEPOSIT = #{actualDeposit,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      CHECK_DEPOSIT = #{checkDeposit,jdbcType=DECIMAL},
+      DEPOSIT_STATUS = #{depositStatus,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>
